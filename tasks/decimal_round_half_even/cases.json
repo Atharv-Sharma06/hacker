@@ -1,0 +1,1633 @@
+[
+ {
+  "id": "decimal_round_half_even-000",
+  "tag": "float-trap",
+  "args": [
+   "2.675",
+   2
+  ],
+  "expected": "2.68",
+  "note": "float(2.675) is 2.67499999..."
+ },
+ {
+  "id": "decimal_round_half_even-001",
+  "tag": "float-trap",
+  "args": [
+   "1.005",
+   2
+  ],
+  "expected": "1.00",
+  "note": "exact tie, 0 is even"
+ },
+ {
+  "id": "decimal_round_half_even-002",
+  "tag": "float-trap",
+  "args": [
+   "1.015",
+   2
+  ],
+  "expected": "1.02"
+ },
+ {
+  "id": "decimal_round_half_even-003",
+  "tag": "tie-to-even",
+  "args": [
+   "0.125",
+   2
+  ],
+  "expected": "0.12"
+ },
+ {
+  "id": "decimal_round_half_even-004",
+  "tag": "tie-to-even",
+  "args": [
+   "0.135",
+   2
+  ],
+  "expected": "0.14"
+ },
+ {
+  "id": "decimal_round_half_even-005",
+  "tag": "tie-to-even",
+  "args": [
+   "2.665",
+   2
+  ],
+  "expected": "2.66"
+ },
+ {
+  "id": "decimal_round_half_even-006",
+  "tag": "tie-to-even",
+  "args": [
+   "0.5",
+   0
+  ],
+  "expected": "0"
+ },
+ {
+  "id": "decimal_round_half_even-007",
+  "tag": "tie-to-even",
+  "args": [
+   "1.5",
+   0
+  ],
+  "expected": "2"
+ },
+ {
+  "id": "decimal_round_half_even-008",
+  "tag": "tie-to-even",
+  "args": [
+   "2.5",
+   0
+  ],
+  "expected": "2"
+ },
+ {
+  "id": "decimal_round_half_even-009",
+  "tag": "tie-to-even",
+  "args": [
+   "-2.5",
+   0
+  ],
+  "expected": "-2"
+ },
+ {
+  "id": "decimal_round_half_even-010",
+  "tag": "tie-to-even",
+  "args": [
+   "-3.5",
+   0
+  ],
+  "expected": "-4"
+ },
+ {
+  "id": "decimal_round_half_even-011",
+  "tag": "above-half",
+  "args": [
+   "2.6750000000000000000001",
+   2
+  ],
+  "expected": "2.68"
+ },
+ {
+  "id": "decimal_round_half_even-012",
+  "tag": "below-half",
+  "args": [
+   "2.6649999999999999999999",
+   2
+  ],
+  "expected": "2.66"
+ },
+ {
+  "id": "decimal_round_half_even-013",
+  "tag": "tie-trailing-zeros",
+  "args": [
+   "2.66500000",
+   2
+  ],
+  "expected": "2.66"
+ },
+ {
+  "id": "decimal_round_half_even-014",
+  "tag": "carry",
+  "args": [
+   "9.995",
+   2
+  ],
+  "expected": "10.00"
+ },
+ {
+  "id": "decimal_round_half_even-015",
+  "tag": "carry",
+  "args": [
+   "99.5",
+   0
+  ],
+  "expected": "100"
+ },
+ {
+  "id": "decimal_round_half_even-016",
+  "tag": "carry",
+  "args": [
+   "-9.9999",
+   3
+  ],
+  "expected": "-10.000"
+ },
+ {
+  "id": "decimal_round_half_even-017",
+  "tag": "negative-zero",
+  "args": [
+   "-0.001",
+   2
+  ],
+  "expected": "0.00"
+ },
+ {
+  "id": "decimal_round_half_even-018",
+  "tag": "negative-zero",
+  "args": [
+   "-0.5",
+   0
+  ],
+  "expected": "0"
+ },
+ {
+  "id": "decimal_round_half_even-019",
+  "tag": "negative-zero",
+  "args": [
+   "-0",
+   0
+  ],
+  "expected": "0"
+ },
+ {
+  "id": "decimal_round_half_even-020",
+  "tag": "negative-zero",
+  "args": [
+   "-0.000",
+   1
+  ],
+  "expected": "0.0"
+ },
+ {
+  "id": "decimal_round_half_even-021",
+  "tag": "negative-small",
+  "args": [
+   "-0.006",
+   2
+  ],
+  "expected": "-0.01"
+ },
+ {
+  "id": "decimal_round_half_even-022",
+  "tag": "leading-zeros",
+  "args": [
+   "007.5",
+   0
+  ],
+  "expected": "8"
+ },
+ {
+  "id": "decimal_round_half_even-023",
+  "tag": "leading-zeros",
+  "args": [
+   "000",
+   2
+  ],
+  "expected": "0.00"
+ },
+ {
+  "id": "decimal_round_half_even-024",
+  "tag": "pad",
+  "args": [
+   "1.2",
+   4
+  ],
+  "expected": "1.2000"
+ },
+ {
+  "id": "decimal_round_half_even-025",
+  "tag": "pad",
+  "args": [
+   "5",
+   3
+  ],
+  "expected": "5.000"
+ },
+ {
+  "id": "decimal_round_half_even-026",
+  "tag": "bignum",
+  "args": [
+   "123456789012345678901234567890.125",
+   2
+  ],
+  "expected": "123456789012345678901234567890.12"
+ },
+ {
+  "id": "decimal_round_half_even-027",
+  "tag": "tiny-tie",
+  "args": [
+   "0.000000000000000000000000000005",
+   29
+  ],
+  "expected": "0.00000000000000000000000000000"
+ },
+ {
+  "id": "decimal_round_half_even-028",
+  "tag": "tiny-tie",
+  "args": [
+   "0.000000000000000000000000000015",
+   29
+  ],
+  "expected": "0.00000000000000000000000000002"
+ },
+ {
+  "id": "decimal_round_half_even-029",
+  "tag": "basic",
+  "args": [
+   "15",
+   0
+  ],
+  "expected": "15"
+ },
+ {
+  "id": "decimal_round_half_even-030",
+  "tag": "basic",
+  "args": [
+   "0.1",
+   1
+  ],
+  "expected": "0.1"
+ },
+ {
+  "id": "decimal_round_half_even-031",
+  "tag": "fuzz",
+  "args": [
+   "-80739068211737725.0895",
+   2
+  ],
+  "expected": "-80739068211737725.09"
+ },
+ {
+  "id": "decimal_round_half_even-032",
+  "tag": "fuzz",
+  "args": [
+   "010876.5786510756",
+   3
+  ],
+  "expected": "10876.579"
+ },
+ {
+  "id": "decimal_round_half_even-033",
+  "tag": "fuzz",
+  "args": [
+   "-736108966.892207",
+   4
+  ],
+  "expected": "-736108966.8922"
+ },
+ {
+  "id": "decimal_round_half_even-034",
+  "tag": "fuzz",
+  "args": [
+   "-930541471250389.95",
+   7
+  ],
+  "expected": "-930541471250389.9500000"
+ },
+ {
+  "id": "decimal_round_half_even-035",
+  "tag": "fuzz",
+  "args": [
+   "0646371655749.116",
+   1
+  ],
+  "expected": "646371655749.1"
+ },
+ {
+  "id": "decimal_round_half_even-036",
+  "tag": "fuzz",
+  "args": [
+   "-1967355679130270355672.435149485",
+   5
+  ],
+  "expected": "-1967355679130270355672.43515"
+ },
+ {
+  "id": "decimal_round_half_even-037",
+  "tag": "fuzz",
+  "args": [
+   "758961693889087570680",
+   5
+  ],
+  "expected": "758961693889087570680.00000"
+ },
+ {
+  "id": "decimal_round_half_even-038",
+  "tag": "fuzz",
+  "args": [
+   "-169558685058931",
+   4
+  ],
+  "expected": "-169558685058931.0000"
+ },
+ {
+  "id": "decimal_round_half_even-039",
+  "tag": "fuzz",
+  "args": [
+   "06046410164115713172481.921314",
+   2
+  ],
+  "expected": "6046410164115713172481.92"
+ },
+ {
+  "id": "decimal_round_half_even-040",
+  "tag": "fuzz",
+  "args": [
+   "391145857.4441235",
+   4
+  ],
+  "expected": "391145857.4441"
+ },
+ {
+  "id": "decimal_round_half_even-041",
+  "tag": "fuzz",
+  "args": [
+   "-07373.215",
+   1
+  ],
+  "expected": "-7373.2"
+ },
+ {
+  "id": "decimal_round_half_even-042",
+  "tag": "fuzz",
+  "args": [
+   "2252222.1",
+   2
+  ],
+  "expected": "2252222.10"
+ },
+ {
+  "id": "decimal_round_half_even-043",
+  "tag": "fuzz",
+  "args": [
+   "-952667651363371.4395",
+   1
+  ],
+  "expected": "-952667651363371.4"
+ },
+ {
+  "id": "decimal_round_half_even-044",
+  "tag": "fuzz",
+  "args": [
+   "38502498.430",
+   8
+  ],
+  "expected": "38502498.43000000"
+ },
+ {
+  "id": "decimal_round_half_even-045",
+  "tag": "fuzz",
+  "args": [
+   "50491326775.269",
+   6
+  ],
+  "expected": "50491326775.269000"
+ },
+ {
+  "id": "decimal_round_half_even-046",
+  "tag": "fuzz",
+  "args": [
+   "-02544422232370631469213",
+   0
+  ],
+  "expected": "-2544422232370631469213"
+ },
+ {
+  "id": "decimal_round_half_even-047",
+  "tag": "fuzz",
+  "args": [
+   "-0004.46502459975",
+   4
+  ],
+  "expected": "-4.4650"
+ },
+ {
+  "id": "decimal_round_half_even-048",
+  "tag": "fuzz",
+  "args": [
+   "4348309037951842159.3",
+   2
+  ],
+  "expected": "4348309037951842159.30"
+ },
+ {
+  "id": "decimal_round_half_even-049",
+  "tag": "fuzz",
+  "args": [
+   "000614062626",
+   8
+  ],
+  "expected": "614062626.00000000"
+ },
+ {
+  "id": "decimal_round_half_even-050",
+  "tag": "fuzz",
+  "args": [
+   "72441.75911863205",
+   0
+  ],
+  "expected": "72442"
+ },
+ {
+  "id": "decimal_round_half_even-051",
+  "tag": "fuzz",
+  "args": [
+   "-1.1463035",
+   3
+  ],
+  "expected": "-1.146"
+ },
+ {
+  "id": "decimal_round_half_even-052",
+  "tag": "fuzz",
+  "args": [
+   "-157011508459807074.77057761",
+   2
+  ],
+  "expected": "-157011508459807074.77"
+ },
+ {
+  "id": "decimal_round_half_even-053",
+  "tag": "fuzz",
+  "args": [
+   "932775491795",
+   5
+  ],
+  "expected": "932775491795.00000"
+ },
+ {
+  "id": "decimal_round_half_even-054",
+  "tag": "fuzz",
+  "args": [
+   "27361869718602.7091",
+   3
+  ],
+  "expected": "27361869718602.709"
+ },
+ {
+  "id": "decimal_round_half_even-055",
+  "tag": "fuzz",
+  "args": [
+   "17738954542980.831145829750",
+   3
+  ],
+  "expected": "17738954542980.831"
+ },
+ {
+  "id": "decimal_round_half_even-056",
+  "tag": "fuzz",
+  "args": [
+   "000431945479271478.5",
+   2
+  ],
+  "expected": "431945479271478.50"
+ },
+ {
+  "id": "decimal_round_half_even-057",
+  "tag": "fuzz",
+  "args": [
+   "12254626759505145267827.888",
+   1
+  ],
+  "expected": "12254626759505145267827.9"
+ },
+ {
+  "id": "decimal_round_half_even-058",
+  "tag": "fuzz",
+  "args": [
+   "-18445891.5292585315",
+   0
+  ],
+  "expected": "-18445892"
+ },
+ {
+  "id": "decimal_round_half_even-059",
+  "tag": "fuzz",
+  "args": [
+   "401.3609",
+   2
+  ],
+  "expected": "401.36"
+ },
+ {
+  "id": "decimal_round_half_even-060",
+  "tag": "fuzz",
+  "args": [
+   "-56632658071.5",
+   2
+  ],
+  "expected": "-56632658071.50"
+ },
+ {
+  "id": "decimal_round_half_even-061",
+  "tag": "fuzz",
+  "args": [
+   "990.3764",
+   0
+  ],
+  "expected": "990"
+ },
+ {
+  "id": "decimal_round_half_even-062",
+  "tag": "fuzz",
+  "args": [
+   "143.027863422701",
+   8
+  ],
+  "expected": "143.02786342"
+ },
+ {
+  "id": "decimal_round_half_even-063",
+  "tag": "fuzz",
+  "args": [
+   "-930445098405726.5225592",
+   4
+  ],
+  "expected": "-930445098405726.5226"
+ },
+ {
+  "id": "decimal_round_half_even-064",
+  "tag": "fuzz",
+  "args": [
+   "910913425.5",
+   4
+  ],
+  "expected": "910913425.5000"
+ },
+ {
+  "id": "decimal_round_half_even-065",
+  "tag": "fuzz",
+  "args": [
+   "-77933822407667167.665",
+   4
+  ],
+  "expected": "-77933822407667167.6650"
+ },
+ {
+  "id": "decimal_round_half_even-066",
+  "tag": "fuzz",
+  "args": [
+   "-558942407227279115000.252",
+   4
+  ],
+  "expected": "-558942407227279115000.2520"
+ },
+ {
+  "id": "decimal_round_half_even-067",
+  "tag": "fuzz",
+  "args": [
+   "6516337876570620194910.8",
+   6
+  ],
+  "expected": "6516337876570620194910.800000"
+ },
+ {
+  "id": "decimal_round_half_even-068",
+  "tag": "fuzz",
+  "args": [
+   "-20476.5",
+   1
+  ],
+  "expected": "-20476.5"
+ },
+ {
+  "id": "decimal_round_half_even-069",
+  "tag": "fuzz",
+  "args": [
+   "6867850.929",
+   3
+  ],
+  "expected": "6867850.929"
+ },
+ {
+  "id": "decimal_round_half_even-070",
+  "tag": "fuzz",
+  "args": [
+   "2560.945",
+   5
+  ],
+  "expected": "2560.94500"
+ },
+ {
+  "id": "decimal_round_half_even-071",
+  "tag": "fuzz",
+  "args": [
+   "205445790134819.39496505",
+   8
+  ],
+  "expected": "205445790134819.39496505"
+ },
+ {
+  "id": "decimal_round_half_even-072",
+  "tag": "fuzz",
+  "args": [
+   "-88336713383.8",
+   3
+  ],
+  "expected": "-88336713383.800"
+ },
+ {
+  "id": "decimal_round_half_even-073",
+  "tag": "fuzz",
+  "args": [
+   "745314453096554.7815",
+   1
+  ],
+  "expected": "745314453096554.8"
+ },
+ {
+  "id": "decimal_round_half_even-074",
+  "tag": "fuzz",
+  "args": [
+   "-34889457070369514744139",
+   6
+  ],
+  "expected": "-34889457070369514744139.000000"
+ },
+ {
+  "id": "decimal_round_half_even-075",
+  "tag": "fuzz",
+  "args": [
+   "057288920262350833120868.0305",
+   8
+  ],
+  "expected": "57288920262350833120868.03050000"
+ },
+ {
+  "id": "decimal_round_half_even-076",
+  "tag": "fuzz",
+  "args": [
+   "7020324130355239066.685",
+   3
+  ],
+  "expected": "7020324130355239066.685"
+ },
+ {
+  "id": "decimal_round_half_even-077",
+  "tag": "fuzz",
+  "args": [
+   "843620389477699.294507",
+   2
+  ],
+  "expected": "843620389477699.29"
+ },
+ {
+  "id": "decimal_round_half_even-078",
+  "tag": "fuzz",
+  "args": [
+   "-88193926028039560.6856646572",
+   4
+  ],
+  "expected": "-88193926028039560.6857"
+ },
+ {
+  "id": "decimal_round_half_even-079",
+  "tag": "fuzz",
+  "args": [
+   "-189176940291239773166544.73303887",
+   2
+  ],
+  "expected": "-189176940291239773166544.73"
+ },
+ {
+  "id": "decimal_round_half_even-080",
+  "tag": "fuzz",
+  "args": [
+   "-00071125374678.2725",
+   3
+  ],
+  "expected": "-71125374678.272"
+ },
+ {
+  "id": "decimal_round_half_even-081",
+  "tag": "fuzz",
+  "args": [
+   "-006579933570512648796683.25",
+   0
+  ],
+  "expected": "-6579933570512648796683"
+ },
+ {
+  "id": "decimal_round_half_even-082",
+  "tag": "fuzz",
+  "args": [
+   "1636963472476562.77482",
+   4
+  ],
+  "expected": "1636963472476562.7748"
+ },
+ {
+  "id": "decimal_round_half_even-083",
+  "tag": "fuzz",
+  "args": [
+   "53932424420814.85",
+   6
+  ],
+  "expected": "53932424420814.850000"
+ },
+ {
+  "id": "decimal_round_half_even-084",
+  "tag": "fuzz",
+  "args": [
+   "62316135356.332733235",
+   2
+  ],
+  "expected": "62316135356.33"
+ },
+ {
+  "id": "decimal_round_half_even-085",
+  "tag": "fuzz",
+  "args": [
+   "276867173651864827.935",
+   0
+  ],
+  "expected": "276867173651864828"
+ },
+ {
+  "id": "decimal_round_half_even-086",
+  "tag": "fuzz",
+  "args": [
+   "-4279339805.88302515",
+   5
+  ],
+  "expected": "-4279339805.88303"
+ },
+ {
+  "id": "decimal_round_half_even-087",
+  "tag": "fuzz",
+  "args": [
+   "06899189025009511483683242.11",
+   8
+  ],
+  "expected": "6899189025009511483683242.11000000"
+ },
+ {
+  "id": "decimal_round_half_even-088",
+  "tag": "fuzz",
+  "args": [
+   "264375455563034446.38221479645",
+   1
+  ],
+  "expected": "264375455563034446.4"
+ },
+ {
+  "id": "decimal_round_half_even-089",
+  "tag": "fuzz",
+  "args": [
+   "61291369952031263.81125",
+   2
+  ],
+  "expected": "61291369952031263.81"
+ },
+ {
+  "id": "decimal_round_half_even-090",
+  "tag": "fuzz",
+  "args": [
+   "-81476685076674927576163.412762551950",
+   5
+  ],
+  "expected": "-81476685076674927576163.41276"
+ },
+ {
+  "id": "decimal_round_half_even-091",
+  "tag": "fuzz",
+  "args": [
+   "235930029934406434984272.95",
+   8
+  ],
+  "expected": "235930029934406434984272.95000000"
+ },
+ {
+  "id": "decimal_round_half_even-092",
+  "tag": "fuzz",
+  "args": [
+   "92787455820918.9285",
+   3
+  ],
+  "expected": "92787455820918.928"
+ },
+ {
+  "id": "decimal_round_half_even-093",
+  "tag": "fuzz",
+  "args": [
+   "-0002422006495888675504457449.576035",
+   6
+  ],
+  "expected": "-2422006495888675504457449.576035"
+ },
+ {
+  "id": "decimal_round_half_even-094",
+  "tag": "fuzz",
+  "args": [
+   "1373218313655434.85115",
+   1
+  ],
+  "expected": "1373218313655434.9"
+ },
+ {
+  "id": "decimal_round_half_even-095",
+  "tag": "fuzz",
+  "args": [
+   "33294.07035",
+   0
+  ],
+  "expected": "33294"
+ },
+ {
+  "id": "decimal_round_half_even-096",
+  "tag": "fuzz",
+  "args": [
+   "8819909931395346.509633",
+   3
+  ],
+  "expected": "8819909931395346.510"
+ },
+ {
+  "id": "decimal_round_half_even-097",
+  "tag": "fuzz",
+  "args": [
+   "-96682121183",
+   0
+  ],
+  "expected": "-96682121183"
+ },
+ {
+  "id": "decimal_round_half_even-098",
+  "tag": "fuzz",
+  "args": [
+   "-963038227023.3383251898",
+   7
+  ],
+  "expected": "-963038227023.3383252"
+ },
+ {
+  "id": "decimal_round_half_even-099",
+  "tag": "fuzz",
+  "args": [
+   "169.74791804",
+   7
+  ],
+  "expected": "169.7479180"
+ },
+ {
+  "id": "decimal_round_half_even-100",
+  "tag": "fuzz",
+  "args": [
+   "-688219005200.25",
+   0
+  ],
+  "expected": "-688219005200"
+ },
+ {
+  "id": "decimal_round_half_even-101",
+  "tag": "fuzz",
+  "args": [
+   "-9573709007093850157459749.3732781828",
+   3
+  ],
+  "expected": "-9573709007093850157459749.373"
+ },
+ {
+  "id": "decimal_round_half_even-102",
+  "tag": "fuzz",
+  "args": [
+   "5035549.35",
+   2
+  ],
+  "expected": "5035549.35"
+ },
+ {
+  "id": "decimal_round_half_even-103",
+  "tag": "fuzz",
+  "args": [
+   "-1226935473046.07125",
+   1
+  ],
+  "expected": "-1226935473046.1"
+ },
+ {
+  "id": "decimal_round_half_even-104",
+  "tag": "fuzz",
+  "args": [
+   "21650024185800375.05396",
+   8
+  ],
+  "expected": "21650024185800375.05396000"
+ },
+ {
+  "id": "decimal_round_half_even-105",
+  "tag": "fuzz",
+  "args": [
+   "852918053537472099638584.33",
+   5
+  ],
+  "expected": "852918053537472099638584.33000"
+ },
+ {
+  "id": "decimal_round_half_even-106",
+  "tag": "fuzz",
+  "args": [
+   "-971624817449702833728990.421984799",
+   6
+  ],
+  "expected": "-971624817449702833728990.421985"
+ },
+ {
+  "id": "decimal_round_half_even-107",
+  "tag": "fuzz",
+  "args": [
+   "2856.73722615",
+   3
+  ],
+  "expected": "2856.737"
+ },
+ {
+  "id": "decimal_round_half_even-108",
+  "tag": "fuzz",
+  "args": [
+   "-536449196378.3135",
+   5
+  ],
+  "expected": "-536449196378.31350"
+ },
+ {
+  "id": "decimal_round_half_even-109",
+  "tag": "fuzz",
+  "args": [
+   "2.9",
+   6
+  ],
+  "expected": "2.900000"
+ },
+ {
+  "id": "decimal_round_half_even-110",
+  "tag": "fuzz",
+  "args": [
+   "-926374298841295677294.09605",
+   6
+  ],
+  "expected": "-926374298841295677294.096050"
+ },
+ {
+  "id": "decimal_round_half_even-111",
+  "tag": "fuzz",
+  "args": [
+   "-5429652642203219577.4895",
+   7
+  ],
+  "expected": "-5429652642203219577.4895000"
+ },
+ {
+  "id": "decimal_round_half_even-112",
+  "tag": "fuzz",
+  "args": [
+   "786243315082926.65",
+   2
+  ],
+  "expected": "786243315082926.65"
+ },
+ {
+  "id": "decimal_round_half_even-113",
+  "tag": "fuzz",
+  "args": [
+   "-000854510415283.595",
+   8
+  ],
+  "expected": "-854510415283.59500000"
+ },
+ {
+  "id": "decimal_round_half_even-114",
+  "tag": "fuzz",
+  "args": [
+   "7497133458493414198749018.2",
+   4
+  ],
+  "expected": "7497133458493414198749018.2000"
+ },
+ {
+  "id": "decimal_round_half_even-115",
+  "tag": "fuzz",
+  "args": [
+   "43152.1",
+   8
+  ],
+  "expected": "43152.10000000"
+ },
+ {
+  "id": "decimal_round_half_even-116",
+  "tag": "fuzz",
+  "args": [
+   "0839127456443046973799907.185",
+   8
+  ],
+  "expected": "839127456443046973799907.18500000"
+ },
+ {
+  "id": "decimal_round_half_even-117",
+  "tag": "fuzz",
+  "args": [
+   "-0004589362691.4005",
+   6
+  ],
+  "expected": "-4589362691.400500"
+ },
+ {
+  "id": "decimal_round_half_even-118",
+  "tag": "fuzz",
+  "args": [
+   "47.825",
+   5
+  ],
+  "expected": "47.82500"
+ },
+ {
+  "id": "decimal_round_half_even-119",
+  "tag": "fuzz",
+  "args": [
+   "18759407140806674890744.0485",
+   3
+  ],
+  "expected": "18759407140806674890744.048"
+ },
+ {
+  "id": "decimal_round_half_even-120",
+  "tag": "fuzz",
+  "args": [
+   "-33013252901110637661.225257102030",
+   8
+  ],
+  "expected": "-33013252901110637661.22525710"
+ },
+ {
+  "id": "decimal_round_half_even-121",
+  "tag": "fuzz",
+  "args": [
+   "71845868061736277026978.468835",
+   3
+  ],
+  "expected": "71845868061736277026978.469"
+ },
+ {
+  "id": "decimal_round_half_even-122",
+  "tag": "fuzz",
+  "args": [
+   "45158711168478775.019882",
+   8
+  ],
+  "expected": "45158711168478775.01988200"
+ },
+ {
+  "id": "decimal_round_half_even-123",
+  "tag": "fuzz",
+  "args": [
+   "-3.743081",
+   1
+  ],
+  "expected": "-3.7"
+ },
+ {
+  "id": "decimal_round_half_even-124",
+  "tag": "fuzz",
+  "args": [
+   "0088330.5",
+   0
+  ],
+  "expected": "88330"
+ },
+ {
+  "id": "decimal_round_half_even-125",
+  "tag": "fuzz",
+  "args": [
+   "-1810671103254951.31145",
+   1
+  ],
+  "expected": "-1810671103254951.3"
+ },
+ {
+  "id": "decimal_round_half_even-126",
+  "tag": "fuzz",
+  "args": [
+   "-868673147579053.6614455",
+   7
+  ],
+  "expected": "-868673147579053.6614455"
+ },
+ {
+  "id": "decimal_round_half_even-127",
+  "tag": "fuzz",
+  "args": [
+   "-001.217",
+   5
+  ],
+  "expected": "-1.21700"
+ },
+ {
+  "id": "decimal_round_half_even-128",
+  "tag": "fuzz",
+  "args": [
+   "-345598.56190062",
+   3
+  ],
+  "expected": "-345598.562"
+ },
+ {
+  "id": "decimal_round_half_even-129",
+  "tag": "fuzz",
+  "args": [
+   "3.55907418718",
+   8
+  ],
+  "expected": "3.55907419"
+ },
+ {
+  "id": "decimal_round_half_even-130",
+  "tag": "fuzz",
+  "args": [
+   "3965226330163115621907.720",
+   6
+  ],
+  "expected": "3965226330163115621907.720000"
+ },
+ {
+  "id": "decimal_round_half_even-131",
+  "tag": "fuzz",
+  "args": [
+   "000494.4540877141",
+   0
+  ],
+  "expected": "494"
+ },
+ {
+  "id": "decimal_round_half_even-132",
+  "tag": "fuzz",
+  "args": [
+   "12007.15",
+   5
+  ],
+  "expected": "12007.15000"
+ },
+ {
+  "id": "decimal_round_half_even-133",
+  "tag": "fuzz",
+  "args": [
+   "06234227061.4999",
+   0
+  ],
+  "expected": "6234227061"
+ },
+ {
+  "id": "decimal_round_half_even-134",
+  "tag": "fuzz",
+  "args": [
+   "92654208844369000510.4835",
+   1
+  ],
+  "expected": "92654208844369000510.5"
+ },
+ {
+  "id": "decimal_round_half_even-135",
+  "tag": "fuzz",
+  "args": [
+   "-321355.665",
+   2
+  ],
+  "expected": "-321355.66"
+ },
+ {
+  "id": "decimal_round_half_even-136",
+  "tag": "fuzz",
+  "args": [
+   "166027492983342647353.5",
+   6
+  ],
+  "expected": "166027492983342647353.500000"
+ },
+ {
+  "id": "decimal_round_half_even-137",
+  "tag": "fuzz",
+  "args": [
+   "-8144690367.624427377529",
+   2
+  ],
+  "expected": "-8144690367.62"
+ },
+ {
+  "id": "decimal_round_half_even-138",
+  "tag": "fuzz",
+  "args": [
+   "189765266606331328457911.029343160",
+   6
+  ],
+  "expected": "189765266606331328457911.029343"
+ },
+ {
+  "id": "decimal_round_half_even-139",
+  "tag": "fuzz",
+  "args": [
+   "301345499066031255529501.483",
+   2
+  ],
+  "expected": "301345499066031255529501.48"
+ },
+ {
+  "id": "decimal_round_half_even-140",
+  "tag": "fuzz",
+  "args": [
+   "-51024405884166.23222114",
+   6
+  ],
+  "expected": "-51024405884166.232221"
+ },
+ {
+  "id": "decimal_round_half_even-141",
+  "tag": "fuzz",
+  "args": [
+   "11013842128261286986.2413591",
+   4
+  ],
+  "expected": "11013842128261286986.2414"
+ },
+ {
+  "id": "decimal_round_half_even-142",
+  "tag": "fuzz",
+  "args": [
+   "-756696676895784481.6219371",
+   6
+  ],
+  "expected": "-756696676895784481.621937"
+ },
+ {
+  "id": "decimal_round_half_even-143",
+  "tag": "fuzz",
+  "args": [
+   "6784032944465463604.5",
+   2
+  ],
+  "expected": "6784032944465463604.50"
+ },
+ {
+  "id": "decimal_round_half_even-144",
+  "tag": "fuzz",
+  "args": [
+   "-771400680904",
+   8
+  ],
+  "expected": "-771400680904.00000000"
+ },
+ {
+  "id": "decimal_round_half_even-145",
+  "tag": "fuzz",
+  "args": [
+   "79.0218940",
+   8
+  ],
+  "expected": "79.02189400"
+ },
+ {
+  "id": "decimal_round_half_even-146",
+  "tag": "fuzz",
+  "args": [
+   "140.5",
+   0
+  ],
+  "expected": "140"
+ },
+ {
+  "id": "decimal_round_half_even-147",
+  "tag": "fuzz",
+  "args": [
+   "463.471",
+   6
+  ],
+  "expected": "463.471000"
+ },
+ {
+  "id": "decimal_round_half_even-148",
+  "tag": "fuzz",
+  "args": [
+   "00450699358745120.0465",
+   5
+  ],
+  "expected": "450699358745120.04650"
+ },
+ {
+  "id": "decimal_round_half_even-149",
+  "tag": "fuzz",
+  "args": [
+   "-0003251.1213114976",
+   1
+  ],
+  "expected": "-3251.1"
+ },
+ {
+  "id": "decimal_round_half_even-150",
+  "tag": "fuzz",
+  "args": [
+   "0.51",
+   7
+  ],
+  "expected": "0.5100000"
+ },
+ {
+  "id": "decimal_round_half_even-151",
+  "tag": "fuzz",
+  "args": [
+   "6518432916776405973.322377298",
+   8
+  ],
+  "expected": "6518432916776405973.32237730"
+ },
+ {
+  "id": "decimal_round_half_even-152",
+  "tag": "fuzz",
+  "args": [
+   "-81787.2",
+   3
+  ],
+  "expected": "-81787.200"
+ },
+ {
+  "id": "decimal_round_half_even-153",
+  "tag": "fuzz",
+  "args": [
+   "-00346651153233104074.97156",
+   4
+  ],
+  "expected": "-346651153233104074.9716"
+ },
+ {
+  "id": "decimal_round_half_even-154",
+  "tag": "fuzz",
+  "args": [
+   "132913890366362942.9994",
+   5
+  ],
+  "expected": "132913890366362942.99940"
+ },
+ {
+  "id": "decimal_round_half_even-155",
+  "tag": "fuzz",
+  "args": [
+   "-342529915.54396",
+   6
+  ],
+  "expected": "-342529915.543960"
+ },
+ {
+  "id": "decimal_round_half_even-156",
+  "tag": "fuzz",
+  "args": [
+   "12746.05",
+   8
+  ],
+  "expected": "12746.05000000"
+ },
+ {
+  "id": "decimal_round_half_even-157",
+  "tag": "fuzz",
+  "args": [
+   "-0001.76595206757",
+   5
+  ],
+  "expected": "-1.76595"
+ },
+ {
+  "id": "decimal_round_half_even-158",
+  "tag": "fuzz",
+  "args": [
+   "008693663140275785647241970.15",
+   6
+  ],
+  "expected": "8693663140275785647241970.150000"
+ },
+ {
+  "id": "decimal_round_half_even-159",
+  "tag": "fuzz",
+  "args": [
+   "8199265170737",
+   2
+  ],
+  "expected": "8199265170737.00"
+ },
+ {
+  "id": "decimal_round_half_even-160",
+  "tag": "fuzz",
+  "args": [
+   "29636295264956025545.30848958942",
+   5
+  ],
+  "expected": "29636295264956025545.30849"
+ },
+ {
+  "id": "decimal_round_half_even-161",
+  "tag": "fuzz",
+  "args": [
+   "00273959637383696311.575682052747",
+   8
+  ],
+  "expected": "273959637383696311.57568205"
+ },
+ {
+  "id": "decimal_round_half_even-162",
+  "tag": "fuzz",
+  "args": [
+   "299930232.6145605",
+   4
+  ],
+  "expected": "299930232.6146"
+ },
+ {
+  "id": "decimal_round_half_even-163",
+  "tag": "fuzz",
+  "args": [
+   "0040450879159206686124012.054308912",
+   8
+  ],
+  "expected": "40450879159206686124012.05430891"
+ },
+ {
+  "id": "decimal_round_half_even-164",
+  "tag": "fuzz",
+  "args": [
+   "-03134553716518705058.7757417",
+   4
+  ],
+  "expected": "-3134553716518705058.7757"
+ },
+ {
+  "id": "decimal_round_half_even-165",
+  "tag": "fuzz",
+  "args": [
+   "-512629197.5",
+   5
+  ],
+  "expected": "-512629197.50000"
+ },
+ {
+  "id": "decimal_round_half_even-166",
+  "tag": "fuzz",
+  "args": [
+   "-942284198078344872831.342830",
+   7
+  ],
+  "expected": "-942284198078344872831.3428300"
+ },
+ {
+  "id": "decimal_round_half_even-167",
+  "tag": "fuzz",
+  "args": [
+   "0008650731657454028.333",
+   5
+  ],
+  "expected": "8650731657454028.33300"
+ },
+ {
+  "id": "decimal_round_half_even-168",
+  "tag": "fuzz",
+  "args": [
+   "12151843302.5355269",
+   4
+  ],
+  "expected": "12151843302.5355"
+ },
+ {
+  "id": "decimal_round_half_even-169",
+  "tag": "fuzz",
+  "args": [
+   "-35788936091.087905",
+   0
+  ],
+  "expected": "-35788936091"
+ },
+ {
+  "id": "decimal_round_half_even-170",
+  "tag": "fuzz",
+  "args": [
+   "-002874.85258647",
+   2
+  ],
+  "expected": "-2874.85"
+ },
+ {
+  "id": "decimal_round_half_even-171",
+  "tag": "fuzz",
+  "args": [
+   "783293344464325795429841.2050584892",
+   6
+  ],
+  "expected": "783293344464325795429841.205058"
+ },
+ {
+  "id": "decimal_round_half_even-172",
+  "tag": "fuzz",
+  "args": [
+   "-0005141206020.5",
+   3
+  ],
+  "expected": "-5141206020.500"
+ },
+ {
+  "id": "decimal_round_half_even-173",
+  "tag": "fuzz",
+  "args": [
+   "-813698416.8495",
+   6
+  ],
+  "expected": "-813698416.849500"
+ },
+ {
+  "id": "decimal_round_half_even-174",
+  "tag": "fuzz",
+  "args": [
+   "-90939614323",
+   1
+  ],
+  "expected": "-90939614323.0"
+ },
+ {
+  "id": "decimal_round_half_even-175",
+  "tag": "fuzz",
+  "args": [
+   "-3493722732117751467.5",
+   7
+  ],
+  "expected": "-3493722732117751467.5000000"
+ },
+ {
+  "id": "decimal_round_half_even-176",
+  "tag": "fuzz",
+  "args": [
+   "0024853233843257.095",
+   7
+  ],
+  "expected": "24853233843257.0950000"
+ },
+ {
+  "id": "decimal_round_half_even-177",
+  "tag": "fuzz",
+  "args": [
+   "15583727.225379978855",
+   2
+  ],
+  "expected": "15583727.23"
+ },
+ {
+  "id": "decimal_round_half_even-178",
+  "tag": "fuzz",
+  "args": [
+   "9747199230456.975",
+   1
+  ],
+  "expected": "9747199230457.0"
+ },
+ {
+  "id": "decimal_round_half_even-179",
+  "tag": "fuzz",
+  "args": [
+   "0006743606988666418826",
+   3
+  ],
+  "expected": "6743606988666418826.000"
+ },
+ {
+  "id": "decimal_round_half_even-180",
+  "tag": "fuzz",
+  "args": [
+   "243441034856221.032779",
+   1
+  ],
+  "expected": "243441034856221.0"
+ }
+]

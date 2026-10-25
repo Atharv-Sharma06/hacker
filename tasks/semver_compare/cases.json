@@ -1,0 +1,1841 @@
+[
+ {
+  "id": "semver_compare-000",
+  "tag": "core",
+  "args": [
+   "1.0.0",
+   "2.0.0"
+  ],
+  "expected": -1
+ },
+ {
+  "id": "semver_compare-001",
+  "tag": "core",
+  "args": [
+   "2.0.0",
+   "1.0.0"
+  ],
+  "expected": 1
+ },
+ {
+  "id": "semver_compare-002",
+  "tag": "core",
+  "args": [
+   "2.0.0",
+   "2.1.0"
+  ],
+  "expected": -1
+ },
+ {
+  "id": "semver_compare-003",
+  "tag": "core",
+  "args": [
+   "2.1.0",
+   "2.0.0"
+  ],
+  "expected": 1
+ },
+ {
+  "id": "semver_compare-004",
+  "tag": "core",
+  "args": [
+   "2.1.0",
+   "2.1.1"
+  ],
+  "expected": -1
+ },
+ {
+  "id": "semver_compare-005",
+  "tag": "core",
+  "args": [
+   "2.1.1",
+   "2.1.0"
+  ],
+  "expected": 1
+ },
+ {
+  "id": "semver_compare-006",
+  "tag": "core-numeric",
+  "args": [
+   "1.10.0",
+   "1.9.0"
+  ],
+  "expected": 1
+ },
+ {
+  "id": "semver_compare-007",
+  "tag": "core-numeric",
+  "args": [
+   "1.9.0",
+   "1.10.0"
+  ],
+  "expected": -1
+ },
+ {
+  "id": "semver_compare-008",
+  "tag": "core-numeric",
+  "args": [
+   "10.0.0",
+   "9.99.99"
+  ],
+  "expected": 1
+ },
+ {
+  "id": "semver_compare-009",
+  "tag": "core-numeric",
+  "args": [
+   "9.99.99",
+   "10.0.0"
+  ],
+  "expected": -1
+ },
+ {
+  "id": "semver_compare-010",
+  "tag": "prerelease-vs-release",
+  "args": [
+   "1.0.0-alpha",
+   "1.0.0"
+  ],
+  "expected": -1
+ },
+ {
+  "id": "semver_compare-011",
+  "tag": "prerelease-vs-release",
+  "args": [
+   "1.0.0",
+   "1.0.0-alpha"
+  ],
+  "expected": 1
+ },
+ {
+  "id": "semver_compare-012",
+  "tag": "prerelease-vs-release",
+  "args": [
+   "1.0.0-rc.1",
+   "1.0.0"
+  ],
+  "expected": -1
+ },
+ {
+  "id": "semver_compare-013",
+  "tag": "prerelease-vs-release",
+  "args": [
+   "1.0.0",
+   "1.0.0-rc.1"
+  ],
+  "expected": 1
+ },
+ {
+  "id": "semver_compare-014",
+  "tag": "prerelease-length",
+  "args": [
+   "1.0.0-alpha",
+   "1.0.0-alpha.1"
+  ],
+  "expected": -1
+ },
+ {
+  "id": "semver_compare-015",
+  "tag": "prerelease-length",
+  "args": [
+   "1.0.0-alpha.1",
+   "1.0.0-alpha"
+  ],
+  "expected": 1
+ },
+ {
+  "id": "semver_compare-016",
+  "tag": "numeric-before-alnum",
+  "args": [
+   "1.0.0-alpha.1",
+   "1.0.0-alpha.beta"
+  ],
+  "expected": -1
+ },
+ {
+  "id": "semver_compare-017",
+  "tag": "numeric-before-alnum",
+  "args": [
+   "1.0.0-alpha.beta",
+   "1.0.0-alpha.1"
+  ],
+  "expected": 1
+ },
+ {
+  "id": "semver_compare-018",
+  "tag": "prerelease-lexical",
+  "args": [
+   "1.0.0-alpha.beta",
+   "1.0.0-beta"
+  ],
+  "expected": -1
+ },
+ {
+  "id": "semver_compare-019",
+  "tag": "prerelease-lexical",
+  "args": [
+   "1.0.0-beta",
+   "1.0.0-alpha.beta"
+  ],
+  "expected": 1
+ },
+ {
+  "id": "semver_compare-020",
+  "tag": "prerelease-length",
+  "args": [
+   "1.0.0-beta",
+   "1.0.0-beta.2"
+  ],
+  "expected": -1
+ },
+ {
+  "id": "semver_compare-021",
+  "tag": "prerelease-length",
+  "args": [
+   "1.0.0-beta.2",
+   "1.0.0-beta"
+  ],
+  "expected": 1
+ },
+ {
+  "id": "semver_compare-022",
+  "tag": "prerelease-numeric",
+  "args": [
+   "1.0.0-beta.2",
+   "1.0.0-beta.11"
+  ],
+  "expected": -1
+ },
+ {
+  "id": "semver_compare-023",
+  "tag": "prerelease-numeric",
+  "args": [
+   "1.0.0-beta.11",
+   "1.0.0-beta.2"
+  ],
+  "expected": 1
+ },
+ {
+  "id": "semver_compare-024",
+  "tag": "prerelease-lexical",
+  "args": [
+   "1.0.0-beta.11",
+   "1.0.0-rc.1"
+  ],
+  "expected": -1
+ },
+ {
+  "id": "semver_compare-025",
+  "tag": "prerelease-lexical",
+  "args": [
+   "1.0.0-rc.1",
+   "1.0.0-beta.11"
+  ],
+  "expected": 1
+ },
+ {
+  "id": "semver_compare-026",
+  "tag": "prerelease-numeric",
+  "args": [
+   "1.0.0-alpha.10",
+   "1.0.0-alpha.9"
+  ],
+  "expected": 1
+ },
+ {
+  "id": "semver_compare-027",
+  "tag": "prerelease-numeric",
+  "args": [
+   "1.0.0-alpha.9",
+   "1.0.0-alpha.10"
+  ],
+  "expected": -1
+ },
+ {
+  "id": "semver_compare-028",
+  "tag": "numeric-before-alnum",
+  "args": [
+   "1.0.0-1",
+   "1.0.0-0A"
+  ],
+  "expected": -1,
+  "note": "'0A' is alphanumeric"
+ },
+ {
+  "id": "semver_compare-029",
+  "tag": "numeric-before-alnum",
+  "args": [
+   "1.0.0-0A",
+   "1.0.0-1"
+  ],
+  "expected": 1,
+  "note": "'0A' is alphanumeric"
+ },
+ {
+  "id": "semver_compare-030",
+  "tag": "numeric-before-alnum",
+  "args": [
+   "1.0.0-2",
+   "1.0.0-1-1"
+  ],
+  "expected": -1,
+  "note": "'1-1' is alphanumeric"
+ },
+ {
+  "id": "semver_compare-031",
+  "tag": "numeric-before-alnum",
+  "args": [
+   "1.0.0-1-1",
+   "1.0.0-2"
+  ],
+  "expected": 1,
+  "note": "'1-1' is alphanumeric"
+ },
+ {
+  "id": "semver_compare-032",
+  "tag": "prerelease-bignum",
+  "args": [
+   "1.0.0-99999999999999999999999",
+   "1.0.0-100000000000000000000000"
+  ],
+  "expected": -1
+ },
+ {
+  "id": "semver_compare-033",
+  "tag": "prerelease-bignum",
+  "args": [
+   "1.0.0-100000000000000000000000",
+   "1.0.0-99999999999999999999999"
+  ],
+  "expected": 1
+ },
+ {
+  "id": "semver_compare-034",
+  "tag": "ascii-order",
+  "args": [
+   "1.0.0-Alpha",
+   "1.0.0-alpha"
+  ],
+  "expected": -1,
+  "note": "'A' (65) sorts before 'a' (97)"
+ },
+ {
+  "id": "semver_compare-035",
+  "tag": "ascii-order",
+  "args": [
+   "1.0.0-alpha",
+   "1.0.0-Alpha"
+  ],
+  "expected": 1,
+  "note": "'A' (65) sorts before 'a' (97)"
+ },
+ {
+  "id": "semver_compare-036",
+  "tag": "ascii-order",
+  "args": [
+   "1.0.0-alpha-2",
+   "1.0.0-alpha-10"
+  ],
+  "expected": 1,
+  "note": "hyphenated identifier compares as text"
+ },
+ {
+  "id": "semver_compare-037",
+  "tag": "ascii-order",
+  "args": [
+   "1.0.0-alpha-10",
+   "1.0.0-alpha-2"
+  ],
+  "expected": -1,
+  "note": "hyphenated identifier compares as text"
+ },
+ {
+  "id": "semver_compare-038",
+  "tag": "prerelease-length",
+  "args": [
+   "1.0.0-a.b.c.d",
+   "1.0.0-a.b.c"
+  ],
+  "expected": 1
+ },
+ {
+  "id": "semver_compare-039",
+  "tag": "prerelease-length",
+  "args": [
+   "1.0.0-a.b.c",
+   "1.0.0-a.b.c.d"
+  ],
+  "expected": -1
+ },
+ {
+  "id": "semver_compare-040",
+  "tag": "equal",
+  "args": [
+   "1.0.0-x.7.z.92",
+   "1.0.0-x.7.z.92"
+  ],
+  "expected": 0
+ },
+ {
+  "id": "semver_compare-041",
+  "tag": "build-ignored",
+  "args": [
+   "1.0.0+build.1",
+   "1.0.0+build.2"
+  ],
+  "expected": 0
+ },
+ {
+  "id": "semver_compare-042",
+  "tag": "build-ignored",
+  "args": [
+   "1.0.0+build.2",
+   "1.0.0+build.1"
+  ],
+  "expected": 0
+ },
+ {
+  "id": "semver_compare-043",
+  "tag": "build-ignored",
+  "args": [
+   "1.0.0+20130313144700",
+   "1.0.0"
+  ],
+  "expected": 0
+ },
+ {
+  "id": "semver_compare-044",
+  "tag": "build-ignored",
+  "args": [
+   "1.0.0",
+   "1.0.0+20130313144700"
+  ],
+  "expected": 0
+ },
+ {
+  "id": "semver_compare-045",
+  "tag": "build-ignored",
+  "args": [
+   "1.0.0-beta+exp.sha.5114f85",
+   "1.0.0-beta"
+  ],
+  "expected": 0
+ },
+ {
+  "id": "semver_compare-046",
+  "tag": "build-ignored",
+  "args": [
+   "1.0.0-beta",
+   "1.0.0-beta+exp.sha.5114f85"
+  ],
+  "expected": 0
+ },
+ {
+  "id": "semver_compare-047",
+  "tag": "build-with-hyphen",
+  "args": [
+   "1.0.0+build-1",
+   "1.0.0"
+  ],
+  "expected": 0,
+  "note": "the '-' is inside build metadata, not a pre-release"
+ },
+ {
+  "id": "semver_compare-048",
+  "tag": "build-with-hyphen",
+  "args": [
+   "1.0.0",
+   "1.0.0+build-1"
+  ],
+  "expected": 0,
+  "note": "the '-' is inside build metadata, not a pre-release"
+ },
+ {
+  "id": "semver_compare-049",
+  "tag": "build-with-hyphen",
+  "args": [
+   "1.0.0+build-1",
+   "1.0.0-rc.1"
+  ],
+  "expected": 1
+ },
+ {
+  "id": "semver_compare-050",
+  "tag": "build-with-hyphen",
+  "args": [
+   "1.0.0-rc.1",
+   "1.0.0+build-1"
+  ],
+  "expected": -1
+ },
+ {
+  "id": "semver_compare-051",
+  "tag": "build-with-hyphen",
+  "args": [
+   "1.0.0-rc.1+build-9",
+   "1.0.0-rc.1+build-1"
+  ],
+  "expected": 0
+ },
+ {
+  "id": "semver_compare-052",
+  "tag": "build-with-hyphen",
+  "args": [
+   "1.0.0-rc.1+build-1",
+   "1.0.0-rc.1+build-9"
+  ],
+  "expected": 0
+ },
+ {
+  "id": "semver_compare-053",
+  "tag": "prerelease-length",
+  "args": [
+   "1.0.0-0.3.7",
+   "1.0.0-0.3.7.0"
+  ],
+  "expected": -1
+ },
+ {
+  "id": "semver_compare-054",
+  "tag": "prerelease-length",
+  "args": [
+   "1.0.0-0.3.7.0",
+   "1.0.0-0.3.7"
+  ],
+  "expected": 1
+ },
+ {
+  "id": "semver_compare-055",
+  "tag": "numeric-before-alnum",
+  "args": [
+   "1.0.0-0",
+   "1.0.0-a"
+  ],
+  "expected": -1
+ },
+ {
+  "id": "semver_compare-056",
+  "tag": "numeric-before-alnum",
+  "args": [
+   "1.0.0-a",
+   "1.0.0-0"
+  ],
+  "expected": 1
+ },
+ {
+  "id": "semver_compare-057",
+  "tag": "numeric-before-alnum",
+  "args": [
+   "1.0.0--",
+   "1.0.0-0"
+  ],
+  "expected": 1,
+  "note": "'-' alone is an alphanumeric identifier"
+ },
+ {
+  "id": "semver_compare-058",
+  "tag": "numeric-before-alnum",
+  "args": [
+   "1.0.0-0",
+   "1.0.0--"
+  ],
+  "expected": -1,
+  "note": "'-' alone is an alphanumeric identifier"
+ },
+ {
+  "id": "semver_compare-059",
+  "tag": "core-bignum",
+  "args": [
+   "123456789012345678901234567890.0.0",
+   "123456789012345678901234567889.9.9"
+  ],
+  "expected": 1
+ },
+ {
+  "id": "semver_compare-060",
+  "tag": "core-bignum",
+  "args": [
+   "123456789012345678901234567889.9.9",
+   "123456789012345678901234567890.0.0"
+  ],
+  "expected": -1
+ },
+ {
+  "id": "semver_compare-061",
+  "tag": "prerelease-vs-release",
+  "args": [
+   "0.0.0",
+   "0.0.0-0"
+  ],
+  "expected": 1
+ },
+ {
+  "id": "semver_compare-062",
+  "tag": "prerelease-vs-release",
+  "args": [
+   "0.0.0-0",
+   "0.0.0"
+  ],
+  "expected": -1
+ },
+ {
+  "id": "semver_compare-063",
+  "tag": "fuzz",
+  "args": [
+   "1.2.3-0A.-.1",
+   "0.2.2-rc.rc.beta+build-7"
+  ],
+  "expected": 1
+ },
+ {
+  "id": "semver_compare-064",
+  "tag": "fuzz",
+  "args": [
+   "2.3.3+b1",
+   "3.2.3"
+  ],
+  "expected": -1
+ },
+ {
+  "id": "semver_compare-065",
+  "tag": "fuzz",
+  "args": [
+   "1.2.3-rc.a1.rc+b1",
+   "1.2.3-x-y+b1"
+  ],
+  "expected": -1
+ },
+ {
+  "id": "semver_compare-066",
+  "tag": "fuzz",
+  "args": [
+   "0.3.1-9.10",
+   "1.1.0-a1.2.beta"
+  ],
+  "expected": -1
+ },
+ {
+  "id": "semver_compare-067",
+  "tag": "fuzz",
+  "args": [
+   "0.1.3-Z",
+   "2.2.2-alpha.1.2"
+  ],
+  "expected": -1
+ },
+ {
+  "id": "semver_compare-068",
+  "tag": "fuzz",
+  "args": [
+   "1.0.0",
+   "2.3.3-alpha"
+  ],
+  "expected": -1
+ },
+ {
+  "id": "semver_compare-069",
+  "tag": "fuzz",
+  "args": [
+   "2.2.3",
+   "2.2.1-0A.rc"
+  ],
+  "expected": 1
+ },
+ {
+  "id": "semver_compare-070",
+  "tag": "fuzz",
+  "args": [
+   "1.0.2-0A.Z+exp.sha.5",
+   "2.1.3-a1.Z+exp.sha.5"
+  ],
+  "expected": -1
+ },
+ {
+  "id": "semver_compare-071",
+  "tag": "fuzz",
+  "args": [
+   "0.1.1-11",
+   "2.1.3-1+b1"
+  ],
+  "expected": -1
+ },
+ {
+  "id": "semver_compare-072",
+  "tag": "fuzz",
+  "args": [
+   "3.0.0-0.beta+build-7",
+   "0.0.0-a1.rc.10"
+  ],
+  "expected": 1
+ },
+ {
+  "id": "semver_compare-073",
+  "tag": "fuzz",
+  "args": [
+   "1.3.3-0A",
+   "1.2.0"
+  ],
+  "expected": 1
+ },
+ {
+  "id": "semver_compare-074",
+  "tag": "fuzz",
+  "args": [
+   "0.1.1-a1.0A.-+exp.sha.5",
+   "1.2.1-10.10.11"
+  ],
+  "expected": -1
+ },
+ {
+  "id": "semver_compare-075",
+  "tag": "fuzz",
+  "args": [
+   "2.1.1",
+   "2.1.3"
+  ],
+  "expected": -1
+ },
+ {
+  "id": "semver_compare-076",
+  "tag": "fuzz",
+  "args": [
+   "2.0.0+build-7",
+   "0.2.0-beta.11"
+  ],
+  "expected": 1
+ },
+ {
+  "id": "semver_compare-077",
+  "tag": "fuzz",
+  "args": [
+   "2.3.2",
+   "1.2.2--.10.-"
+  ],
+  "expected": 1
+ },
+ {
+  "id": "semver_compare-078",
+  "tag": "fuzz",
+  "args": [
+   "1.3.3-a1+b1",
+   "1.0.1"
+  ],
+  "expected": 1
+ },
+ {
+  "id": "semver_compare-079",
+  "tag": "fuzz",
+  "args": [
+   "1.2.0-10",
+   "1.3.3-Z.0A"
+  ],
+  "expected": -1
+ },
+ {
+  "id": "semver_compare-080",
+  "tag": "fuzz",
+  "args": [
+   "0.3.1-1",
+   "3.0.0-a1.beta"
+  ],
+  "expected": -1
+ },
+ {
+  "id": "semver_compare-081",
+  "tag": "fuzz",
+  "args": [
+   "2.3.1-0",
+   "2.2.1-rc.a1.0"
+  ],
+  "expected": 1
+ },
+ {
+  "id": "semver_compare-082",
+  "tag": "fuzz",
+  "args": [
+   "3.0.2",
+   "3.3.0-0"
+  ],
+  "expected": -1
+ },
+ {
+  "id": "semver_compare-083",
+  "tag": "fuzz",
+  "args": [
+   "3.0.1",
+   "2.2.3-Z.1.10"
+  ],
+  "expected": 1
+ },
+ {
+  "id": "semver_compare-084",
+  "tag": "fuzz",
+  "args": [
+   "0.3.0-rc.rc",
+   "1.0.0+exp.sha.5"
+  ],
+  "expected": -1
+ },
+ {
+  "id": "semver_compare-085",
+  "tag": "fuzz",
+  "args": [
+   "1.3.2",
+   "0.3.0+build-7"
+  ],
+  "expected": 1
+ },
+ {
+  "id": "semver_compare-086",
+  "tag": "fuzz",
+  "args": [
+   "0.0.0-rc.9",
+   "1.1.0-a1"
+  ],
+  "expected": -1
+ },
+ {
+  "id": "semver_compare-087",
+  "tag": "fuzz",
+  "args": [
+   "0.2.0-11",
+   "3.0.2-a1"
+  ],
+  "expected": -1
+ },
+ {
+  "id": "semver_compare-088",
+  "tag": "fuzz",
+  "args": [
+   "1.2.2+exp.sha.5",
+   "1.2.0-1.0.-"
+  ],
+  "expected": 1
+ },
+ {
+  "id": "semver_compare-089",
+  "tag": "fuzz",
+  "args": [
+   "0.3.1-11.x-y",
+   "0.3.2-10"
+  ],
+  "expected": -1
+ },
+ {
+  "id": "semver_compare-090",
+  "tag": "fuzz",
+  "args": [
+   "2.2.1",
+   "1.2.1-a1.1"
+  ],
+  "expected": 1
+ },
+ {
+  "id": "semver_compare-091",
+  "tag": "fuzz",
+  "args": [
+   "0.0.1",
+   "1.3.3-x-y.x-y.1+001"
+  ],
+  "expected": -1
+ },
+ {
+  "id": "semver_compare-092",
+  "tag": "fuzz",
+  "args": [
+   "0.0.0-rc.-+001",
+   "2.1.1"
+  ],
+  "expected": -1
+ },
+ {
+  "id": "semver_compare-093",
+  "tag": "fuzz",
+  "args": [
+   "1.2.0--.9+build-7",
+   "2.1.2+b1"
+  ],
+  "expected": -1
+ },
+ {
+  "id": "semver_compare-094",
+  "tag": "fuzz",
+  "args": [
+   "3.3.3-2.alpha",
+   "2.0.2-10.a1"
+  ],
+  "expected": 1
+ },
+ {
+  "id": "semver_compare-095",
+  "tag": "fuzz",
+  "args": [
+   "1.2.1-beta+b1",
+   "2.2.0-0.0A.9"
+  ],
+  "expected": -1
+ },
+ {
+  "id": "semver_compare-096",
+  "tag": "fuzz",
+  "args": [
+   "1.1.1-9.alpha.alpha+b1",
+   "1.3.3-0A.a1.rc"
+  ],
+  "expected": -1
+ },
+ {
+  "id": "semver_compare-097",
+  "tag": "fuzz",
+  "args": [
+   "2.1.1-0A.-",
+   "1.0.0-beta.9.x-y+exp.sha.5"
+  ],
+  "expected": 1
+ },
+ {
+  "id": "semver_compare-098",
+  "tag": "fuzz",
+  "args": [
+   "3.0.1-0.0A.a1",
+   "3.2.0"
+  ],
+  "expected": -1
+ },
+ {
+  "id": "semver_compare-099",
+  "tag": "fuzz",
+  "args": [
+   "0.3.2-beta.11.0A",
+   "2.1.3-10.11"
+  ],
+  "expected": -1
+ },
+ {
+  "id": "semver_compare-100",
+  "tag": "fuzz",
+  "args": [
+   "2.1.1-rc",
+   "0.1.1-11.alpha.rc"
+  ],
+  "expected": 1
+ },
+ {
+  "id": "semver_compare-101",
+  "tag": "fuzz",
+  "args": [
+   "3.2.3-1",
+   "0.1.0+001"
+  ],
+  "expected": 1
+ },
+ {
+  "id": "semver_compare-102",
+  "tag": "fuzz",
+  "args": [
+   "0.3.2-2.0.0A",
+   "3.2.2"
+  ],
+  "expected": -1
+ },
+ {
+  "id": "semver_compare-103",
+  "tag": "fuzz",
+  "args": [
+   "2.2.0-0A.-.rc",
+   "0.3.2"
+  ],
+  "expected": 1
+ },
+ {
+  "id": "semver_compare-104",
+  "tag": "fuzz",
+  "args": [
+   "2.3.2-rc.alpha+b1",
+   "2.1.3-0"
+  ],
+  "expected": 1
+ },
+ {
+  "id": "semver_compare-105",
+  "tag": "fuzz",
+  "args": [
+   "3.3.0-0A.a1.x-y+exp.sha.5",
+   "0.2.1-rc.x-y.9+001"
+  ],
+  "expected": 1
+ },
+ {
+  "id": "semver_compare-106",
+  "tag": "fuzz",
+  "args": [
+   "3.0.1-2.beta.11+build-7",
+   "1.2.2+b1"
+  ],
+  "expected": 1
+ },
+ {
+  "id": "semver_compare-107",
+  "tag": "fuzz",
+  "args": [
+   "2.0.2-10.10.1",
+   "1.0.1-9"
+  ],
+  "expected": 1
+ },
+ {
+  "id": "semver_compare-108",
+  "tag": "fuzz",
+  "args": [
+   "1.3.2-Z.0",
+   "2.3.2-Z+build-7"
+  ],
+  "expected": -1
+ },
+ {
+  "id": "semver_compare-109",
+  "tag": "fuzz",
+  "args": [
+   "1.1.1",
+   "0.3.1-9"
+  ],
+  "expected": 1
+ },
+ {
+  "id": "semver_compare-110",
+  "tag": "fuzz",
+  "args": [
+   "1.3.2",
+   "0.2.0-11.11.a1+b1"
+  ],
+  "expected": 1
+ },
+ {
+  "id": "semver_compare-111",
+  "tag": "fuzz",
+  "args": [
+   "1.2.0+001",
+   "1.1.2"
+  ],
+  "expected": 1
+ },
+ {
+  "id": "semver_compare-112",
+  "tag": "fuzz",
+  "args": [
+   "2.1.2-beta",
+   "3.1.2--.-.0"
+  ],
+  "expected": -1
+ },
+ {
+  "id": "semver_compare-113",
+  "tag": "fuzz",
+  "args": [
+   "1.0.2--.1",
+   "0.0.0-0A.11.a1"
+  ],
+  "expected": 1
+ },
+ {
+  "id": "semver_compare-114",
+  "tag": "fuzz",
+  "args": [
+   "0.1.0-rc+exp.sha.5",
+   "0.1.0-11"
+  ],
+  "expected": 1
+ },
+ {
+  "id": "semver_compare-115",
+  "tag": "fuzz",
+  "args": [
+   "2.2.0-a1.rc",
+   "2.0.2-1.2"
+  ],
+  "expected": 1
+ },
+ {
+  "id": "semver_compare-116",
+  "tag": "fuzz",
+  "args": [
+   "1.2.2-alpha.2.beta",
+   "1.3.0"
+  ],
+  "expected": -1
+ },
+ {
+  "id": "semver_compare-117",
+  "tag": "fuzz",
+  "args": [
+   "1.2.1-beta.10",
+   "1.1.1-9.2.10"
+  ],
+  "expected": 1
+ },
+ {
+  "id": "semver_compare-118",
+  "tag": "fuzz",
+  "args": [
+   "0.1.2-10.0A",
+   "2.0.1-2.beta.a1"
+  ],
+  "expected": -1
+ },
+ {
+  "id": "semver_compare-119",
+  "tag": "fuzz",
+  "args": [
+   "2.3.2-11.alpha.beta",
+   "2.0.3-10+exp.sha.5"
+  ],
+  "expected": 1
+ },
+ {
+  "id": "semver_compare-120",
+  "tag": "fuzz",
+  "args": [
+   "3.2.0-1.10.0",
+   "0.3.1"
+  ],
+  "expected": 1
+ },
+ {
+  "id": "semver_compare-121",
+  "tag": "fuzz",
+  "args": [
+   "3.1.2-x-y.2.beta+001",
+   "0.3.1"
+  ],
+  "expected": 1
+ },
+ {
+  "id": "semver_compare-122",
+  "tag": "fuzz",
+  "args": [
+   "1.1.1-Z",
+   "1.3.0-11.10.1"
+  ],
+  "expected": -1
+ },
+ {
+  "id": "semver_compare-123",
+  "tag": "fuzz",
+  "args": [
+   "0.0.2-11.-.-",
+   "1.2.2"
+  ],
+  "expected": -1
+ },
+ {
+  "id": "semver_compare-124",
+  "tag": "fuzz",
+  "args": [
+   "1.3.0-11",
+   "3.3.3-0"
+  ],
+  "expected": -1
+ },
+ {
+  "id": "semver_compare-125",
+  "tag": "fuzz",
+  "args": [
+   "1.1.3",
+   "1.3.1-beta.11.rc"
+  ],
+  "expected": -1
+ },
+ {
+  "id": "semver_compare-126",
+  "tag": "fuzz",
+  "args": [
+   "3.0.0-1+build-7",
+   "1.2.1"
+  ],
+  "expected": 1
+ },
+ {
+  "id": "semver_compare-127",
+  "tag": "fuzz",
+  "args": [
+   "3.3.2+001",
+   "0.3.0-2.10.2"
+  ],
+  "expected": 1
+ },
+ {
+  "id": "semver_compare-128",
+  "tag": "fuzz",
+  "args": [
+   "0.2.2-11+001",
+   "2.0.2-0A"
+  ],
+  "expected": -1
+ },
+ {
+  "id": "semver_compare-129",
+  "tag": "fuzz",
+  "args": [
+   "1.2.2-rc.0.0",
+   "3.2.2"
+  ],
+  "expected": -1
+ },
+ {
+  "id": "semver_compare-130",
+  "tag": "fuzz",
+  "args": [
+   "1.0.2-a1.Z.beta+build-7",
+   "1.2.3-rc.rc"
+  ],
+  "expected": -1
+ },
+ {
+  "id": "semver_compare-131",
+  "tag": "fuzz",
+  "args": [
+   "0.1.0",
+   "2.1.3+001"
+  ],
+  "expected": -1
+ },
+ {
+  "id": "semver_compare-132",
+  "tag": "fuzz",
+  "args": [
+   "2.0.1+build-7",
+   "1.2.0-0"
+  ],
+  "expected": 1
+ },
+ {
+  "id": "semver_compare-133",
+  "tag": "fuzz",
+  "args": [
+   "1.1.2+build-7",
+   "0.3.0"
+  ],
+  "expected": 1
+ },
+ {
+  "id": "semver_compare-134",
+  "tag": "fuzz",
+  "args": [
+   "1.3.0-a1.alpha",
+   "1.0.2-9.1.a1"
+  ],
+  "expected": 1
+ },
+ {
+  "id": "semver_compare-135",
+  "tag": "fuzz",
+  "args": [
+   "0.2.2",
+   "0.3.3-10.x-y"
+  ],
+  "expected": -1
+ },
+ {
+  "id": "semver_compare-136",
+  "tag": "fuzz",
+  "args": [
+   "1.3.3-0A.9",
+   "1.3.0"
+  ],
+  "expected": 1
+ },
+ {
+  "id": "semver_compare-137",
+  "tag": "fuzz",
+  "args": [
+   "2.0.2-0",
+   "1.1.0-Z.2.11"
+  ],
+  "expected": 1
+ },
+ {
+  "id": "semver_compare-138",
+  "tag": "fuzz",
+  "args": [
+   "3.2.3-beta.rc",
+   "3.2.1-beta.x-y.beta"
+  ],
+  "expected": 1
+ },
+ {
+  "id": "semver_compare-139",
+  "tag": "fuzz",
+  "args": [
+   "3.0.1--",
+   "0.3.0-11.2.beta+exp.sha.5"
+  ],
+  "expected": 1
+ },
+ {
+  "id": "semver_compare-140",
+  "tag": "fuzz",
+  "args": [
+   "2.0.0-9.beta.beta",
+   "2.2.1-11.2"
+  ],
+  "expected": -1
+ },
+ {
+  "id": "semver_compare-141",
+  "tag": "fuzz",
+  "args": [
+   "2.0.0-alpha.1",
+   "2.1.0-Z.rc+build-7"
+  ],
+  "expected": -1
+ },
+ {
+  "id": "semver_compare-142",
+  "tag": "fuzz",
+  "args": [
+   "2.3.0-Z",
+   "0.1.0-11.x-y+001"
+  ],
+  "expected": 1
+ },
+ {
+  "id": "semver_compare-143",
+  "tag": "fuzz",
+  "args": [
+   "2.2.2-0.x-y.1",
+   "3.2.1"
+  ],
+  "expected": -1
+ },
+ {
+  "id": "semver_compare-144",
+  "tag": "fuzz",
+  "args": [
+   "1.0.3-x-y",
+   "1.3.0"
+  ],
+  "expected": -1
+ },
+ {
+  "id": "semver_compare-145",
+  "tag": "fuzz",
+  "args": [
+   "3.3.2-alpha",
+   "0.3.0-Z.beta.rc"
+  ],
+  "expected": 1
+ },
+ {
+  "id": "semver_compare-146",
+  "tag": "fuzz",
+  "args": [
+   "3.3.1-Z.1+build-7",
+   "2.0.0"
+  ],
+  "expected": 1
+ },
+ {
+  "id": "semver_compare-147",
+  "tag": "fuzz",
+  "args": [
+   "0.0.2-Z.10.10",
+   "2.1.2-rc.0A+001"
+  ],
+  "expected": -1
+ },
+ {
+  "id": "semver_compare-148",
+  "tag": "fuzz",
+  "args": [
+   "3.3.0-2.2",
+   "2.3.0-rc.a1"
+  ],
+  "expected": 1
+ },
+ {
+  "id": "semver_compare-149",
+  "tag": "fuzz",
+  "args": [
+   "1.1.0-0.rc.x-y",
+   "2.2.3-alpha.-.alpha"
+  ],
+  "expected": -1
+ },
+ {
+  "id": "semver_compare-150",
+  "tag": "fuzz",
+  "args": [
+   "2.0.3-1",
+   "2.2.0+b1"
+  ],
+  "expected": -1
+ },
+ {
+  "id": "semver_compare-151",
+  "tag": "fuzz",
+  "args": [
+   "3.0.3-11.x-y.11",
+   "1.1.3-alpha"
+  ],
+  "expected": 1
+ },
+ {
+  "id": "semver_compare-152",
+  "tag": "fuzz",
+  "args": [
+   "3.0.3-a1.1.-",
+   "2.0.3-x-y"
+  ],
+  "expected": 1
+ },
+ {
+  "id": "semver_compare-153",
+  "tag": "fuzz",
+  "args": [
+   "2.0.2-rc+build-7",
+   "0.3.2-x-y.-.2"
+  ],
+  "expected": 1
+ },
+ {
+  "id": "semver_compare-154",
+  "tag": "fuzz",
+  "args": [
+   "2.1.0",
+   "2.0.2-beta"
+  ],
+  "expected": 1
+ },
+ {
+  "id": "semver_compare-155",
+  "tag": "fuzz",
+  "args": [
+   "2.3.0-1+build-7",
+   "1.1.1-beta.beta.0"
+  ],
+  "expected": 1
+ },
+ {
+  "id": "semver_compare-156",
+  "tag": "fuzz",
+  "args": [
+   "3.3.3-2+build-7",
+   "2.2.3-alpha.rc.Z+build-7"
+  ],
+  "expected": 1
+ },
+ {
+  "id": "semver_compare-157",
+  "tag": "fuzz",
+  "args": [
+   "1.1.1--+exp.sha.5",
+   "2.3.1-10+001"
+  ],
+  "expected": -1
+ },
+ {
+  "id": "semver_compare-158",
+  "tag": "fuzz",
+  "args": [
+   "2.1.0",
+   "1.1.0"
+  ],
+  "expected": 1
+ },
+ {
+  "id": "semver_compare-159",
+  "tag": "fuzz",
+  "args": [
+   "1.1.2-alpha.a1",
+   "1.3.1-1"
+  ],
+  "expected": -1
+ },
+ {
+  "id": "semver_compare-160",
+  "tag": "fuzz",
+  "args": [
+   "1.3.1",
+   "1.3.3"
+  ],
+  "expected": -1
+ },
+ {
+  "id": "semver_compare-161",
+  "tag": "fuzz",
+  "args": [
+   "1.1.1-a1",
+   "0.2.3-a1.2+b1"
+  ],
+  "expected": 1
+ },
+ {
+  "id": "semver_compare-162",
+  "tag": "fuzz",
+  "args": [
+   "3.1.2-Z",
+   "0.3.2-a1.a1+001"
+  ],
+  "expected": 1
+ },
+ {
+  "id": "semver_compare-163",
+  "tag": "fuzz",
+  "args": [
+   "1.0.1-10.9",
+   "2.2.1--"
+  ],
+  "expected": -1
+ },
+ {
+  "id": "semver_compare-164",
+  "tag": "fuzz",
+  "args": [
+   "0.1.3-9.alpha+b1",
+   "3.0.1-11.x-y.0A+b1"
+  ],
+  "expected": -1
+ },
+ {
+  "id": "semver_compare-165",
+  "tag": "fuzz",
+  "args": [
+   "1.2.2",
+   "0.1.0-11+b1"
+  ],
+  "expected": 1
+ },
+ {
+  "id": "semver_compare-166",
+  "tag": "fuzz",
+  "args": [
+   "0.3.1-10.beta.a1",
+   "3.0.0-alpha.1"
+  ],
+  "expected": -1
+ },
+ {
+  "id": "semver_compare-167",
+  "tag": "fuzz",
+  "args": [
+   "3.3.0",
+   "2.1.1-a1.beta.rc+b1"
+  ],
+  "expected": 1
+ },
+ {
+  "id": "semver_compare-168",
+  "tag": "fuzz",
+  "args": [
+   "0.2.3",
+   "0.0.0+001"
+  ],
+  "expected": 1
+ },
+ {
+  "id": "semver_compare-169",
+  "tag": "fuzz",
+  "args": [
+   "1.2.0-x-y.10",
+   "2.1.1+001"
+  ],
+  "expected": -1
+ },
+ {
+  "id": "semver_compare-170",
+  "tag": "fuzz",
+  "args": [
+   "1.0.1-beta.-.rc",
+   "2.1.1-Z.9.2"
+  ],
+  "expected": -1
+ },
+ {
+  "id": "semver_compare-171",
+  "tag": "fuzz",
+  "args": [
+   "0.2.3-0A.a1",
+   "0.1.2"
+  ],
+  "expected": 1
+ },
+ {
+  "id": "semver_compare-172",
+  "tag": "fuzz",
+  "args": [
+   "2.3.1",
+   "3.0.0--.2"
+  ],
+  "expected": -1
+ },
+ {
+  "id": "semver_compare-173",
+  "tag": "fuzz",
+  "args": [
+   "1.3.3-beta",
+   "2.0.0"
+  ],
+  "expected": -1
+ },
+ {
+  "id": "semver_compare-174",
+  "tag": "fuzz",
+  "args": [
+   "1.3.1",
+   "0.3.1-x-y.10.a1"
+  ],
+  "expected": 1
+ },
+ {
+  "id": "semver_compare-175",
+  "tag": "fuzz",
+  "args": [
+   "2.1.0",
+   "2.3.3-a1.2"
+  ],
+  "expected": -1
+ },
+ {
+  "id": "semver_compare-176",
+  "tag": "fuzz",
+  "args": [
+   "3.3.3-2.x-y",
+   "0.1.0"
+  ],
+  "expected": 1
+ },
+ {
+  "id": "semver_compare-177",
+  "tag": "fuzz",
+  "args": [
+   "1.3.3-11.alpha",
+   "1.3.2-alpha.0A+001"
+  ],
+  "expected": 1
+ },
+ {
+  "id": "semver_compare-178",
+  "tag": "fuzz",
+  "args": [
+   "1.0.2-11.0A",
+   "3.2.2-rc"
+  ],
+  "expected": -1
+ },
+ {
+  "id": "semver_compare-179",
+  "tag": "fuzz",
+  "args": [
+   "3.2.3-x-y.11",
+   "0.2.1"
+  ],
+  "expected": 1
+ },
+ {
+  "id": "semver_compare-180",
+  "tag": "fuzz",
+  "args": [
+   "3.1.2",
+   "3.0.2-beta+001"
+  ],
+  "expected": 1
+ },
+ {
+  "id": "semver_compare-181",
+  "tag": "fuzz",
+  "args": [
+   "3.2.2-0A.alpha",
+   "2.1.0-rc"
+  ],
+  "expected": 1
+ },
+ {
+  "id": "semver_compare-182",
+  "tag": "fuzz",
+  "args": [
+   "3.1.0-10",
+   "3.2.3-a1.9+exp.sha.5"
+  ],
+  "expected": -1
+ },
+ {
+  "id": "semver_compare-183",
+  "tag": "fuzz",
+  "args": [
+   "2.3.3-2.9.alpha",
+   "2.3.0"
+  ],
+  "expected": 1
+ },
+ {
+  "id": "semver_compare-184",
+  "tag": "fuzz",
+  "args": [
+   "3.1.2-Z+001",
+   "3.3.3-0.0.0+001"
+  ],
+  "expected": -1
+ },
+ {
+  "id": "semver_compare-185",
+  "tag": "fuzz",
+  "args": [
+   "2.3.0-2.0",
+   "2.1.3"
+  ],
+  "expected": 1
+ },
+ {
+  "id": "semver_compare-186",
+  "tag": "fuzz",
+  "args": [
+   "1.2.2-1.2",
+   "0.3.0-alpha.11.rc+b1"
+  ],
+  "expected": 1
+ },
+ {
+  "id": "semver_compare-187",
+  "tag": "fuzz",
+  "args": [
+   "0.1.3+b1",
+   "1.1.0-11.11"
+  ],
+  "expected": -1
+ },
+ {
+  "id": "semver_compare-188",
+  "tag": "fuzz",
+  "args": [
+   "2.3.2-1.1",
+   "1.3.2-alpha"
+  ],
+  "expected": 1
+ },
+ {
+  "id": "semver_compare-189",
+  "tag": "fuzz",
+  "args": [
+   "0.2.2",
+   "1.0.1-10+b1"
+  ],
+  "expected": -1
+ },
+ {
+  "id": "semver_compare-190",
+  "tag": "fuzz",
+  "args": [
+   "3.1.0-0A",
+   "2.2.3-0.beta+build-7"
+  ],
+  "expected": 1
+ },
+ {
+  "id": "semver_compare-191",
+  "tag": "fuzz",
+  "args": [
+   "2.2.3-10.alpha.beta+001",
+   "1.0.3-0A+001"
+  ],
+  "expected": 1
+ },
+ {
+  "id": "semver_compare-192",
+  "tag": "fuzz",
+  "args": [
+   "3.0.1-alpha.0A.-+exp.sha.5",
+   "0.0.0-0.beta.rc"
+  ],
+  "expected": 1
+ },
+ {
+  "id": "semver_compare-193",
+  "tag": "fuzz",
+  "args": [
+   "3.2.0-rc.rc.x-y",
+   "1.3.3-2.0A"
+  ],
+  "expected": 1
+ },
+ {
+  "id": "semver_compare-194",
+  "tag": "fuzz",
+  "args": [
+   "1.1.3-10.0A.0A",
+   "3.2.2-9.Z.9+build-7"
+  ],
+  "expected": -1
+ },
+ {
+  "id": "semver_compare-195",
+  "tag": "fuzz",
+  "args": [
+   "1.0.2-alpha.a1.-",
+   "3.1.0-rc"
+  ],
+  "expected": -1
+ },
+ {
+  "id": "semver_compare-196",
+  "tag": "fuzz",
+  "args": [
+   "3.3.0+001",
+   "2.3.2-9"
+  ],
+  "expected": 1
+ },
+ {
+  "id": "semver_compare-197",
+  "tag": "fuzz",
+  "args": [
+   "3.1.3-2.0A",
+   "2.0.2-alpha.9"
+  ],
+  "expected": 1
+ },
+ {
+  "id": "semver_compare-198",
+  "tag": "fuzz",
+  "args": [
+   "0.3.1-a1.rc",
+   "1.3.3-a1.beta.2+b1"
+  ],
+  "expected": -1
+ },
+ {
+  "id": "semver_compare-199",
+  "tag": "fuzz",
+  "args": [
+   "3.0.2-9.2.0",
+   "2.1.0-10.0A"
+  ],
+  "expected": 1
+ },
+ {
+  "id": "semver_compare-200",
+  "tag": "fuzz",
+  "args": [
+   "3.0.0-1.beta",
+   "1.1.2-Z.2.0A"
+  ],
+  "expected": 1
+ },
+ {
+  "id": "semver_compare-201",
+  "tag": "fuzz",
+  "args": [
+   "0.2.2-x-y+build-7",
+   "2.3.3-rc+build-7"
+  ],
+  "expected": -1
+ },
+ {
+  "id": "semver_compare-202",
+  "tag": "fuzz",
+  "args": [
+   "1.0.2-10",
+   "3.1.3--"
+  ],
+  "expected": -1
+ }
+]

@@ -1,0 +1,1770 @@
+[
+ {
+  "id": "iso_week-000",
+  "tag": "year-boundary",
+  "args": [
+   2021,
+   1,
+   3
+  ],
+  "expected": [
+   2020,
+   53
+  ]
+ },
+ {
+  "id": "iso_week-001",
+  "tag": "year-boundary",
+  "args": [
+   2021,
+   1,
+   4
+  ],
+  "expected": [
+   2021,
+   1
+  ]
+ },
+ {
+  "id": "iso_week-002",
+  "tag": "year-boundary",
+  "args": [
+   2024,
+   12,
+   30
+  ],
+  "expected": [
+   2025,
+   1
+  ]
+ },
+ {
+  "id": "iso_week-003",
+  "tag": "year-boundary",
+  "args": [
+   2024,
+   12,
+   29
+  ],
+  "expected": [
+   2024,
+   52
+  ]
+ },
+ {
+  "id": "iso_week-004",
+  "tag": "week-53",
+  "args": [
+   2026,
+   12,
+   31
+  ],
+  "expected": [
+   2026,
+   53
+  ]
+ },
+ {
+  "id": "iso_week-005",
+  "tag": "year-boundary",
+  "args": [
+   2027,
+   1,
+   1
+  ],
+  "expected": [
+   2026,
+   53
+  ]
+ },
+ {
+  "id": "iso_week-006",
+  "tag": "week-53",
+  "args": [
+   2015,
+   12,
+   31
+  ],
+  "expected": [
+   2015,
+   53
+  ]
+ },
+ {
+  "id": "iso_week-007",
+  "tag": "year-boundary",
+  "args": [
+   2016,
+   1,
+   3
+  ],
+  "expected": [
+   2015,
+   53
+  ]
+ },
+ {
+  "id": "iso_week-008",
+  "tag": "year-boundary",
+  "args": [
+   2008,
+   12,
+   29
+  ],
+  "expected": [
+   2009,
+   1
+  ]
+ },
+ {
+  "id": "iso_week-009",
+  "tag": "year-boundary",
+  "args": [
+   2010,
+   1,
+   3
+  ],
+  "expected": [
+   2009,
+   53
+  ]
+ },
+ {
+  "id": "iso_week-010",
+  "tag": "range-limit",
+  "args": [
+   1,
+   1,
+   1
+  ],
+  "expected": [
+   1,
+   1
+  ]
+ },
+ {
+  "id": "iso_week-011",
+  "tag": "range-limit",
+  "args": [
+   9999,
+   12,
+   31
+  ],
+  "expected": [
+   9999,
+   52
+  ]
+ },
+ {
+  "id": "iso_week-012",
+  "tag": "leap",
+  "args": [
+   2000,
+   2,
+   29
+  ],
+  "expected": [
+   2000,
+   9
+  ]
+ },
+ {
+  "id": "iso_week-013",
+  "tag": "century-non-leap",
+  "args": [
+   1900,
+   3,
+   1
+  ],
+  "expected": [
+   1900,
+   9
+  ]
+ },
+ {
+  "id": "iso_week-014",
+  "tag": "century-non-leap",
+  "args": [
+   2100,
+   12,
+   31
+  ],
+  "expected": [
+   2100,
+   52
+  ]
+ },
+ {
+  "id": "iso_week-015",
+  "tag": "basic",
+  "args": [
+   2026,
+   10,
+   30
+  ],
+  "expected": [
+   2026,
+   44
+  ]
+ },
+ {
+  "id": "iso_week-016",
+  "tag": "fuzz",
+  "args": [
+   9179,
+   12,
+   30
+  ],
+  "expected": [
+   9179,
+   52
+  ]
+ },
+ {
+  "id": "iso_week-017",
+  "tag": "fuzz",
+  "args": [
+   430,
+   4,
+   7
+  ],
+  "expected": [
+   430,
+   14
+  ]
+ },
+ {
+  "id": "iso_week-018",
+  "tag": "fuzz",
+  "args": [
+   5937,
+   2,
+   6
+  ],
+  "expected": [
+   5937,
+   5
+  ]
+ },
+ {
+  "id": "iso_week-019",
+  "tag": "fuzz",
+  "args": [
+   4293,
+   1,
+   4
+  ],
+  "expected": [
+   4293,
+   1
+  ]
+ },
+ {
+  "id": "iso_week-020",
+  "tag": "fuzz",
+  "args": [
+   5560,
+   12,
+   29
+  ],
+  "expected": [
+   5560,
+   52
+  ]
+ },
+ {
+  "id": "iso_week-021",
+  "tag": "fuzz",
+  "args": [
+   2427,
+   12,
+   27
+  ],
+  "expected": [
+   2427,
+   52
+  ]
+ },
+ {
+  "id": "iso_week-022",
+  "tag": "fuzz",
+  "args": [
+   4657,
+   12,
+   27
+  ],
+  "expected": [
+   4657,
+   52
+  ]
+ },
+ {
+  "id": "iso_week-023",
+  "tag": "fuzz",
+  "args": [
+   8516,
+   10,
+   25
+  ],
+  "expected": [
+   8516,
+   43
+  ]
+ },
+ {
+  "id": "iso_week-024",
+  "tag": "fuzz",
+  "args": [
+   6823,
+   12,
+   30
+  ],
+  "expected": [
+   6823,
+   52
+  ]
+ },
+ {
+  "id": "iso_week-025",
+  "tag": "fuzz",
+  "args": [
+   902,
+   1,
+   1
+  ],
+  "expected": [
+   901,
+   52
+  ]
+ },
+ {
+  "id": "iso_week-026",
+  "tag": "fuzz",
+  "args": [
+   8105,
+   12,
+   27
+  ],
+  "expected": [
+   8105,
+   52
+  ]
+ },
+ {
+  "id": "iso_week-027",
+  "tag": "fuzz",
+  "args": [
+   2764,
+   3,
+   11
+  ],
+  "expected": [
+   2764,
+   11
+  ]
+ },
+ {
+  "id": "iso_week-028",
+  "tag": "fuzz",
+  "args": [
+   6169,
+   1,
+   2
+  ],
+  "expected": [
+   6169,
+   1
+  ]
+ },
+ {
+  "id": "iso_week-029",
+  "tag": "fuzz",
+  "args": [
+   1771,
+   6,
+   14
+  ],
+  "expected": [
+   1771,
+   24
+  ]
+ },
+ {
+  "id": "iso_week-030",
+  "tag": "fuzz",
+  "args": [
+   57,
+   6,
+   8
+  ],
+  "expected": [
+   57,
+   23
+  ]
+ },
+ {
+  "id": "iso_week-031",
+  "tag": "fuzz",
+  "args": [
+   1214,
+   12,
+   27
+  ],
+  "expected": [
+   1214,
+   52
+  ]
+ },
+ {
+  "id": "iso_week-032",
+  "tag": "fuzz",
+  "args": [
+   5492,
+   4,
+   5
+  ],
+  "expected": [
+   5492,
+   14
+  ]
+ },
+ {
+  "id": "iso_week-033",
+  "tag": "fuzz",
+  "args": [
+   3310,
+   1,
+   5
+  ],
+  "expected": [
+   3310,
+   1
+  ]
+ },
+ {
+  "id": "iso_week-034",
+  "tag": "fuzz",
+  "args": [
+   1394,
+   12,
+   26
+  ],
+  "expected": [
+   1394,
+   52
+  ]
+ },
+ {
+  "id": "iso_week-035",
+  "tag": "fuzz",
+  "args": [
+   2782,
+   6,
+   14
+  ],
+  "expected": [
+   2782,
+   24
+  ]
+ },
+ {
+  "id": "iso_week-036",
+  "tag": "fuzz",
+  "args": [
+   8137,
+   12,
+   31
+  ],
+  "expected": [
+   8138,
+   1
+  ]
+ },
+ {
+  "id": "iso_week-037",
+  "tag": "fuzz",
+  "args": [
+   779,
+   12,
+   27
+  ],
+  "expected": [
+   779,
+   52
+  ]
+ },
+ {
+  "id": "iso_week-038",
+  "tag": "fuzz",
+  "args": [
+   1403,
+   12,
+   31
+  ],
+  "expected": [
+   1403,
+   52
+  ]
+ },
+ {
+  "id": "iso_week-039",
+  "tag": "fuzz",
+  "args": [
+   4282,
+   5,
+   20
+  ],
+  "expected": [
+   4282,
+   20
+  ]
+ },
+ {
+  "id": "iso_week-040",
+  "tag": "fuzz",
+  "args": [
+   1706,
+   12,
+   28
+  ],
+  "expected": [
+   1706,
+   52
+  ]
+ },
+ {
+  "id": "iso_week-041",
+  "tag": "fuzz",
+  "args": [
+   4409,
+   12,
+   28
+  ],
+  "expected": [
+   4409,
+   53
+  ]
+ },
+ {
+  "id": "iso_week-042",
+  "tag": "fuzz",
+  "args": [
+   1111,
+   5,
+   22
+  ],
+  "expected": [
+   1111,
+   21
+  ]
+ },
+ {
+  "id": "iso_week-043",
+  "tag": "fuzz",
+  "args": [
+   6804,
+   12,
+   9
+  ],
+  "expected": [
+   6804,
+   50
+  ]
+ },
+ {
+  "id": "iso_week-044",
+  "tag": "fuzz",
+  "args": [
+   9570,
+   12,
+   5
+  ],
+  "expected": [
+   9570,
+   49
+  ]
+ },
+ {
+  "id": "iso_week-045",
+  "tag": "fuzz",
+  "args": [
+   3113,
+   8,
+   4
+  ],
+  "expected": [
+   3113,
+   32
+  ]
+ },
+ {
+  "id": "iso_week-046",
+  "tag": "fuzz",
+  "args": [
+   8822,
+   12,
+   25
+  ],
+  "expected": [
+   8822,
+   51
+  ]
+ },
+ {
+  "id": "iso_week-047",
+  "tag": "fuzz",
+  "args": [
+   2351,
+   1,
+   4
+  ],
+  "expected": [
+   2351,
+   1
+  ]
+ },
+ {
+  "id": "iso_week-048",
+  "tag": "fuzz",
+  "args": [
+   456,
+   9,
+   15
+  ],
+  "expected": [
+   456,
+   37
+  ]
+ },
+ {
+  "id": "iso_week-049",
+  "tag": "fuzz",
+  "args": [
+   8072,
+   3,
+   13
+  ],
+  "expected": [
+   8072,
+   10
+  ]
+ },
+ {
+  "id": "iso_week-050",
+  "tag": "fuzz",
+  "args": [
+   4249,
+   12,
+   7
+  ],
+  "expected": [
+   4249,
+   49
+  ]
+ },
+ {
+  "id": "iso_week-051",
+  "tag": "fuzz",
+  "args": [
+   2468,
+   12,
+   30
+  ],
+  "expected": [
+   2468,
+   52
+  ]
+ },
+ {
+  "id": "iso_week-052",
+  "tag": "fuzz",
+  "args": [
+   481,
+   7,
+   27
+  ],
+  "expected": [
+   481,
+   30
+  ]
+ },
+ {
+  "id": "iso_week-053",
+  "tag": "fuzz",
+  "args": [
+   4777,
+   1,
+   5
+  ],
+  "expected": [
+   4777,
+   1
+  ]
+ },
+ {
+  "id": "iso_week-054",
+  "tag": "fuzz",
+  "args": [
+   8221,
+   6,
+   16
+  ],
+  "expected": [
+   8221,
+   24
+  ]
+ },
+ {
+  "id": "iso_week-055",
+  "tag": "fuzz",
+  "args": [
+   1010,
+   6,
+   25
+  ],
+  "expected": [
+   1010,
+   26
+  ]
+ },
+ {
+  "id": "iso_week-056",
+  "tag": "fuzz",
+  "args": [
+   4146,
+   7,
+   11
+  ],
+  "expected": [
+   4146,
+   28
+  ]
+ },
+ {
+  "id": "iso_week-057",
+  "tag": "fuzz",
+  "args": [
+   1524,
+   7,
+   7
+  ],
+  "expected": [
+   1524,
+   28
+  ]
+ },
+ {
+  "id": "iso_week-058",
+  "tag": "fuzz",
+  "args": [
+   4348,
+   3,
+   28
+  ],
+  "expected": [
+   4348,
+   13
+  ]
+ },
+ {
+  "id": "iso_week-059",
+  "tag": "fuzz",
+  "args": [
+   7448,
+   9,
+   6
+  ],
+  "expected": [
+   7448,
+   36
+  ]
+ },
+ {
+  "id": "iso_week-060",
+  "tag": "fuzz",
+  "args": [
+   1372,
+   12,
+   29
+  ],
+  "expected": [
+   1372,
+   53
+  ]
+ },
+ {
+  "id": "iso_week-061",
+  "tag": "fuzz",
+  "args": [
+   4734,
+   9,
+   23
+  ],
+  "expected": [
+   4734,
+   38
+  ]
+ },
+ {
+  "id": "iso_week-062",
+  "tag": "fuzz",
+  "args": [
+   2840,
+   12,
+   29
+  ],
+  "expected": [
+   2840,
+   52
+  ]
+ },
+ {
+  "id": "iso_week-063",
+  "tag": "fuzz",
+  "args": [
+   3932,
+   1,
+   1
+  ],
+  "expected": [
+   3931,
+   53
+  ]
+ },
+ {
+  "id": "iso_week-064",
+  "tag": "fuzz",
+  "args": [
+   3245,
+   12,
+   31
+  ],
+  "expected": [
+   3245,
+   52
+  ]
+ },
+ {
+  "id": "iso_week-065",
+  "tag": "fuzz",
+  "args": [
+   8994,
+   12,
+   5
+  ],
+  "expected": [
+   8994,
+   49
+  ]
+ },
+ {
+  "id": "iso_week-066",
+  "tag": "fuzz",
+  "args": [
+   4352,
+   12,
+   26
+  ],
+  "expected": [
+   4352,
+   52
+  ]
+ },
+ {
+  "id": "iso_week-067",
+  "tag": "fuzz",
+  "args": [
+   5561,
+   1,
+   7
+  ],
+  "expected": [
+   5561,
+   1
+  ]
+ },
+ {
+  "id": "iso_week-068",
+  "tag": "fuzz",
+  "args": [
+   5207,
+   1,
+   4
+  ],
+  "expected": [
+   5207,
+   1
+  ]
+ },
+ {
+  "id": "iso_week-069",
+  "tag": "fuzz",
+  "args": [
+   3253,
+   10,
+   12
+  ],
+  "expected": [
+   3253,
+   41
+  ]
+ },
+ {
+  "id": "iso_week-070",
+  "tag": "fuzz",
+  "args": [
+   2108,
+   12,
+   30
+  ],
+  "expected": [
+   2108,
+   52
+  ]
+ },
+ {
+  "id": "iso_week-071",
+  "tag": "fuzz",
+  "args": [
+   2849,
+   12,
+   26
+  ],
+  "expected": [
+   2849,
+   51
+  ]
+ },
+ {
+  "id": "iso_week-072",
+  "tag": "fuzz",
+  "args": [
+   586,
+   12,
+   25
+  ],
+  "expected": [
+   586,
+   52
+  ]
+ },
+ {
+  "id": "iso_week-073",
+  "tag": "fuzz",
+  "args": [
+   4836,
+   12,
+   28
+  ],
+  "expected": [
+   4836,
+   52
+  ]
+ },
+ {
+  "id": "iso_week-074",
+  "tag": "fuzz",
+  "args": [
+   2200,
+   12,
+   26
+  ],
+  "expected": [
+   2200,
+   52
+  ]
+ },
+ {
+  "id": "iso_week-075",
+  "tag": "fuzz",
+  "args": [
+   2721,
+   1,
+   4
+  ],
+  "expected": [
+   2721,
+   1
+  ]
+ },
+ {
+  "id": "iso_week-076",
+  "tag": "fuzz",
+  "args": [
+   5740,
+   12,
+   3
+  ],
+  "expected": [
+   5740,
+   48
+  ]
+ },
+ {
+  "id": "iso_week-077",
+  "tag": "fuzz",
+  "args": [
+   3646,
+   1,
+   7
+  ],
+  "expected": [
+   3646,
+   1
+  ]
+ },
+ {
+  "id": "iso_week-078",
+  "tag": "fuzz",
+  "args": [
+   4963,
+   1,
+   6
+  ],
+  "expected": [
+   4963,
+   1
+  ]
+ },
+ {
+  "id": "iso_week-079",
+  "tag": "fuzz",
+  "args": [
+   9364,
+   1,
+   3
+  ],
+  "expected": [
+   9364,
+   1
+  ]
+ },
+ {
+  "id": "iso_week-080",
+  "tag": "fuzz",
+  "args": [
+   8407,
+   1,
+   7
+  ],
+  "expected": [
+   8407,
+   1
+  ]
+ },
+ {
+  "id": "iso_week-081",
+  "tag": "fuzz",
+  "args": [
+   526,
+   6,
+   28
+  ],
+  "expected": [
+   526,
+   26
+  ]
+ },
+ {
+  "id": "iso_week-082",
+  "tag": "fuzz",
+  "args": [
+   298,
+   4,
+   18
+  ],
+  "expected": [
+   298,
+   16
+  ]
+ },
+ {
+  "id": "iso_week-083",
+  "tag": "fuzz",
+  "args": [
+   1869,
+   11,
+   28
+  ],
+  "expected": [
+   1869,
+   47
+  ]
+ },
+ {
+  "id": "iso_week-084",
+  "tag": "fuzz",
+  "args": [
+   1471,
+   1,
+   17
+  ],
+  "expected": [
+   1471,
+   3
+  ]
+ },
+ {
+  "id": "iso_week-085",
+  "tag": "fuzz",
+  "args": [
+   9400,
+   1,
+   7
+  ],
+  "expected": [
+   9400,
+   2
+  ]
+ },
+ {
+  "id": "iso_week-086",
+  "tag": "fuzz",
+  "args": [
+   4702,
+   1,
+   2
+  ],
+  "expected": [
+   4702,
+   1
+  ]
+ },
+ {
+  "id": "iso_week-087",
+  "tag": "fuzz",
+  "args": [
+   3346,
+   12,
+   12
+  ],
+  "expected": [
+   3346,
+   50
+  ]
+ },
+ {
+  "id": "iso_week-088",
+  "tag": "fuzz",
+  "args": [
+   7907,
+   1,
+   3
+  ],
+  "expected": [
+   7907,
+   1
+  ]
+ },
+ {
+  "id": "iso_week-089",
+  "tag": "fuzz",
+  "args": [
+   9192,
+   12,
+   30
+  ],
+  "expected": [
+   9192,
+   53
+  ]
+ },
+ {
+  "id": "iso_week-090",
+  "tag": "fuzz",
+  "args": [
+   7046,
+   4,
+   14
+  ],
+  "expected": [
+   7046,
+   16
+  ]
+ },
+ {
+  "id": "iso_week-091",
+  "tag": "fuzz",
+  "args": [
+   1888,
+   3,
+   26
+  ],
+  "expected": [
+   1888,
+   13
+  ]
+ },
+ {
+  "id": "iso_week-092",
+  "tag": "fuzz",
+  "args": [
+   4914,
+   11,
+   26
+  ],
+  "expected": [
+   4914,
+   48
+  ]
+ },
+ {
+  "id": "iso_week-093",
+  "tag": "fuzz",
+  "args": [
+   6838,
+   1,
+   24
+  ],
+  "expected": [
+   6838,
+   3
+  ]
+ },
+ {
+  "id": "iso_week-094",
+  "tag": "fuzz",
+  "args": [
+   2578,
+   12,
+   31
+  ],
+  "expected": [
+   2578,
+   53
+  ]
+ },
+ {
+  "id": "iso_week-095",
+  "tag": "fuzz",
+  "args": [
+   8212,
+   4,
+   25
+  ],
+  "expected": [
+   8212,
+   17
+  ]
+ },
+ {
+  "id": "iso_week-096",
+  "tag": "fuzz",
+  "args": [
+   5735,
+   12,
+   25
+  ],
+  "expected": [
+   5735,
+   51
+  ]
+ },
+ {
+  "id": "iso_week-097",
+  "tag": "fuzz",
+  "args": [
+   1546,
+   9,
+   20
+  ],
+  "expected": [
+   1546,
+   38
+  ]
+ },
+ {
+  "id": "iso_week-098",
+  "tag": "fuzz",
+  "args": [
+   3258,
+   12,
+   25
+  ],
+  "expected": [
+   3258,
+   52
+  ]
+ },
+ {
+  "id": "iso_week-099",
+  "tag": "fuzz",
+  "args": [
+   187,
+   12,
+   25
+  ],
+  "expected": [
+   187,
+   52
+  ]
+ },
+ {
+  "id": "iso_week-100",
+  "tag": "fuzz",
+  "args": [
+   964,
+   10,
+   27
+  ],
+  "expected": [
+   964,
+   43
+  ]
+ },
+ {
+  "id": "iso_week-101",
+  "tag": "fuzz",
+  "args": [
+   4139,
+   12,
+   31
+  ],
+  "expected": [
+   4139,
+   53
+  ]
+ },
+ {
+  "id": "iso_week-102",
+  "tag": "fuzz",
+  "args": [
+   4179,
+   6,
+   14
+  ],
+  "expected": [
+   4179,
+   24
+  ]
+ },
+ {
+  "id": "iso_week-103",
+  "tag": "fuzz",
+  "args": [
+   8774,
+   3,
+   18
+  ],
+  "expected": [
+   8774,
+   12
+  ]
+ },
+ {
+  "id": "iso_week-104",
+  "tag": "fuzz",
+  "args": [
+   2354,
+   12,
+   29
+  ],
+  "expected": [
+   2354,
+   52
+  ]
+ },
+ {
+  "id": "iso_week-105",
+  "tag": "fuzz",
+  "args": [
+   9812,
+   1,
+   7
+  ],
+  "expected": [
+   9812,
+   2
+  ]
+ },
+ {
+  "id": "iso_week-106",
+  "tag": "fuzz",
+  "args": [
+   8132,
+   1,
+   7
+  ],
+  "expected": [
+   8132,
+   2
+  ]
+ },
+ {
+  "id": "iso_week-107",
+  "tag": "fuzz",
+  "args": [
+   7870,
+   1,
+   4
+  ],
+  "expected": [
+   7870,
+   1
+  ]
+ },
+ {
+  "id": "iso_week-108",
+  "tag": "fuzz",
+  "args": [
+   4760,
+   1,
+   3
+  ],
+  "expected": [
+   4759,
+   53
+  ]
+ },
+ {
+  "id": "iso_week-109",
+  "tag": "fuzz",
+  "args": [
+   9583,
+   1,
+   7
+  ],
+  "expected": [
+   9583,
+   1
+  ]
+ },
+ {
+  "id": "iso_week-110",
+  "tag": "fuzz",
+  "args": [
+   3386,
+   1,
+   7
+  ],
+  "expected": [
+   3386,
+   1
+  ]
+ },
+ {
+  "id": "iso_week-111",
+  "tag": "fuzz",
+  "args": [
+   429,
+   9,
+   20
+  ],
+  "expected": [
+   429,
+   38
+  ]
+ },
+ {
+  "id": "iso_week-112",
+  "tag": "fuzz",
+  "args": [
+   2022,
+   10,
+   18
+  ],
+  "expected": [
+   2022,
+   42
+  ]
+ },
+ {
+  "id": "iso_week-113",
+  "tag": "fuzz",
+  "args": [
+   6568,
+   5,
+   15
+  ],
+  "expected": [
+   6568,
+   19
+  ]
+ },
+ {
+  "id": "iso_week-114",
+  "tag": "fuzz",
+  "args": [
+   617,
+   1,
+   1
+  ],
+  "expected": [
+   617,
+   1
+  ]
+ },
+ {
+  "id": "iso_week-115",
+  "tag": "fuzz",
+  "args": [
+   1831,
+   4,
+   27
+  ],
+  "expected": [
+   1831,
+   17
+  ]
+ },
+ {
+  "id": "iso_week-116",
+  "tag": "fuzz",
+  "args": [
+   6971,
+   1,
+   5
+  ],
+  "expected": [
+   6971,
+   1
+  ]
+ },
+ {
+  "id": "iso_week-117",
+  "tag": "fuzz",
+  "args": [
+   1401,
+   12,
+   26
+  ],
+  "expected": [
+   1401,
+   52
+  ]
+ },
+ {
+  "id": "iso_week-118",
+  "tag": "fuzz",
+  "args": [
+   3932,
+   12,
+   27
+  ],
+  "expected": [
+   3932,
+   52
+  ]
+ },
+ {
+  "id": "iso_week-119",
+  "tag": "fuzz",
+  "args": [
+   2910,
+   2,
+   24
+  ],
+  "expected": [
+   2910,
+   9
+  ]
+ },
+ {
+  "id": "iso_week-120",
+  "tag": "fuzz",
+  "args": [
+   6945,
+   12,
+   25
+  ],
+  "expected": [
+   6945,
+   51
+  ]
+ },
+ {
+  "id": "iso_week-121",
+  "tag": "fuzz",
+  "args": [
+   682,
+   5,
+   10
+  ],
+  "expected": [
+   682,
+   19
+  ]
+ },
+ {
+  "id": "iso_week-122",
+  "tag": "fuzz",
+  "args": [
+   6855,
+   1,
+   4
+  ],
+  "expected": [
+   6855,
+   1
+  ]
+ },
+ {
+  "id": "iso_week-123",
+  "tag": "fuzz",
+  "args": [
+   1591,
+   1,
+   6
+  ],
+  "expected": [
+   1591,
+   1
+  ]
+ },
+ {
+  "id": "iso_week-124",
+  "tag": "fuzz",
+  "args": [
+   6528,
+   12,
+   28
+  ],
+  "expected": [
+   6528,
+   53
+  ]
+ },
+ {
+  "id": "iso_week-125",
+  "tag": "fuzz",
+  "args": [
+   3656,
+   12,
+   28
+  ],
+  "expected": [
+   3656,
+   52
+  ]
+ },
+ {
+  "id": "iso_week-126",
+  "tag": "fuzz",
+  "args": [
+   6136,
+   12,
+   29
+  ],
+  "expected": [
+   6136,
+   52
+  ]
+ },
+ {
+  "id": "iso_week-127",
+  "tag": "fuzz",
+  "args": [
+   6496,
+   10,
+   27
+  ],
+  "expected": [
+   6496,
+   43
+  ]
+ },
+ {
+  "id": "iso_week-128",
+  "tag": "fuzz",
+  "args": [
+   8904,
+   9,
+   5
+  ],
+  "expected": [
+   8904,
+   36
+  ]
+ },
+ {
+  "id": "iso_week-129",
+  "tag": "fuzz",
+  "args": [
+   1564,
+   11,
+   27
+  ],
+  "expected": [
+   1564,
+   48
+  ]
+ },
+ {
+  "id": "iso_week-130",
+  "tag": "fuzz",
+  "args": [
+   6168,
+   11,
+   2
+  ],
+  "expected": [
+   6168,
+   44
+  ]
+ },
+ {
+  "id": "iso_week-131",
+  "tag": "fuzz",
+  "args": [
+   794,
+   12,
+   30
+  ],
+  "expected": [
+   794,
+   52
+  ]
+ },
+ {
+  "id": "iso_week-132",
+  "tag": "fuzz",
+  "args": [
+   5219,
+   3,
+   20
+  ],
+  "expected": [
+   5219,
+   12
+  ]
+ },
+ {
+  "id": "iso_week-133",
+  "tag": "fuzz",
+  "args": [
+   4443,
+   1,
+   21
+  ],
+  "expected": [
+   4443,
+   4
+  ]
+ },
+ {
+  "id": "iso_week-134",
+  "tag": "fuzz",
+  "args": [
+   8761,
+   7,
+   18
+  ],
+  "expected": [
+   8761,
+   29
+  ]
+ },
+ {
+  "id": "iso_week-135",
+  "tag": "fuzz",
+  "args": [
+   3816,
+   12,
+   27
+  ],
+  "expected": [
+   3816,
+   52
+  ]
+ }
+]

@@ -1,0 +1,2 @@
+# Only needed for the anthropic: model adapter. The harness itself is stdlib-only.
+anthropic>=1.0

@@ -1,0 +1,1162 @@
+[
+ {
+  "id": "posix_normpath-000",
+  "tag": "basic",
+  "args": [
+   ""
+  ],
+  "expected": "."
+ },
+ {
+  "id": "posix_normpath-001",
+  "tag": "basic",
+  "args": [
+   "."
+  ],
+  "expected": "."
+ },
+ {
+  "id": "posix_normpath-002",
+  "tag": "basic",
+  "args": [
+   "./"
+  ],
+  "expected": "."
+ },
+ {
+  "id": "posix_normpath-003",
+  "tag": "basic",
+  "args": [
+   "/"
+  ],
+  "expected": "/"
+ },
+ {
+  "id": "posix_normpath-004",
+  "tag": "double-slash-root",
+  "args": [
+   "//"
+  ],
+  "expected": "//"
+ },
+ {
+  "id": "posix_normpath-005",
+  "tag": "double-slash-root",
+  "args": [
+   "///"
+  ],
+  "expected": "/"
+ },
+ {
+  "id": "posix_normpath-006",
+  "tag": "double-slash-root",
+  "args": [
+   "////"
+  ],
+  "expected": "/"
+ },
+ {
+  "id": "posix_normpath-007",
+  "tag": "double-slash-root",
+  "args": [
+   "//a"
+  ],
+  "expected": "//a"
+ },
+ {
+  "id": "posix_normpath-008",
+  "tag": "double-slash-root",
+  "args": [
+   "///a"
+  ],
+  "expected": "/a"
+ },
+ {
+  "id": "posix_normpath-009",
+  "tag": "double-slash-root",
+  "args": [
+   "//a//b/"
+  ],
+  "expected": "//a/b"
+ },
+ {
+  "id": "posix_normpath-010",
+  "tag": "dotdot",
+  "args": [
+   "/.."
+  ],
+  "expected": "/"
+ },
+ {
+  "id": "posix_normpath-011",
+  "tag": "dotdot",
+  "args": [
+   "/../.."
+  ],
+  "expected": "/"
+ },
+ {
+  "id": "posix_normpath-012",
+  "tag": "dotdot",
+  "args": [
+   "/../a"
+  ],
+  "expected": "/a"
+ },
+ {
+  "id": "posix_normpath-013",
+  "tag": "double-slash-root",
+  "args": [
+   "//.."
+  ],
+  "expected": "//"
+ },
+ {
+  "id": "posix_normpath-014",
+  "tag": "dotdot",
+  "args": [
+   ".."
+  ],
+  "expected": ".."
+ },
+ {
+  "id": "posix_normpath-015",
+  "tag": "dotdot",
+  "args": [
+   "../.."
+  ],
+  "expected": "../.."
+ },
+ {
+  "id": "posix_normpath-016",
+  "tag": "dotdot",
+  "args": [
+   "a/.."
+  ],
+  "expected": "."
+ },
+ {
+  "id": "posix_normpath-017",
+  "tag": "dotdot",
+  "args": [
+   "a/../.."
+  ],
+  "expected": ".."
+ },
+ {
+  "id": "posix_normpath-018",
+  "tag": "dotdot",
+  "args": [
+   "a/b/../../.."
+  ],
+  "expected": ".."
+ },
+ {
+  "id": "posix_normpath-019",
+  "tag": "dotdot",
+  "args": [
+   "../a/.."
+  ],
+  "expected": ".."
+ },
+ {
+  "id": "posix_normpath-020",
+  "tag": "dotdot",
+  "args": [
+   "./../a"
+  ],
+  "expected": "../a"
+ },
+ {
+  "id": "posix_normpath-021",
+  "tag": "basic",
+  "args": [
+   "a/./b/."
+  ],
+  "expected": "a/b"
+ },
+ {
+  "id": "posix_normpath-022",
+  "tag": "basic",
+  "args": [
+   "a//b"
+  ],
+  "expected": "a/b"
+ },
+ {
+  "id": "posix_normpath-023",
+  "tag": "basic",
+  "args": [
+   "a/b/"
+  ],
+  "expected": "a/b"
+ },
+ {
+  "id": "posix_normpath-024",
+  "tag": "dotdot",
+  "args": [
+   "/a/b/c/../../d"
+  ],
+  "expected": "/a/d"
+ },
+ {
+  "id": "posix_normpath-025",
+  "tag": "dotdot",
+  "args": [
+   "..."
+  ],
+  "expected": "..."
+ },
+ {
+  "id": "posix_normpath-026",
+  "tag": "dotdot",
+  "args": [
+   "a/.../b"
+  ],
+  "expected": "a/.../b"
+ },
+ {
+  "id": "posix_normpath-027",
+  "tag": "dotdot",
+  "args": [
+   "a/..b/../c"
+  ],
+  "expected": "a/c"
+ },
+ {
+  "id": "posix_normpath-028",
+  "tag": "basic",
+  "args": [
+   ".a/./.b"
+  ],
+  "expected": ".a/.b"
+ },
+ {
+  "id": "posix_normpath-029",
+  "tag": "basic",
+  "args": [
+   "a b/ c"
+  ],
+  "expected": "a b/ c"
+ },
+ {
+  "id": "posix_normpath-030",
+  "tag": "dotdot",
+  "args": [
+   "/ü/../é"
+  ],
+  "expected": "/é"
+ },
+ {
+  "id": "posix_normpath-031",
+  "tag": "dotdot",
+  "args": [
+   "a/b/../../../../c"
+  ],
+  "expected": "../../c"
+ },
+ {
+  "id": "posix_normpath-032",
+  "tag": "fuzz",
+  "args": [
+   "///c d/./..././"
+  ],
+  "expected": "/c d/..."
+ },
+ {
+  "id": "posix_normpath-033",
+  "tag": "fuzz",
+  "args": [
+   "/b/.../b/"
+  ],
+  "expected": "/b/.../b"
+ },
+ {
+  "id": "posix_normpath-034",
+  "tag": "fuzz",
+  "args": [
+   "b/..."
+  ],
+  "expected": "b/..."
+ },
+ {
+  "id": "posix_normpath-035",
+  "tag": "fuzz",
+  "args": [
+   "//.././a/a"
+  ],
+  "expected": "//a/a"
+ },
+ {
+  "id": "posix_normpath-036",
+  "tag": "fuzz",
+  "args": [
+   "//../b//b/./..."
+  ],
+  "expected": "//b/b/..."
+ },
+ {
+  "id": "posix_normpath-037",
+  "tag": "fuzz",
+  "args": [
+   "///.../b/.../"
+  ],
+  "expected": "/.../b/..."
+ },
+ {
+  "id": "posix_normpath-038",
+  "tag": "fuzz",
+  "args": [
+   "//c d/b"
+  ],
+  "expected": "//c d/b"
+ },
+ {
+  "id": "posix_normpath-039",
+  "tag": "fuzz",
+  "args": [
+   "///a/a/c d/../b/"
+  ],
+  "expected": "/a/a/b"
+ },
+ {
+  "id": "posix_normpath-040",
+  "tag": "fuzz",
+  "args": [
+   "//..//a"
+  ],
+  "expected": "//a"
+ },
+ {
+  "id": "posix_normpath-041",
+  "tag": "fuzz",
+  "args": [
+   "./a/c d/.//."
+  ],
+  "expected": "a/c d"
+ },
+ {
+  "id": "posix_normpath-042",
+  "tag": "fuzz",
+  "args": [
+   "///b/"
+  ],
+  "expected": "/b"
+ },
+ {
+  "id": "posix_normpath-043",
+  "tag": "fuzz",
+  "args": [
+   "/.../c d/"
+  ],
+  "expected": "/.../c d"
+ },
+ {
+  "id": "posix_normpath-044",
+  "tag": "fuzz",
+  "args": [
+   "///./../../b/./c d/"
+  ],
+  "expected": "/b/c d"
+ },
+ {
+  "id": "posix_normpath-045",
+  "tag": "fuzz",
+  "args": [
+   "//./.../c d/./.../c d"
+  ],
+  "expected": "//.../c d/.../c d"
+ },
+ {
+  "id": "posix_normpath-046",
+  "tag": "fuzz",
+  "args": [
+   "c d/./"
+  ],
+  "expected": "c d"
+ },
+ {
+  "id": "posix_normpath-047",
+  "tag": "fuzz",
+  "args": [
+   "/b/.../"
+  ],
+  "expected": "/b/..."
+ },
+ {
+  "id": "posix_normpath-048",
+  "tag": "fuzz",
+  "args": [
+   ".../."
+  ],
+  "expected": "..."
+ },
+ {
+  "id": "posix_normpath-049",
+  "tag": "fuzz",
+  "args": [
+   "./c d"
+  ],
+  "expected": "c d"
+ },
+ {
+  "id": "posix_normpath-050",
+  "tag": "fuzz",
+  "args": [
+   "//./.../c d/./c d"
+  ],
+  "expected": "//.../c d/c d"
+ },
+ {
+  "id": "posix_normpath-051",
+  "tag": "fuzz",
+  "args": [
+   "///.../..."
+  ],
+  "expected": "/.../..."
+ },
+ {
+  "id": "posix_normpath-052",
+  "tag": "fuzz",
+  "args": [
+   "b/./b"
+  ],
+  "expected": "b/b"
+ },
+ {
+  "id": "posix_normpath-053",
+  "tag": "fuzz",
+  "args": [
+   "././b/a"
+  ],
+  "expected": "b/a"
+ },
+ {
+  "id": "posix_normpath-054",
+  "tag": "fuzz",
+  "args": [
+   ".../b/..//b"
+  ],
+  "expected": ".../b"
+ },
+ {
+  "id": "posix_normpath-055",
+  "tag": "fuzz",
+  "args": [
+   "//./c d/b//"
+  ],
+  "expected": "//c d/b"
+ },
+ {
+  "id": "posix_normpath-056",
+  "tag": "fuzz",
+  "args": [
+   "///c d/./a/c d/c d/a"
+  ],
+  "expected": "/c d/a/c d/c d/a"
+ },
+ {
+  "id": "posix_normpath-057",
+  "tag": "fuzz",
+  "args": [
+   "b/b/a/c d/c d"
+  ],
+  "expected": "b/b/a/c d/c d"
+ },
+ {
+  "id": "posix_normpath-058",
+  "tag": "fuzz",
+  "args": [
+   "///a/././/c d/b"
+  ],
+  "expected": "/a/c d/b"
+ },
+ {
+  "id": "posix_normpath-059",
+  "tag": "fuzz",
+  "args": [
+   "/.../b/b/c d"
+  ],
+  "expected": "/.../b/b/c d"
+ },
+ {
+  "id": "posix_normpath-060",
+  "tag": "fuzz",
+  "args": [
+   "///./c d/b/.."
+  ],
+  "expected": "/c d"
+ },
+ {
+  "id": "posix_normpath-061",
+  "tag": "fuzz",
+  "args": [
+   "//./a/a/b/a/c d/"
+  ],
+  "expected": "//a/a/b/a/c d"
+ },
+ {
+  "id": "posix_normpath-062",
+  "tag": "fuzz",
+  "args": [
+   "/.../c d/."
+  ],
+  "expected": "/.../c d"
+ },
+ {
+  "id": "posix_normpath-063",
+  "tag": "fuzz",
+  "args": [
+   "b/././/c d/"
+  ],
+  "expected": "b/c d"
+ },
+ {
+  "id": "posix_normpath-064",
+  "tag": "fuzz",
+  "args": [
+   "//b/../../..././a"
+  ],
+  "expected": "//.../a"
+ },
+ {
+  "id": "posix_normpath-065",
+  "tag": "fuzz",
+  "args": [
+   "///a/c d/b/c d/.../a"
+  ],
+  "expected": "/a/c d/b/c d/.../a"
+ },
+ {
+  "id": "posix_normpath-066",
+  "tag": "fuzz",
+  "args": [
+   ".//a/.../.../a"
+  ],
+  "expected": "a/.../.../a"
+ },
+ {
+  "id": "posix_normpath-067",
+  "tag": "fuzz",
+  "args": [
+   "//c d/"
+  ],
+  "expected": "//c d"
+ },
+ {
+  "id": "posix_normpath-068",
+  "tag": "fuzz",
+  "args": [
+   "../c d/b/b"
+  ],
+  "expected": "../c d/b/b"
+ },
+ {
+  "id": "posix_normpath-069",
+  "tag": "fuzz",
+  "args": [
+   "/c d/c d"
+  ],
+  "expected": "/c d/c d"
+ },
+ {
+  "id": "posix_normpath-070",
+  "tag": "fuzz",
+  "args": [
+   "//a/../a/c d/."
+  ],
+  "expected": "//a/c d"
+ },
+ {
+  "id": "posix_normpath-071",
+  "tag": "fuzz",
+  "args": [
+   "c d/././b"
+  ],
+  "expected": "c d/b"
+ },
+ {
+  "id": "posix_normpath-072",
+  "tag": "fuzz",
+  "args": [
+   "///..."
+  ],
+  "expected": "/..."
+ },
+ {
+  "id": "posix_normpath-073",
+  "tag": "fuzz",
+  "args": [
+   "//a/./c d"
+  ],
+  "expected": "//a/c d"
+ },
+ {
+  "id": "posix_normpath-074",
+  "tag": "fuzz",
+  "args": [
+   "//a/c d/b"
+  ],
+  "expected": "//a/c d/b"
+ },
+ {
+  "id": "posix_normpath-075",
+  "tag": "fuzz",
+  "args": [
+   "a/b/c d"
+  ],
+  "expected": "a/b/c d"
+ },
+ {
+  "id": "posix_normpath-076",
+  "tag": "fuzz",
+  "args": [
+   "./.."
+  ],
+  "expected": ".."
+ },
+ {
+  "id": "posix_normpath-077",
+  "tag": "fuzz",
+  "args": [
+   "///./../a/...//a"
+  ],
+  "expected": "/a/.../a"
+ },
+ {
+  "id": "posix_normpath-078",
+  "tag": "fuzz",
+  "args": [
+   "//b"
+  ],
+  "expected": "//b"
+ },
+ {
+  "id": "posix_normpath-079",
+  "tag": "fuzz",
+  "args": [
+   "///c d/"
+  ],
+  "expected": "/c d"
+ },
+ {
+  "id": "posix_normpath-080",
+  "tag": "fuzz",
+  "args": [
+   "./c d/.//b/c d"
+  ],
+  "expected": "c d/b/c d"
+ },
+ {
+  "id": "posix_normpath-081",
+  "tag": "fuzz",
+  "args": [
+   "//.../c d"
+  ],
+  "expected": "//.../c d"
+ },
+ {
+  "id": "posix_normpath-082",
+  "tag": "fuzz",
+  "args": [
+   "a/c d/."
+  ],
+  "expected": "a/c d"
+ },
+ {
+  "id": "posix_normpath-083",
+  "tag": "fuzz",
+  "args": [
+   "//.../b///..."
+  ],
+  "expected": "//.../b/..."
+ },
+ {
+  "id": "posix_normpath-084",
+  "tag": "fuzz",
+  "args": [
+   "a/../a/.../c d"
+  ],
+  "expected": "a/.../c d"
+ },
+ {
+  "id": "posix_normpath-085",
+  "tag": "fuzz",
+  "args": [
+   "///a/"
+  ],
+  "expected": "/a"
+ },
+ {
+  "id": "posix_normpath-086",
+  "tag": "fuzz",
+  "args": [
+   "////c d/..//"
+  ],
+  "expected": "/"
+ },
+ {
+  "id": "posix_normpath-087",
+  "tag": "fuzz",
+  "args": [
+   "b/..././"
+  ],
+  "expected": "b/..."
+ },
+ {
+  "id": "posix_normpath-088",
+  "tag": "fuzz",
+  "args": [
+   "/."
+  ],
+  "expected": "/"
+ },
+ {
+  "id": "posix_normpath-089",
+  "tag": "fuzz",
+  "args": [
+   ".../a/"
+  ],
+  "expected": ".../a"
+ },
+ {
+  "id": "posix_normpath-090",
+  "tag": "fuzz",
+  "args": [
+   "/c d"
+  ],
+  "expected": "/c d"
+ },
+ {
+  "id": "posix_normpath-091",
+  "tag": "fuzz",
+  "args": [
+   "///../b"
+  ],
+  "expected": "/b"
+ },
+ {
+  "id": "posix_normpath-092",
+  "tag": "fuzz",
+  "args": [
+   "//..././a/.."
+  ],
+  "expected": "//..."
+ },
+ {
+  "id": "posix_normpath-093",
+  "tag": "fuzz",
+  "args": [
+   "/../a/../c d/a"
+  ],
+  "expected": "/c d/a"
+ },
+ {
+  "id": "posix_normpath-094",
+  "tag": "fuzz",
+  "args": [
+   "/.../.../c d/"
+  ],
+  "expected": "/.../.../c d"
+ },
+ {
+  "id": "posix_normpath-095",
+  "tag": "fuzz",
+  "args": [
+   "a/c d/a/.../.../b"
+  ],
+  "expected": "a/c d/a/.../.../b"
+ },
+ {
+  "id": "posix_normpath-096",
+  "tag": "fuzz",
+  "args": [
+   "///b/.../..."
+  ],
+  "expected": "/b/.../..."
+ },
+ {
+  "id": "posix_normpath-097",
+  "tag": "fuzz",
+  "args": [
+   "/b"
+  ],
+  "expected": "/b"
+ },
+ {
+  "id": "posix_normpath-098",
+  "tag": "fuzz",
+  "args": [
+   "/../b/c d/."
+  ],
+  "expected": "/b/c d"
+ },
+ {
+  "id": "posix_normpath-099",
+  "tag": "fuzz",
+  "args": [
+   "/b/./a/b"
+  ],
+  "expected": "/b/a/b"
+ },
+ {
+  "id": "posix_normpath-100",
+  "tag": "fuzz",
+  "args": [
+   ".../b"
+  ],
+  "expected": ".../b"
+ },
+ {
+  "id": "posix_normpath-101",
+  "tag": "fuzz",
+  "args": [
+   "/a//../.."
+  ],
+  "expected": "/"
+ },
+ {
+  "id": "posix_normpath-102",
+  "tag": "fuzz",
+  "args": [
+   "//././a//"
+  ],
+  "expected": "//a"
+ },
+ {
+  "id": "posix_normpath-103",
+  "tag": "fuzz",
+  "args": [
+   "/b/./../.../..."
+  ],
+  "expected": "/.../..."
+ },
+ {
+  "id": "posix_normpath-104",
+  "tag": "fuzz",
+  "args": [
+   "c d/b"
+  ],
+  "expected": "c d/b"
+ },
+ {
+  "id": "posix_normpath-105",
+  "tag": "fuzz",
+  "args": [
+   "./.../"
+  ],
+  "expected": "..."
+ },
+ {
+  "id": "posix_normpath-106",
+  "tag": "fuzz",
+  "args": [
+   "///b//../c d"
+  ],
+  "expected": "/c d"
+ },
+ {
+  "id": "posix_normpath-107",
+  "tag": "fuzz",
+  "args": [
+   "b/b//../a/a/"
+  ],
+  "expected": "b/a/a"
+ },
+ {
+  "id": "posix_normpath-108",
+  "tag": "fuzz",
+  "args": [
+   "//./b/..."
+  ],
+  "expected": "//b/..."
+ },
+ {
+  "id": "posix_normpath-109",
+  "tag": "fuzz",
+  "args": [
+   "/.//b/"
+  ],
+  "expected": "/b"
+ },
+ {
+  "id": "posix_normpath-110",
+  "tag": "fuzz",
+  "args": [
+   "////c d/"
+  ],
+  "expected": "/c d"
+ },
+ {
+  "id": "posix_normpath-111",
+  "tag": "fuzz",
+  "args": [
+   "a/a/c d///a"
+  ],
+  "expected": "a/a/c d/a"
+ },
+ {
+  "id": "posix_normpath-112",
+  "tag": "fuzz",
+  "args": [
+   "./../a/b"
+  ],
+  "expected": "../a/b"
+ },
+ {
+  "id": "posix_normpath-113",
+  "tag": "fuzz",
+  "args": [
+   "//.././a/.../"
+  ],
+  "expected": "//a/..."
+ },
+ {
+  "id": "posix_normpath-114",
+  "tag": "fuzz",
+  "args": [
+   "//...//.//...//"
+  ],
+  "expected": "//.../..."
+ },
+ {
+  "id": "posix_normpath-115",
+  "tag": "fuzz",
+  "args": [
+   "///././.../.../b/../"
+  ],
+  "expected": "/.../..."
+ },
+ {
+  "id": "posix_normpath-116",
+  "tag": "fuzz",
+  "args": [
+   "///c d/a"
+  ],
+  "expected": "/c d/a"
+ },
+ {
+  "id": "posix_normpath-117",
+  "tag": "fuzz",
+  "args": [
+   "../c d/a"
+  ],
+  "expected": "../c d/a"
+ },
+ {
+  "id": "posix_normpath-118",
+  "tag": "fuzz",
+  "args": [
+   "///b/b/./b/"
+  ],
+  "expected": "/b/b/b"
+ },
+ {
+  "id": "posix_normpath-119",
+  "tag": "fuzz",
+  "args": [
+   ".../../..././.../../"
+  ],
+  "expected": "..."
+ },
+ {
+  "id": "posix_normpath-120",
+  "tag": "fuzz",
+  "args": [
+   ".../c d/"
+  ],
+  "expected": ".../c d"
+ },
+ {
+  "id": "posix_normpath-121",
+  "tag": "fuzz",
+  "args": [
+   "a"
+  ],
+  "expected": "a"
+ },
+ {
+  "id": "posix_normpath-122",
+  "tag": "fuzz",
+  "args": [
+   "//a//c d//"
+  ],
+  "expected": "//a/c d"
+ },
+ {
+  "id": "posix_normpath-123",
+  "tag": "fuzz",
+  "args": [
+   "//./b/../"
+  ],
+  "expected": "//"
+ },
+ {
+  "id": "posix_normpath-124",
+  "tag": "fuzz",
+  "args": [
+   "../b/../."
+  ],
+  "expected": ".."
+ },
+ {
+  "id": "posix_normpath-125",
+  "tag": "fuzz",
+  "args": [
+   "/c d/../b//././"
+  ],
+  "expected": "/b"
+ },
+ {
+  "id": "posix_normpath-126",
+  "tag": "fuzz",
+  "args": [
+   "///c d/b/.../b"
+  ],
+  "expected": "/c d/b/.../b"
+ },
+ {
+  "id": "posix_normpath-127",
+  "tag": "fuzz",
+  "args": [
+   "////a/.../.."
+  ],
+  "expected": "/a"
+ },
+ {
+  "id": "posix_normpath-128",
+  "tag": "fuzz",
+  "args": [
+   "/../../..././../."
+  ],
+  "expected": "/"
+ },
+ {
+  "id": "posix_normpath-129",
+  "tag": "fuzz",
+  "args": [
+   "b/c d"
+  ],
+  "expected": "b/c d"
+ },
+ {
+  "id": "posix_normpath-130",
+  "tag": "fuzz",
+  "args": [
+   "a/"
+  ],
+  "expected": "a"
+ },
+ {
+  "id": "posix_normpath-131",
+  "tag": "fuzz",
+  "args": [
+   "////../../a/.."
+  ],
+  "expected": "/"
+ },
+ {
+  "id": "posix_normpath-132",
+  "tag": "fuzz",
+  "args": [
+   "///.../b/.///"
+  ],
+  "expected": "/.../b"
+ },
+ {
+  "id": "posix_normpath-133",
+  "tag": "fuzz",
+  "args": [
+   "../b/../../../"
+  ],
+  "expected": "../../.."
+ },
+ {
+  "id": "posix_normpath-134",
+  "tag": "fuzz",
+  "args": [
+   "b/..././a/"
+  ],
+  "expected": "b/.../a"
+ },
+ {
+  "id": "posix_normpath-135",
+  "tag": "fuzz",
+  "args": [
+   "///a/./"
+  ],
+  "expected": "/a"
+ },
+ {
+  "id": "posix_normpath-136",
+  "tag": "fuzz",
+  "args": [
+   "//.//..."
+  ],
+  "expected": "//..."
+ },
+ {
+  "id": "posix_normpath-137",
+  "tag": "fuzz",
+  "args": [
+   "/a/../"
+  ],
+  "expected": "/"
+ },
+ {
+  "id": "posix_normpath-138",
+  "tag": "fuzz",
+  "args": [
+   "///./b/"
+  ],
+  "expected": "/b"
+ },
+ {
+  "id": "posix_normpath-139",
+  "tag": "fuzz",
+  "args": [
+   ".././/..//."
+  ],
+  "expected": "../.."
+ },
+ {
+  "id": "posix_normpath-140",
+  "tag": "fuzz",
+  "args": [
+   "b/../c d/b/b/c d/"
+  ],
+  "expected": "c d/b/b/c d"
+ },
+ {
+  "id": "posix_normpath-141",
+  "tag": "fuzz",
+  "args": [
+   "///../a///../b"
+  ],
+  "expected": "/b"
+ },
+ {
+  "id": "posix_normpath-142",
+  "tag": "fuzz",
+  "args": [
+   ".././..."
+  ],
+  "expected": "../..."
+ },
+ {
+  "id": "posix_normpath-143",
+  "tag": "fuzz",
+  "args": [
+   "/./."
+  ],
+  "expected": "/"
+ },
+ {
+  "id": "posix_normpath-144",
+  "tag": "fuzz",
+  "args": [
+   "///.../b/c d/a/"
+  ],
+  "expected": "/.../b/c d/a"
+ }
+]

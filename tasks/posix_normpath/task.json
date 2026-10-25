@@ -1,0 +1,14 @@
+{
+  "id": "posix_normpath",
+  "title": "POSIX lexical path normalization",
+  "function": "normpath",
+  "forbidden_imports": ["os", "posixpath", "pathlib", "ntpath", "genericpath"],
+  "skill": "POSIX path semantics (the implementation-defined '//' root)",
+  "traps": [
+    "exactly two leading slashes are preserved, one or three-plus collapse to '/'",
+    "'..' above the root of an absolute path is discarded",
+    "leading '..' in a relative path is kept",
+    "'..' never cancels a preceding '..'",
+    "empty result becomes '.'"
+  ]
+}

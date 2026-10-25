@@ -1,0 +1,15 @@
+{
+  "id": "python_int_literal",
+  "title": "Python 3 integer literal lexer",
+  "function": "is_valid_int_literal",
+  "forbidden_imports": ["tokenize", "ast", "token", "parser", "codeop", "code"],
+  "skill": "Language lexical grammar vs runtime parsing (int(s, 0) is not the grammar)",
+  "traps": [
+    "int(s, 0) accepts whitespace, signs and non-ASCII digits, the grammar does not",
+    "'00' and '0_0' are valid, '01' is not",
+    "an underscore may follow the base prefix ('0x_f')",
+    "no trailing, leading or doubled underscores",
+    "non-ASCII digits like '١' or '１' are not valid literals",
+    "case of the prefix letter does not matter"
+  ]
+}

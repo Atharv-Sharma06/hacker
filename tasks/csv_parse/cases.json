@@ -1,0 +1,2793 @@
+[
+ {
+  "id": "csv_parse-000",
+  "tag": "empty",
+  "args": [
+   ""
+  ],
+  "expected": []
+ },
+ {
+  "id": "csv_parse-001",
+  "tag": "basic",
+  "args": [
+   "a"
+  ],
+  "expected": [
+   [
+    "a"
+   ]
+  ]
+ },
+ {
+  "id": "csv_parse-002",
+  "tag": "basic",
+  "args": [
+   "a,b,c\n1,2,3"
+  ],
+  "expected": [
+   [
+    "a",
+    "b",
+    "c"
+   ],
+   [
+    "1",
+    "2",
+    "3"
+   ]
+  ]
+ },
+ {
+  "id": "csv_parse-003",
+  "tag": "trailing-newline",
+  "args": [
+   "a,b\n"
+  ],
+  "expected": [
+   [
+    "a",
+    "b"
+   ]
+  ]
+ },
+ {
+  "id": "csv_parse-004",
+  "tag": "trailing-newline",
+  "args": [
+   "a,b\r\n"
+  ],
+  "expected": [
+   [
+    "a",
+    "b"
+   ]
+  ]
+ },
+ {
+  "id": "csv_parse-005",
+  "tag": "blank-record",
+  "args": [
+   "a,b\n\n"
+  ],
+  "expected": [
+   [
+    "a",
+    "b"
+   ],
+   [
+    ""
+   ]
+  ]
+ },
+ {
+  "id": "csv_parse-006",
+  "tag": "blank-record",
+  "args": [
+   "\n"
+  ],
+  "expected": [
+   [
+    ""
+   ]
+  ]
+ },
+ {
+  "id": "csv_parse-007",
+  "tag": "blank-record",
+  "args": [
+   "\n\n"
+  ],
+  "expected": [
+   [
+    ""
+   ],
+   [
+    ""
+   ]
+  ]
+ },
+ {
+  "id": "csv_parse-008",
+  "tag": "blank-record",
+  "args": [
+   "a\n\nb"
+  ],
+  "expected": [
+   [
+    "a"
+   ],
+   [
+    ""
+   ],
+   [
+    "b"
+   ]
+  ]
+ },
+ {
+  "id": "csv_parse-009",
+  "tag": "trailing-comma",
+  "args": [
+   "a,"
+  ],
+  "expected": [
+   [
+    "a",
+    ""
+   ]
+  ]
+ },
+ {
+  "id": "csv_parse-010",
+  "tag": "trailing-comma",
+  "args": [
+   ","
+  ],
+  "expected": [
+   [
+    "",
+    ""
+   ]
+  ]
+ },
+ {
+  "id": "csv_parse-011",
+  "tag": "trailing-comma",
+  "args": [
+   ",,\n"
+  ],
+  "expected": [
+   [
+    "",
+    "",
+    ""
+   ]
+  ]
+ },
+ {
+  "id": "csv_parse-012",
+  "tag": "quoted-empty",
+  "args": [
+   "\"\""
+  ],
+  "expected": [
+   [
+    ""
+   ]
+  ]
+ },
+ {
+  "id": "csv_parse-013",
+  "tag": "quoted-empty",
+  "args": [
+   "\"\",\"\""
+  ],
+  "expected": [
+   [
+    "",
+    ""
+   ]
+  ]
+ },
+ {
+  "id": "csv_parse-014",
+  "tag": "quoted-delimiter",
+  "args": [
+   "\"a,b\",c"
+  ],
+  "expected": [
+   [
+    "a,b",
+    "c"
+   ]
+  ]
+ },
+ {
+  "id": "csv_parse-015",
+  "tag": "quoted-newline",
+  "args": [
+   "\"line1\nline2\",x"
+  ],
+  "expected": [
+   [
+    "line1\nline2",
+    "x"
+   ]
+  ]
+ },
+ {
+  "id": "csv_parse-016",
+  "tag": "quoted-newline",
+  "args": [
+   "\"crlf\r\ninside\"\r\nnext"
+  ],
+  "expected": [
+   [
+    "crlf\r\ninside"
+   ],
+   [
+    "next"
+   ]
+  ]
+ },
+ {
+  "id": "csv_parse-017",
+  "tag": "escaped-quote",
+  "args": [
+   "\"say \"\"hi\"\"\""
+  ],
+  "expected": [
+   [
+    "say \"hi\""
+   ]
+  ]
+ },
+ {
+  "id": "csv_parse-018",
+  "tag": "escaped-quote",
+  "args": [
+   "\"\"\"\""
+  ],
+  "expected": [
+   [
+    "\""
+   ]
+  ]
+ },
+ {
+  "id": "csv_parse-019",
+  "tag": "escaped-quote",
+  "args": [
+   "\"\"\"\"\"\""
+  ],
+  "expected": [
+   [
+    "\"\""
+   ]
+  ]
+ },
+ {
+  "id": "csv_parse-020",
+  "tag": "bare-quote-literal",
+  "args": [
+   "a\"b,c"
+  ],
+  "expected": [
+   [
+    "a\"b",
+    "c"
+   ]
+  ]
+ },
+ {
+  "id": "csv_parse-021",
+  "tag": "bare-quote-literal",
+  "args": [
+   "ab\",c"
+  ],
+  "expected": [
+   [
+    "ab\"",
+    "c"
+   ]
+  ]
+ },
+ {
+  "id": "csv_parse-022",
+  "tag": "bare-quote-literal",
+  "args": [
+   "x\"\"y"
+  ],
+  "expected": [
+   [
+    "x\"\"y"
+   ]
+  ]
+ },
+ {
+  "id": "csv_parse-023",
+  "tag": "lone-cr",
+  "args": [
+   "a\rb,c"
+  ],
+  "expected": [
+   [
+    "a\rb",
+    "c"
+   ]
+  ]
+ },
+ {
+  "id": "csv_parse-024",
+  "tag": "lone-cr",
+  "args": [
+   "a,b\r"
+  ],
+  "expected": [
+   [
+    "a",
+    "b\r"
+   ]
+  ]
+ },
+ {
+  "id": "csv_parse-025",
+  "tag": "whitespace-kept",
+  "args": [
+   " a , b "
+  ],
+  "expected": [
+   [
+    " a ",
+    " b "
+   ]
+  ]
+ },
+ {
+  "id": "csv_parse-026",
+  "tag": "error-after-quote",
+  "args": [
+   "\"a\" ,b"
+  ],
+  "expected_error": "ValueError"
+ },
+ {
+  "id": "csv_parse-027",
+  "tag": "error-after-quote",
+  "args": [
+   "\"a\"b"
+  ],
+  "expected_error": "ValueError"
+ },
+ {
+  "id": "csv_parse-028",
+  "tag": "error-unterminated",
+  "args": [
+   "\"a\"\""
+  ],
+  "expected_error": "ValueError"
+ },
+ {
+  "id": "csv_parse-029",
+  "tag": "error-unterminated",
+  "args": [
+   "\"abc"
+  ],
+  "expected_error": "ValueError"
+ },
+ {
+  "id": "csv_parse-030",
+  "tag": "error-unterminated",
+  "args": [
+   "a,\"b\n"
+  ],
+  "expected_error": "ValueError"
+ },
+ {
+  "id": "csv_parse-031",
+  "tag": "error-after-quote",
+  "args": [
+   "\"a\"\r"
+  ],
+  "expected_error": "ValueError"
+ },
+ {
+  "id": "csv_parse-032",
+  "tag": "unicode",
+  "args": [
+   "é,ü\n日本,\"語\""
+  ],
+  "expected": [
+   [
+    "é",
+    "ü"
+   ],
+   [
+    "日本",
+    "語"
+   ]
+  ]
+ },
+ {
+  "id": "csv_parse-033",
+  "tag": "fuzz",
+  "args": [
+   "\"\",\"\r\nééb\",b1bb\r\n1 "
+  ],
+  "expected": [
+   [
+    "",
+    "\r\nééb",
+    "b1bb"
+   ],
+   [
+    "1 "
+   ]
+  ]
+ },
+ {
+  "id": "csv_parse-034",
+  "tag": "fuzz",
+  "args": [
+   "\"1,\n\"\n\"é\",\"\"\"\r\n \"\nb,\"\r\nx \"\n"
+  ],
+  "expected": [
+   [
+    "1,\n"
+   ],
+   [
+    "é",
+    "\"\r\n "
+   ],
+   [
+    "b",
+    "\r\nx "
+   ]
+  ]
+ },
+ {
+  "id": "csv_parse-035",
+  "tag": "fuzz",
+  "args": [
+   "xxéa,\"b\"\na11\nb a\n\"\"\"é\", ,11\n"
+  ],
+  "expected": [
+   [
+    "xxéa",
+    "b"
+   ],
+   [
+    "a11"
+   ],
+   [
+    "b a"
+   ],
+   [
+    "\"é",
+    " ",
+    "11"
+   ]
+  ]
+ },
+ {
+  "id": "csv_parse-036",
+  "tag": "fuzz",
+  "args": [
+   "aax,\"1,b11\",xé,b\r\nxéb\r\nx1,\"ééb x\",é"
+  ],
+  "expected": [
+   [
+    "aax",
+    "1,b11",
+    "xé",
+    "b"
+   ],
+   [
+    "xéb"
+   ],
+   [
+    "x1",
+    "ééb x",
+    "é"
+   ]
+  ]
+ },
+ {
+  "id": "csv_parse-037",
+  "tag": "fuzz",
+  "args": [
+   "b b,aaé \nba,11,xx\n\"\r\n\",\"\"\"\",\"aa\"\n"
+  ],
+  "expected": [
+   [
+    "b b",
+    "aaé "
+   ],
+   [
+    "ba",
+    "11",
+    "xx"
+   ],
+   [
+    "\r\n",
+    "\"",
+    "aa"
+   ]
+  ]
+ },
+ {
+  "id": "csv_parse-038",
+  "tag": "fuzz",
+  "args": [
+   " , b\nxé  \n"
+  ],
+  "expected": [
+   [
+    " ",
+    " b"
+   ],
+   [
+    "xé  "
+   ]
+  ]
+ },
+ {
+  "id": "csv_parse-039",
+  "tag": "fuzz",
+  "args": [
+   "\"\n1a\",\"a\",\"\"\n ,x1 ,\"\"\nxbxx,\"\"\n\"\r\n\",\"a\",\"é\""
+  ],
+  "expected": [
+   [
+    "\n1a",
+    "a",
+    ""
+   ],
+   [
+    " ",
+    "x1 ",
+    ""
+   ],
+   [
+    "xbxx",
+    ""
+   ],
+   [
+    "\r\n",
+    "a",
+    "é"
+   ]
+  ]
+ },
+ {
+  "id": "csv_parse-040",
+  "tag": "fuzz",
+  "args": [
+   "\"\"\"\", é1a,\",x a\",aaax\n"
+  ],
+  "expected": [
+   [
+    "\"",
+    " é1a",
+    ",x a",
+    "aaax"
+   ]
+  ]
+ },
+ {
+  "id": "csv_parse-041",
+  "tag": "fuzz",
+  "args": [
+   "bb,\"éx\",\" x\"\"\n\",xxx\n\"x\"\n  , x1"
+  ],
+  "expected": [
+   [
+    "bb",
+    "éx",
+    " x\"\n",
+    "xxx"
+   ],
+   [
+    "x"
+   ],
+   [
+    "  ",
+    " x1"
+   ]
+  ]
+ },
+ {
+  "id": "csv_parse-042",
+  "tag": "fuzz",
+  "args": [
+   "\"\r\nb,\r\na\",\"  \"\"\",\"\"\"xbbé\",\" \r\n\n1\"\nbéb\n \n"
+  ],
+  "expected": [
+   [
+    "\r\nb,\r\na",
+    "  \"",
+    "\"xbbé",
+    " \r\n\n1"
+   ],
+   [
+    "béb"
+   ],
+   [
+    " "
+   ]
+  ]
+ },
+ {
+  "id": "csv_parse-043",
+  "tag": "fuzz",
+  "args": [
+   "\"ab\"\"\",éé\n\" \n\",béb,1ba,\"1\"\n"
+  ],
+  "expected": [
+   [
+    "ab\"",
+    "éé"
+   ],
+   [
+    " \n",
+    "béb",
+    "1ba",
+    "1"
+   ]
+  ]
+ },
+ {
+  "id": "csv_parse-044",
+  "tag": "fuzz",
+  "args": [
+   "\"\",\"\r\n\n 1\"\naxé,\"\na\na1\"\n1,1x,x11\n"
+  ],
+  "expected": [
+   [
+    "",
+    "\r\n\n 1"
+   ],
+   [
+    "axé",
+    "\na\na1"
+   ],
+   [
+    "1",
+    "1x",
+    "x11"
+   ]
+  ]
+ },
+ {
+  "id": "csv_parse-045",
+  "tag": "fuzz",
+  "args": [
+   "\"\n\"\r\n"
+  ],
+  "expected": [
+   [
+    "\n"
+   ]
+  ]
+ },
+ {
+  "id": "csv_parse-046",
+  "tag": "fuzz",
+  "args": [
+   "a,\"b\"\"\n é\"\n  ,\"a \",aab ,\"\r\n\"\n\"\"\"a\",\",,\"\"\",\"a\"\"\""
+  ],
+  "expected": [
+   [
+    "a",
+    "b\"\n é"
+   ],
+   [
+    "  ",
+    "a ",
+    "aab ",
+    "\r\n"
+   ],
+   [
+    "\"a",
+    ",,\"",
+    "a\""
+   ]
+  ]
+ },
+ {
+  "id": "csv_parse-047",
+  "tag": "fuzz",
+  "args": [
+   "\"\nx\",\" \r\n\",\"\""
+  ],
+  "expected": [
+   [
+    "\nx",
+    " \r\n",
+    ""
+   ]
+  ]
+ },
+ {
+  "id": "csv_parse-048",
+  "tag": "fuzz",
+  "args": [
+   "\"\",\"\r\n\",bbbb\na,\",\",1é,\"\"\"é\"\"x\"\néé é,a\n"
+  ],
+  "expected": [
+   [
+    "",
+    "\r\n",
+    "bbbb"
+   ],
+   [
+    "a",
+    ",",
+    "1é",
+    "\"é\"x"
+   ],
+   [
+    "éé é",
+    "a"
+   ]
+  ]
+ },
+ {
+  "id": "csv_parse-049",
+  "tag": "fuzz",
+  "args": [
+   "xé,éx ,ax\r\n\"b\"\"\r\n1\",xa,\"\n\"\"b\""
+  ],
+  "expected": [
+   [
+    "xé",
+    "éx ",
+    "ax"
+   ],
+   [
+    "b\"\r\n1",
+    "xa",
+    "\n\"b"
+   ]
+  ]
+ },
+ {
+  "id": "csv_parse-050",
+  "tag": "fuzz",
+  "args": [
+   "\" \",1\r\n\"x\"\"\",\",\""
+  ],
+  "expected": [
+   [
+    " ",
+    "1"
+   ],
+   [
+    "x\"",
+    ","
+   ]
+  ]
+ },
+ {
+  "id": "csv_parse-051",
+  "tag": "fuzz",
+  "args": [
+   "b,ax\r\n\"\"\"\r\n,\r\n\",é bé, 11 ,\" \r\né\"\r\n"
+  ],
+  "expected": [
+   [
+    "b",
+    "ax"
+   ],
+   [
+    "\"\r\n,\r\n",
+    "é bé",
+    " 11 ",
+    " \r\né"
+   ]
+  ]
+ },
+ {
+  "id": "csv_parse-052",
+  "tag": "fuzz",
+  "args": [
+   "\"\r\n\r\n\r\na\",\"\"\"1,,é\"\n\" , \",a b,\"\nxxa\",xaxé\n\"\"\"b1 \",1x\naéb1,aé "
+  ],
+  "expected": [
+   [
+    "\r\n\r\n\r\na",
+    "\"1,,é"
+   ],
+   [
+    " , ",
+    "a b",
+    "\nxxa",
+    "xaxé"
+   ],
+   [
+    "\"b1 ",
+    "1x"
+   ],
+   [
+    "aéb1",
+    "aé "
+   ]
+  ]
+ },
+ {
+  "id": "csv_parse-053",
+  "tag": "fuzz",
+  "args": [
+   "bxa,\"\"\r\nx é1,\"a\",\"\nb\""
+  ],
+  "expected": [
+   [
+    "bxa",
+    ""
+   ],
+   [
+    "x é1",
+    "a",
+    "\nb"
+   ]
+  ]
+ },
+ {
+  "id": "csv_parse-054",
+  "tag": "fuzz",
+  "args": [
+   "bx ,\"éxx \",bb,aééx\r\n\",\",xé"
+  ],
+  "expected": [
+   [
+    "bx ",
+    "éxx ",
+    "bb",
+    "aééx"
+   ],
+   [
+    ",",
+    "xé"
+   ]
+  ]
+ },
+ {
+  "id": "csv_parse-055",
+  "tag": "fuzz",
+  "args": [
+   "\"\",\"\r\n\",1 \nba,\"\"\"\r\n\nxé\",éb\n"
+  ],
+  "expected": [
+   [
+    "",
+    "\r\n",
+    "1 "
+   ],
+   [
+    "ba",
+    "\"\r\n\nxé",
+    "éb"
+   ]
+  ]
+ },
+ {
+  "id": "csv_parse-056",
+  "tag": "fuzz",
+  "args": [
+   "\"\na\",\"b\r\nba\r\n\",\"bb a \",b \n\"b\",\"\"\"\",\"1éb \"\n1 ,1,\"\",\"1\r\n\"\n1é,x"
+  ],
+  "expected": [
+   [
+    "\na",
+    "b\r\nba\r\n",
+    "bb a ",
+    "b "
+   ],
+   [
+    "b",
+    "\"",
+    "1éb "
+   ],
+   [
+    "1 ",
+    "1",
+    "",
+    "1\r\n"
+   ],
+   [
+    "1é",
+    "x"
+   ]
+  ]
+ },
+ {
+  "id": "csv_parse-057",
+  "tag": "fuzz",
+  "args": [
+   "\" 1\r\n \"\"\"\r\néb1b, xxa,xx ,é ab\r\n\"1bbé,\",\"\",\"ab é\",\"a\nax\"\r\nx é,xbx,bb1b, 1\r\n"
+  ],
+  "expected": [
+   [
+    " 1\r\n \""
+   ],
+   [
+    "éb1b",
+    " xxa",
+    "xx ",
+    "é ab"
+   ],
+   [
+    "1bbé,",
+    "",
+    "ab é",
+    "a\nax"
+   ],
+   [
+    "x é",
+    "xbx",
+    "bb1b",
+    " 1"
+   ]
+  ]
+ },
+ {
+  "id": "csv_parse-058",
+  "tag": "fuzz",
+  "args": [
+   "11,\"x\"\"x 1\",é1,\"\"\n\"\né\n\r\n\",\"aéa\"\"\"\n b ,\"a\r\nx\",\"\",aéab"
+  ],
+  "expected": [
+   [
+    "11",
+    "x\"x 1",
+    "é1",
+    ""
+   ],
+   [
+    "\né\n\r\n",
+    "aéa\""
+   ],
+   [
+    " b ",
+    "a\r\nx",
+    "",
+    "aéab"
+   ]
+  ]
+ },
+ {
+  "id": "csv_parse-059",
+  "tag": "fuzz",
+  "args": [
+   "\"x\nx\",é\n\"bb1\", 1b"
+  ],
+  "expected": [
+   [
+    "x\nx",
+    "é"
+   ],
+   [
+    "bb1",
+    " 1b"
+   ]
+  ]
+ },
+ {
+  "id": "csv_parse-060",
+  "tag": "fuzz",
+  "args": [
+   "\",,1\",\"\"\r\nx,1 , ,\"b\"\r\n\"\n\"\r\n"
+  ],
+  "expected": [
+   [
+    ",,1",
+    ""
+   ],
+   [
+    "x",
+    "1 ",
+    " ",
+    "b"
+   ],
+   [
+    "\n"
+   ]
+  ]
+ },
+ {
+  "id": "csv_parse-061",
+  "tag": "fuzz",
+  "args": [
+   "\" \r\n\"\"éé\",\" xx,,\",\"é\r\n\",é\na,b ,\"x\n \""
+  ],
+  "expected": [
+   [
+    " \r\n\"éé",
+    " xx,,",
+    "é\r\n",
+    "é"
+   ],
+   [
+    "a",
+    "b ",
+    "x\n "
+   ]
+  ]
+ },
+ {
+  "id": "csv_parse-062",
+  "tag": "fuzz",
+  "args": [
+   " b,\"\"\n"
+  ],
+  "expected": [
+   [
+    " b",
+    ""
+   ]
+  ]
+ },
+ {
+  "id": "csv_parse-063",
+  "tag": "fuzz",
+  "args": [
+   "1a,\"é\",\"bbx\n\"\nab ,abx1\n\",a\r\n,a\",\"b\"\n 1é ,\"é\"\"\",\"b,\"\",1\"\n"
+  ],
+  "expected": [
+   [
+    "1a",
+    "é",
+    "bbx\n"
+   ],
+   [
+    "ab ",
+    "abx1"
+   ],
+   [
+    ",a\r\n,a",
+    "b"
+   ],
+   [
+    " 1é ",
+    "é\"",
+    "b,\",1"
+   ]
+  ]
+ },
+ {
+  "id": "csv_parse-064",
+  "tag": "fuzz",
+  "args": [
+   "\"\n,b\",\", ,a\"\r\n\"aéb \",ba,ééb\r\n\",1b\",1 b ,\"\",\"\"\r\n\"bxbx\",\"b\",\"\",\"\"\"1béb\"\r\n"
+  ],
+  "expected": [
+   [
+    "\n,b",
+    ", ,a"
+   ],
+   [
+    "aéb ",
+    "ba",
+    "ééb"
+   ],
+   [
+    ",1b",
+    "1 b ",
+    "",
+    ""
+   ],
+   [
+    "bxbx",
+    "b",
+    "",
+    "\"1béb"
+   ]
+  ]
+ },
+ {
+  "id": "csv_parse-065",
+  "tag": "fuzz",
+  "args": [
+   "\"\", "
+  ],
+  "expected": [
+   [
+    "",
+    " "
+   ]
+  ]
+ },
+ {
+  "id": "csv_parse-066",
+  "tag": "fuzz",
+  "args": [
+   "\"1\"\"1a\",\" éaé\",\"1xbx\"\n\" \", x,\"\""
+  ],
+  "expected": [
+   [
+    "1\"1a",
+    " éaé",
+    "1xbx"
+   ],
+   [
+    " ",
+    " x",
+    ""
+   ]
+  ]
+ },
+ {
+  "id": "csv_parse-067",
+  "tag": "fuzz",
+  "args": [
+   " ,\"a\n11\r\n\"\r\n"
+  ],
+  "expected": [
+   [
+    " ",
+    "a\n11\r\n"
+   ]
+  ]
+ },
+ {
+  "id": "csv_parse-068",
+  "tag": "fuzz",
+  "args": [
+   " b1 ,\"x\r\na,\",1\n\"\"\"ax,\n\",\"a\"\n"
+  ],
+  "expected": [
+   [
+    " b1 ",
+    "x\r\na,",
+    "1"
+   ],
+   [
+    "\"ax,\n",
+    "a"
+   ]
+  ]
+ },
+ {
+  "id": "csv_parse-069",
+  "tag": "fuzz",
+  "args": [
+   "\"b  \n,\", bb,aé1\r\n\"xbbé\r\n\"\r\n\"\n é\",  ,x\r\n"
+  ],
+  "expected": [
+   [
+    "b  \n,",
+    " bb",
+    "aé1"
+   ],
+   [
+    "xbbé\r\n"
+   ],
+   [
+    "\n é",
+    "  ",
+    "x"
+   ]
+  ]
+ },
+ {
+  "id": "csv_parse-070",
+  "tag": "fuzz",
+  "args": [
+   "11 ,\"\",\" \nx\"\n"
+  ],
+  "expected": [
+   [
+    "11 ",
+    "",
+    " \nx"
+   ]
+  ]
+ },
+ {
+  "id": "csv_parse-071",
+  "tag": "fuzz",
+  "args": [
+   "b é,\"1,b\r\na\"\r\naxb\r\n1 é\r\n\"b\"\"\"\r\n"
+  ],
+  "expected": [
+   [
+    "b é",
+    "1,b\r\na"
+   ],
+   [
+    "axb"
+   ],
+   [
+    "1 é"
+   ],
+   [
+    "b\""
+   ]
+  ]
+ },
+ {
+  "id": "csv_parse-072",
+  "tag": "fuzz",
+  "args": [
+   "\"\"\" x\r\n\"\r\nax,\"b\nx\"\r\n\"1é\",1xa1,\"b1\",\"\"\r\n1a,11  \r\n"
+  ],
+  "expected": [
+   [
+    "\" x\r\n"
+   ],
+   [
+    "ax",
+    "b\nx"
+   ],
+   [
+    "1é",
+    "1xa1",
+    "b1",
+    ""
+   ],
+   [
+    "1a",
+    "11  "
+   ]
+  ]
+ },
+ {
+  "id": "csv_parse-073",
+  "tag": "fuzz",
+  "args": [
+   "a1 ,\"b\",\"1\nax\"\n"
+  ],
+  "expected": [
+   [
+    "a1 ",
+    "b",
+    "1\nax"
+   ]
+  ]
+ },
+ {
+  "id": "csv_parse-074",
+  "tag": "fuzz",
+  "args": [
+   "1aab,x1x \nb  ,b\n"
+  ],
+  "expected": [
+   [
+    "1aab",
+    "x1x "
+   ],
+   [
+    "b  ",
+    "b"
+   ]
+  ]
+ },
+ {
+  "id": "csv_parse-075",
+  "tag": "fuzz",
+  "args": [
+   "\"1\",x\n\", éé\",x1,éé"
+  ],
+  "expected": [
+   [
+    "1",
+    "x"
+   ],
+   [
+    ", éé",
+    "x1",
+    "éé"
+   ]
+  ]
+ },
+ {
+  "id": "csv_parse-076",
+  "tag": "fuzz",
+  "args": [
+   "1,\"\r\n\"\nx,x1\n\"é\",\"\n\""
+  ],
+  "expected": [
+   [
+    "1",
+    "\r\n"
+   ],
+   [
+    "x",
+    "x1"
+   ],
+   [
+    "é",
+    "\n"
+   ]
+  ]
+ },
+ {
+  "id": "csv_parse-077",
+  "tag": "fuzz",
+  "args": [
+   "\"a1\"\"\",\" x   \", ,x\né,\"é\", é"
+  ],
+  "expected": [
+   [
+    "a1\"",
+    " x   ",
+    " ",
+    "x"
+   ],
+   [
+    "é",
+    "é",
+    " é"
+   ]
+  ]
+ },
+ {
+  "id": "csv_parse-078",
+  "tag": "fuzz",
+  "args": [
+   "\"a\n, b\",\"\n\",xxé\r\nébx\r\n1,\",\",\",ax\",é\r\n"
+  ],
+  "expected": [
+   [
+    "a\n, b",
+    "\n",
+    "xxé"
+   ],
+   [
+    "ébx"
+   ],
+   [
+    "1",
+    ",",
+    ",ax",
+    "é"
+   ]
+  ]
+ },
+ {
+  "id": "csv_parse-079",
+  "tag": "fuzz",
+  "args": [
+   "b,1a1,éa\n"
+  ],
+  "expected": [
+   [
+    "b",
+    "1a1",
+    "éa"
+   ]
+  ]
+ },
+ {
+  "id": "csv_parse-080",
+  "tag": "fuzz",
+  "args": [
+   "a1é1,\"\r\nab\r\n\"\r\nxx1,1 bb,b,a"
+  ],
+  "expected": [
+   [
+    "a1é1",
+    "\r\nab\r\n"
+   ],
+   [
+    "xx1",
+    "1 bb",
+    "b",
+    "a"
+   ]
+  ]
+ },
+ {
+  "id": "csv_parse-081",
+  "tag": "fuzz",
+  "args": [
+   "é,x,1,é1 é\r\n\"x\",éé\r\n\"\r\n\"\r\n\"1\",\" éb,\",a xb"
+  ],
+  "expected": [
+   [
+    "é",
+    "x",
+    "1",
+    "é1 é"
+   ],
+   [
+    "x",
+    "éé"
+   ],
+   [
+    "\r\n"
+   ],
+   [
+    "1",
+    " éb,",
+    "a xb"
+   ]
+  ]
+ },
+ {
+  "id": "csv_parse-082",
+  "tag": "fuzz",
+  "args": [
+   "\"\r\n\r\n\"\n  x,\"\",\"1é\"\n\",,x, \",1aa\n"
+  ],
+  "expected": [
+   [
+    "\r\n\r\n"
+   ],
+   [
+    "  x",
+    "",
+    "1é"
+   ],
+   [
+    ",,x, ",
+    "1aa"
+   ]
+  ]
+ },
+ {
+  "id": "csv_parse-083",
+  "tag": "fuzz",
+  "args": [
+   "é1\r\n\"\r\n1\",x xx,1 xx,\"\na,\""
+  ],
+  "expected": [
+   [
+    "é1"
+   ],
+   [
+    "\r\n1",
+    "x xx",
+    "1 xx",
+    "\na,"
+   ]
+  ]
+ },
+ {
+  "id": "csv_parse-084",
+  "tag": "fuzz",
+  "args": [
+   "\"a\r\n1 \",\",a\n\""
+  ],
+  "expected": [
+   [
+    "a\r\n1 ",
+    ",a\n"
+   ]
+  ]
+ },
+ {
+  "id": "csv_parse-085",
+  "tag": "fuzz",
+  "args": [
+   "\"éb,a\",\"xa\"\"\",\"\r\n1\"\"\r\n\",  é1\r\n x x,\"a\"\r\n"
+  ],
+  "expected": [
+   [
+    "éb,a",
+    "xa\"",
+    "\r\n1\"\r\n",
+    "  é1"
+   ],
+   [
+    " x x",
+    "a"
+   ]
+  ]
+ },
+ {
+  "id": "csv_parse-086",
+  "tag": "fuzz",
+  "args": [
+   "\"\n\r\nx\"\"é\",\"\"\",bé1\",a\r\nx111,bb \r\n\"xa\"\r\né\r\n"
+  ],
+  "expected": [
+   [
+    "\n\r\nx\"é",
+    "\",bé1",
+    "a"
+   ],
+   [
+    "x111",
+    "bb "
+   ],
+   [
+    "xa"
+   ],
+   [
+    "é"
+   ]
+  ]
+ },
+ {
+  "id": "csv_parse-087",
+  "tag": "fuzz",
+  "args": [
+   "1x x,1x 1"
+  ],
+  "expected": [
+   [
+    "1x x",
+    "1x 1"
+   ]
+  ]
+ },
+ {
+  "id": "csv_parse-088",
+  "tag": "fuzz",
+  "args": [
+   "xaé,a1x1,éb,\"\"\",\r\n\n\"\"\"\nbb, xa ,\"x1\",\" ,\r\n\n \"\n   ,\"\",\"\r\naa\"\" \"\n\"\",\"\"\n"
+  ],
+  "expected": [
+   [
+    "xaé",
+    "a1x1",
+    "éb",
+    "\",\r\n\n\""
+   ],
+   [
+    "bb",
+    " xa ",
+    "x1",
+    " ,\r\n\n "
+   ],
+   [
+    "   ",
+    "",
+    "\r\naa\" "
+   ],
+   [
+    "",
+    ""
+   ]
+  ]
+ },
+ {
+  "id": "csv_parse-089",
+  "tag": "fuzz",
+  "args": [
+   "ba,\"\"\"\"\"1\",éx \n\"1 \",\"é\r\n \",\"a1\",\"é\"\"\r\n \"\"\"\n\"1x\n\"\n"
+  ],
+  "expected": [
+   [
+    "ba",
+    "\"\"1",
+    "éx "
+   ],
+   [
+    "1 ",
+    "é\r\n ",
+    "a1",
+    "é\"\r\n \""
+   ],
+   [
+    "1x\n"
+   ]
+  ]
+ },
+ {
+  "id": "csv_parse-090",
+  "tag": "fuzz",
+  "args": [
+   "a, é,\"é\r\n\"\"\n\",baa\n"
+  ],
+  "expected": [
+   [
+    "a",
+    " é",
+    "é\r\n\"\n",
+    "baa"
+   ]
+  ]
+ },
+ {
+  "id": "csv_parse-091",
+  "tag": "fuzz",
+  "args": [
+   "aa a,\"a\",\"\"\r\nbéx,b,é,\" 1\"\r\na\r\n a11,bxé"
+  ],
+  "expected": [
+   [
+    "aa a",
+    "a",
+    ""
+   ],
+   [
+    "béx",
+    "b",
+    "é",
+    " 1"
+   ],
+   [
+    "a"
+   ],
+   [
+    " a11",
+    "bxé"
+   ]
+  ]
+ },
+ {
+  "id": "csv_parse-092",
+  "tag": "fuzz",
+  "args": [
+   "\" \",éé1x,éx1\n\"\",\"\"\"\",a é,xé\n\"ax \",\"\n\r\n\r\n\""
+  ],
+  "expected": [
+   [
+    " ",
+    "éé1x",
+    "éx1"
+   ],
+   [
+    "",
+    "\"",
+    "a é",
+    "xé"
+   ],
+   [
+    "ax ",
+    "\n\r\n\r\n"
+   ]
+  ]
+ },
+ {
+  "id": "csv_parse-093",
+  "tag": "fuzz",
+  "args": [
+   "aax,\"\r\n\"\"\n \",\"\né1\r\n\",\"a\r\n\""
+  ],
+  "expected": [
+   [
+    "aax",
+    "\r\n\"\n ",
+    "\né1\r\n",
+    "a\r\n"
+   ]
+  ]
+ },
+ {
+  "id": "csv_parse-094",
+  "tag": "fuzz",
+  "args": [
+   "\"\"\r\n\" b, \"\"\"\r\n\",bb\",\"\"\r\n1, , b1a\r\n"
+  ],
+  "expected": [
+   [
+    ""
+   ],
+   [
+    " b, \""
+   ],
+   [
+    ",bb",
+    ""
+   ],
+   [
+    "1",
+    " ",
+    " b1a"
+   ]
+  ]
+ },
+ {
+  "id": "csv_parse-095",
+  "tag": "fuzz",
+  "args": [
+   "xaax,abb,x11,\" \r\nb\r\n\"\r\n"
+  ],
+  "expected": [
+   [
+    "xaax",
+    "abb",
+    "x11",
+    " \r\nb\r\n"
+   ]
+  ]
+ },
+ {
+  "id": "csv_parse-096",
+  "tag": "fuzz",
+  "args": [
+   "\",,\",b\r\n1é,\"bx\",\"\r\n\n\r\nx\"\r\n"
+  ],
+  "expected": [
+   [
+    ",,",
+    "b"
+   ],
+   [
+    "1é",
+    "bx",
+    "\r\n\n\r\nx"
+   ]
+  ]
+ },
+ {
+  "id": "csv_parse-097",
+  "tag": "fuzz",
+  "args": [
+   "\"abb1\n\",\"1\r\n\",\"\"\"a\"\"\n\"\"\",\"xbé b\""
+  ],
+  "expected": [
+   [
+    "abb1\n",
+    "1\r\n",
+    "\"a\"\n\"",
+    "xbé b"
+   ]
+  ]
+ },
+ {
+  "id": "csv_parse-098",
+  "tag": "fuzz",
+  "args": [
+   "x x \na1 a\n\"\n\"\"b\",\"x  x\"\n"
+  ],
+  "expected": [
+   [
+    "x x "
+   ],
+   [
+    "a1 a"
+   ],
+   [
+    "\n\"b",
+    "x  x"
+   ]
+  ]
+ },
+ {
+  "id": "csv_parse-099",
+  "tag": "fuzz",
+  "args": [
+   "\"ab,\",\"bx\r\n\"\r\n"
+  ],
+  "expected": [
+   [
+    "ab,",
+    "bx\r\n"
+   ]
+  ]
+ },
+ {
+  "id": "csv_parse-100",
+  "tag": "fuzz",
+  "args": [
+   "bxx,\"\",\"\"\r\n\"\n\r\n  \",\"ba1\",ba,béb\r\n"
+  ],
+  "expected": [
+   [
+    "bxx",
+    "",
+    ""
+   ],
+   [
+    "\n\r\n  ",
+    "ba1",
+    "ba",
+    "béb"
+   ]
+  ]
+ },
+ {
+  "id": "csv_parse-101",
+  "tag": "fuzz",
+  "args": [
+   "\"a\"\"\"\"\",é,éabé,xxxé\r\n11,é1a,b"
+  ],
+  "expected": [
+   [
+    "a\"\"",
+    "é",
+    "éabé",
+    "xxxé"
+   ],
+   [
+    "11",
+    "é1a",
+    "b"
+   ]
+  ]
+ },
+ {
+  "id": "csv_parse-102",
+  "tag": "fuzz",
+  "args": [
+   "  \n é\n\"a\na\"\"\"\"\",\",a11\",\"\"\n\"é\",\"11x\",é11"
+  ],
+  "expected": [
+   [
+    "  "
+   ],
+   [
+    " é"
+   ],
+   [
+    "a\na\"\"",
+    ",a11",
+    ""
+   ],
+   [
+    "é",
+    "11x",
+    "é11"
+   ]
+  ]
+ },
+ {
+  "id": "csv_parse-103",
+  "tag": "fuzz",
+  "args": [
+   "a,éa\n\",\",\"\"\"a\",\",\"\"\"\n\",\"\nbxa ,\"\r\n,\r\nbx\",\"\nb\n\"\n"
+  ],
+  "expected": [
+   [
+    "a",
+    "éa"
+   ],
+   [
+    ",",
+    "\"a",
+    ",\""
+   ],
+   [
+    ","
+   ],
+   [
+    "bxa ",
+    "\r\n,\r\nbx",
+    "\nb\n"
+   ]
+  ]
+ },
+ {
+  "id": "csv_parse-104",
+  "tag": "fuzz",
+  "args": [
+   "a,\",é\n\",11\r\n"
+  ],
+  "expected": [
+   [
+    "a",
+    ",é\n",
+    "11"
+   ]
+  ]
+ },
+ {
+  "id": "csv_parse-105",
+  "tag": "fuzz",
+  "args": [
+   "\"\n\",éx,\"\"\"\n,é\",\",x\r\n\"\"\"\r\n b\r\nééé,\"x1\",\"\"\"ax\"\"b\",\" \n\"\"\"\r\n\"\r\n\r\n\"\r\n"
+  ],
+  "expected": [
+   [
+    "\n",
+    "éx",
+    "\"\n,é",
+    ",x\r\n\""
+   ],
+   [
+    " b"
+   ],
+   [
+    "ééé",
+    "x1",
+    "\"ax\"b",
+    " \n\""
+   ],
+   [
+    "\r\n\r\n"
+   ]
+  ]
+ },
+ {
+  "id": "csv_parse-106",
+  "tag": "fuzz",
+  "args": [
+   "\"aéa\r\n\",\",\"\"\",\"1\r\n,\"\n\"1 \"\"\"\n"
+  ],
+  "expected": [
+   [
+    "aéa\r\n",
+    ",\"",
+    "1\r\n,"
+   ],
+   [
+    "1 \""
+   ]
+  ]
+ },
+ {
+  "id": "csv_parse-107",
+  "tag": "fuzz",
+  "args": [
+   "bb,\"a\",\"\"\"b, \",\"\""
+  ],
+  "expected": [
+   [
+    "bb",
+    "a",
+    "\"b, ",
+    ""
+   ]
+  ]
+ },
+ {
+  "id": "csv_parse-108",
+  "tag": "fuzz",
+  "args": [
+   "\"1,\", b1\n\"b\néa\",\"1\n,\",\"\""
+  ],
+  "expected": [
+   [
+    "1,",
+    " b1"
+   ],
+   [
+    "b\néa",
+    "1\n,",
+    ""
+   ]
+  ]
+ },
+ {
+  "id": "csv_parse-109",
+  "tag": "fuzz",
+  "args": [
+   "  a,1b é,\"ax1 \",xbb\r\né11x\r\na a\r\néé,\"a,\nb\",x"
+  ],
+  "expected": [
+   [
+    "  a",
+    "1b é",
+    "ax1 ",
+    "xbb"
+   ],
+   [
+    "é11x"
+   ],
+   [
+    "a a"
+   ],
+   [
+    "éé",
+    "a,\nb",
+    "x"
+   ]
+  ]
+ },
+ {
+  "id": "csv_parse-110",
+  "tag": "fuzz",
+  "args": [
+   "\"a\r\nb\",\"aé\",\"\"\r\nb\r\n\"\"\"x1,\", \r\n1xa"
+  ],
+  "expected": [
+   [
+    "a\r\nb",
+    "aé",
+    ""
+   ],
+   [
+    "b"
+   ],
+   [
+    "\"x1,",
+    " "
+   ],
+   [
+    "1xa"
+   ]
+  ]
+ },
+ {
+  "id": "csv_parse-111",
+  "tag": "fuzz",
+  "args": [
+   "éa,\"1,bb\r\n\"\r\n"
+  ],
+  "expected": [
+   [
+    "éa",
+    "1,bb\r\n"
+   ]
+  ]
+ },
+ {
+  "id": "csv_parse-112",
+  "tag": "fuzz",
+  "args": [
+   "\"é\n\",\"1\",\" 1\"\r\n\",b\",xxx,xx1,é é1"
+  ],
+  "expected": [
+   [
+    "é\n",
+    "1",
+    " 1"
+   ],
+   [
+    ",b",
+    "xxx",
+    "xx1",
+    "é é1"
+   ]
+  ]
+ },
+ {
+  "id": "csv_parse-113",
+  "tag": "fuzz",
+  "args": [
+   " ,a,xx"
+  ],
+  "expected": [
+   [
+    " ",
+    "a",
+    "xx"
+   ]
+  ]
+ },
+ {
+  "id": "csv_parse-114",
+  "tag": "fuzz",
+  "args": [
+   "\" 1\",\"bé\", xé,\"1 1\"\r\n"
+  ],
+  "expected": [
+   [
+    " 1",
+    "bé",
+    " xé",
+    "1 1"
+   ]
+  ]
+ },
+ {
+  "id": "csv_parse-115",
+  "tag": "fuzz",
+  "args": [
+   " 1é, ,\"éa1\",\",é \"\r\nx1,\"1xa ,\"\r\n éé,b,\"\"\r\n\"\n,a1\",\"x,x\n \"\r\n"
+  ],
+  "expected": [
+   [
+    " 1é",
+    " ",
+    "éa1",
+    ",é "
+   ],
+   [
+    "x1",
+    "1xa ,"
+   ],
+   [
+    " éé",
+    "b",
+    ""
+   ],
+   [
+    "\n,a1",
+    "x,x\n "
+   ]
+  ]
+ },
+ {
+  "id": "csv_parse-116",
+  "tag": "fuzz",
+  "args": [
+   "\"\",bx,1\n\"\r\na\",bx1x,\"\"\"aé\"\"\",\"b\n\""
+  ],
+  "expected": [
+   [
+    "",
+    "bx",
+    "1"
+   ],
+   [
+    "\r\na",
+    "bx1x",
+    "\"aé\"",
+    "b\n"
+   ]
+  ]
+ },
+ {
+  "id": "csv_parse-117",
+  "tag": "fuzz",
+  "args": [
+   "\",\",é,\"\"\"\",\",é\"\r\n"
+  ],
+  "expected": [
+   [
+    ",",
+    "é",
+    "\"",
+    ",é"
+   ]
+  ]
+ },
+ {
+  "id": "csv_parse-118",
+  "tag": "fuzz",
+  "args": [
+   "\"b\"\"\", 1\n\"\",1b b\n bxé,\"\"\"\n\",é\n"
+  ],
+  "expected": [
+   [
+    "b\"",
+    " 1"
+   ],
+   [
+    "",
+    "1b b"
+   ],
+   [
+    " bxé",
+    "\"\n",
+    "é"
+   ]
+  ]
+ },
+ {
+  "id": "csv_parse-119",
+  "tag": "fuzz",
+  "args": [
+   "bé\n"
+  ],
+  "expected": [
+   [
+    "bé"
+   ]
+  ]
+ },
+ {
+  "id": "csv_parse-120",
+  "tag": "fuzz",
+  "args": [
+   "\"\"\"é ,\"\n"
+  ],
+  "expected": [
+   [
+    "\"é ,"
+   ]
+  ]
+ },
+ {
+  "id": "csv_parse-121",
+  "tag": "fuzz",
+  "args": [
+   "xb1,\"b\",\"1é\"\r\nbbb ,\"\n\"\"\",bb,1 "
+  ],
+  "expected": [
+   [
+    "xb1",
+    "b",
+    "1é"
+   ],
+   [
+    "bbb ",
+    "\n\"",
+    "bb",
+    "1 "
+   ]
+  ]
+ },
+ {
+  "id": "csv_parse-122",
+  "tag": "fuzz",
+  "args": [
+   "\"11\n,\",1b,xaa ,éé  \n\"éab\",\"\r\na\n,\", x \né 1\n\"\"\"11 é\""
+  ],
+  "expected": [
+   [
+    "11\n,",
+    "1b",
+    "xaa ",
+    "éé  "
+   ],
+   [
+    "éab",
+    "\r\na\n,",
+    " x "
+   ],
+   [
+    "é 1"
+   ],
+   [
+    "\"11 é"
+   ]
+  ]
+ },
+ {
+  "id": "csv_parse-123",
+  "tag": "fuzz",
+  "args": [
+   "a é , ,1xé \néé,aééx,\"\nx,a\"\n ,\",\"\"a\n\"\"\",é1\n"
+  ],
+  "expected": [
+   [
+    "a é ",
+    " ",
+    "1xé "
+   ],
+   [
+    "éé",
+    "aééx",
+    "\nx,a"
+   ],
+   [
+    " ",
+    ",\"a\n\"",
+    "é1"
+   ]
+  ]
+ },
+ {
+  "id": "csv_parse-124",
+  "tag": "fuzz",
+  "args": [
+   "é,\"\",\"\"\n\"b\",é,\"\",1   \n\"\n,a\",\"\",x,\" ,x\n1\""
+  ],
+  "expected": [
+   [
+    "é",
+    "",
+    ""
+   ],
+   [
+    "b",
+    "é",
+    "",
+    "1   "
+   ],
+   [
+    "\n,a",
+    "",
+    "x",
+    " ,x\n1"
+   ]
+  ]
+ },
+ {
+  "id": "csv_parse-125",
+  "tag": "fuzz",
+  "args": [
+   "\",b\n\",é  ,aba,\"\""
+  ],
+  "expected": [
+   [
+    ",b\n",
+    "é  ",
+    "aba",
+    ""
+   ]
+  ]
+ },
+ {
+  "id": "csv_parse-126",
+  "tag": "fuzz",
+  "args": [
+   "xbxa,a1 a,\"éx\",\" b1b\"\r\n"
+  ],
+  "expected": [
+   [
+    "xbxa",
+    "a1 a",
+    "éx",
+    " b1b"
+   ]
+  ]
+ },
+ {
+  "id": "csv_parse-127",
+  "tag": "fuzz",
+  "args": [
+   "\"a1\",\"\r\na x\",bb\r\n"
+  ],
+  "expected": [
+   [
+    "a1",
+    "\r\na x",
+    "bb"
+   ]
+  ]
+ },
+ {
+  "id": "csv_parse-128",
+  "tag": "fuzz",
+  "args": [
+   "\"\n\néb\"\r\n\"\",\"\n\nba,\", \r\na1"
+  ],
+  "expected": [
+   [
+    "\n\néb"
+   ],
+   [
+    "",
+    "\n\nba,",
+    " "
+   ],
+   [
+    "a1"
+   ]
+  ]
+ },
+ {
+  "id": "csv_parse-129",
+  "tag": "fuzz",
+  "args": [
+   "\"xx\",11,é1,x\r\n"
+  ],
+  "expected": [
+   [
+    "xx",
+    "11",
+    "é1",
+    "x"
+   ]
+  ]
+ },
+ {
+  "id": "csv_parse-130",
+  "tag": "fuzz",
+  "args": [
+   "\",\",\"éb\", xbé, aé\n\"\r\nxbx\"\n\"\r\n\"\n 1xa,é, "
+  ],
+  "expected": [
+   [
+    ",",
+    "éb",
+    " xbé",
+    " aé"
+   ],
+   [
+    "\r\nxbx"
+   ],
+   [
+    "\r\n"
+   ],
+   [
+    " 1xa",
+    "é",
+    " "
+   ]
+  ]
+ },
+ {
+  "id": "csv_parse-131",
+  "tag": "fuzz",
+  "args": [
+   "\"\"\"\"\r\n1,  ,\"b\"\"\",é\r\naxb,\"\""
+  ],
+  "expected": [
+   [
+    "\""
+   ],
+   [
+    "1",
+    "  ",
+    "b\"",
+    "é"
+   ],
+   [
+    "axb",
+    ""
+   ]
+  ]
+ },
+ {
+  "id": "csv_parse-132",
+  "tag": "fuzz",
+  "args": [
+   "\" xé \"\nba,\"ébb\"\"\r\n\",\",\r\n\",\"\"\n\"b a1\",\"x1\",x é,aé\n\"\"\"éxé\",x1"
+  ],
+  "expected": [
+   [
+    " xé "
+   ],
+   [
+    "ba",
+    "ébb\"\r\n",
+    ",\r\n",
+    ""
+   ],
+   [
+    "b a1",
+    "x1",
+    "x é",
+    "aé"
+   ],
+   [
+    "\"éxé",
+    "x1"
+   ]
+  ]
+ },
+ {
+  "id": "csv_parse-133",
+  "tag": "fuzz",
+  "args": [
+   "\"\"\r\n\",\",éx,x\r\nax"
+  ],
+  "expected": [
+   [
+    ""
+   ],
+   [
+    ",",
+    "éx",
+    "x"
+   ],
+   [
+    "ax"
+   ]
+  ]
+ },
+ {
+  "id": "csv_parse-134",
+  "tag": "fuzz",
+  "args": [
+   " a\r\n\"\r\nx\",aa1a,\",1\"\r\n"
+  ],
+  "expected": [
+   [
+    " a"
+   ],
+   [
+    "\r\nx",
+    "aa1a",
+    ",1"
+   ]
+  ]
+ },
+ {
+  "id": "csv_parse-135",
+  "tag": "fuzz",
+  "args": [
+   "é\r\nxxé,\"\"\"aé\",b\r\n\"éa\n\n\",xx"
+  ],
+  "expected": [
+   [
+    "é"
+   ],
+   [
+    "xxé",
+    "\"aé",
+    "b"
+   ],
+   [
+    "éa\n\n",
+    "xx"
+   ]
+  ]
+ },
+ {
+  "id": "csv_parse-136",
+  "tag": "fuzz",
+  "args": [
+   "\"aé\r\n1\",\",a1\",x\né  a\n"
+  ],
+  "expected": [
+   [
+    "aé\r\n1",
+    ",a1",
+    "x"
+   ],
+   [
+    "é  a"
+   ]
+  ]
+ },
+ {
+  "id": "csv_parse-137",
+  "tag": "fuzz",
+  "args": [
+   " ,xabé\néa , ,x\nxx "
+  ],
+  "expected": [
+   [
+    " ",
+    "xabé"
+   ],
+   [
+    "éa ",
+    " ",
+    "x"
+   ],
+   [
+    "xx "
+   ]
+  ]
+ },
+ {
+  "id": "csv_parse-138",
+  "tag": "fuzz",
+  "args": [
+   "\"\nx\r\nb\",xaaa,\"\"\"\",xx\n\"aé\",\" é\"\nb\n\"1a\",1éx , é"
+  ],
+  "expected": [
+   [
+    "\nx\r\nb",
+    "xaaa",
+    "\"",
+    "xx"
+   ],
+   [
+    "aé",
+    " é"
+   ],
+   [
+    "b"
+   ],
+   [
+    "1a",
+    "1éx ",
+    " é"
+   ]
+  ]
+ },
+ {
+  "id": "csv_parse-139",
+  "tag": "fuzz",
+  "args": [
+   "1b1,b11,b, 1 \n ,1 x \nb1\nba,\", ,b\n\",éx,bxaa"
+  ],
+  "expected": [
+   [
+    "1b1",
+    "b11",
+    "b",
+    " 1 "
+   ],
+   [
+    " ",
+    "1 x "
+   ],
+   [
+    "b1"
+   ],
+   [
+    "ba",
+    ", ,b\n",
+    "éx",
+    "bxaa"
+   ]
+  ]
+ },
+ {
+  "id": "csv_parse-140",
+  "tag": "fuzz",
+  "args": [
+   "\"a\"\"\"\"\n\n\"\n\"ba\",é,xx ,1ax \n\"béé\",\"é,\",\"1b\""
+  ],
+  "expected": [
+   [
+    "a\"\"\n\n"
+   ],
+   [
+    "ba",
+    "é",
+    "xx ",
+    "1ax "
+   ],
+   [
+    "béé",
+    "é,",
+    "1b"
+   ]
+  ]
+ },
+ {
+  "id": "csv_parse-141",
+  "tag": "fuzz",
+  "args": [
+   "bbé1,a1aa, 11,\"\"\"1\"\r\n1, a\r\n\"\né,é\r\n\",1\r\n"
+  ],
+  "expected": [
+   [
+    "bbé1",
+    "a1aa",
+    " 11",
+    "\"1"
+   ],
+   [
+    "1",
+    " a"
+   ],
+   [
+    "\né,é\r\n",
+    "1"
+   ]
+  ]
+ },
+ {
+  "id": "csv_parse-142",
+  "tag": "fuzz",
+  "args": [
+   "\" b1\",bb,\"\n\",éé"
+  ],
+  "expected": [
+   [
+    " b1",
+    "bb",
+    "\n",
+    "éé"
+   ]
+  ]
+ },
+ {
+  "id": "csv_parse-143",
+  "tag": "fuzz",
+  "args": [
+   "b,\"\r\n\",x\r\n\"b\""
+  ],
+  "expected": [
+   [
+    "b",
+    "\r\n",
+    "x"
+   ],
+   [
+    "b"
+   ]
+  ]
+ },
+ {
+  "id": "csv_parse-144",
+  "tag": "fuzz",
+  "args": [
+   "a,\"\r\nx\r\n\",bé1b\n é,x1xé, ,\",xxa\"\n"
+  ],
+  "expected": [
+   [
+    "a",
+    "\r\nx\r\n",
+    "bé1b"
+   ],
+   [
+    " é",
+    "x1xé",
+    " ",
+    ",xxa"
+   ]
+  ]
+ },
+ {
+  "id": "csv_parse-145",
+  "tag": "fuzz",
+  "args": [
+   "\" b\",x  é\r\n\"\", b 1\r\n\" x\",\"é,\"\r\n"
+  ],
+  "expected": [
+   [
+    " b",
+    "x  é"
+   ],
+   [
+    "",
+    " b 1"
+   ],
+   [
+    " x",
+    "é,"
+   ]
+  ]
+ },
+ {
+  "id": "csv_parse-146",
+  "tag": "fuzz",
+  "args": [
+   "\"\",1,éa a\nb1,\"\",\" b \", x é\n"
+  ],
+  "expected": [
+   [
+    "",
+    "1",
+    "éa a"
+   ],
+   [
+    "b1",
+    "",
+    " b ",
+    " x é"
+   ]
+  ]
+ },
+ {
+  "id": "csv_parse-147",
+  "tag": "fuzz",
+  "args": [
+   "\"éb \r\n,\",\"1\r\n\",\" é\",xax\r\n 1"
+  ],
+  "expected": [
+   [
+    "éb \r\n,",
+    "1\r\n",
+    " é",
+    "xax"
+   ],
+   [
+    " 1"
+   ]
+  ]
+ },
+ {
+  "id": "csv_parse-148",
+  "tag": "fuzz",
+  "args": [
+   "x11x,\"xb\r\nx\""
+  ],
+  "expected": [
+   [
+    "x11x",
+    "xb\r\nx"
+   ]
+  ]
+ },
+ {
+  "id": "csv_parse-149",
+  "tag": "fuzz",
+  "args": [
+   "éb,a,\"\r\n,\""
+  ],
+  "expected": [
+   [
+    "éb",
+    "a",
+    "\r\n,"
+   ]
+  ]
+ },
+ {
+  "id": "csv_parse-150",
+  "tag": "fuzz",
+  "args": [
+   " x,a1 ,1\n\"\r\nb\"\n\"11\",x\n\"\",\"\r\n\"\n"
+  ],
+  "expected": [
+   [
+    " x",
+    "a1 ",
+    "1"
+   ],
+   [
+    "\r\nb"
+   ],
+   [
+    "11",
+    "x"
+   ],
+   [
+    "",
+    "\r\n"
+   ]
+  ]
+ },
+ {
+  "id": "csv_parse-151",
+  "tag": "fuzz",
+  "args": [
+   "\",,\"\nxb, 1aé\n\"\r\n\",\"éa1\n\",\"b\r\n\r\n\"\n1b,\" \"\n"
+  ],
+  "expected": [
+   [
+    ",,"
+   ],
+   [
+    "xb",
+    " 1aé"
+   ],
+   [
+    "\r\n",
+    "éa1\n",
+    "b\r\n\r\n"
+   ],
+   [
+    "1b",
+    " "
+   ]
+  ]
+ }
+]

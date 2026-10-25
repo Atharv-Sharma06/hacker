@@ -1,0 +1,14 @@
+{
+  "id": "decimal_round_half_even",
+  "title": "Exact banker's rounding of decimal strings",
+  "function": "round_half_even",
+  "forbidden_imports": ["decimal", "fractions", "numpy", "mpmath", "sympy"],
+  "skill": "Numerics: exact decimal arithmetic vs binary floating point",
+  "traps": [
+    "binary floats cannot represent 2.675 exactly, so float-based code rounds it the wrong way",
+    "only an exact tie goes to even; 2.6750001 is above half",
+    "carry can ripple through all digits (9.995 -> 10.00)",
+    "negative zero must print as unsigned zero",
+    "inputs can have more digits than a float holds"
+  ]
+}

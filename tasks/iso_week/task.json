@@ -1,0 +1,13 @@
+{
+  "id": "iso_week",
+  "title": "ISO 8601 week date without a date library",
+  "function": "iso_week",
+  "forbidden_imports": ["datetime", "calendar", "time", "dateutil", "arrow", "pendulum", "numpy", "pandas"],
+  "skill": "Calendar arithmetic: ISO week-numbering year boundaries",
+  "traps": [
+    "late-December days can belong to week 1 of the next ISO year",
+    "early-January days can belong to week 52 or 53 of the previous ISO year",
+    "Gregorian leap-year rule for centuries",
+    "the full proleptic range down to year 1"
+  ]
+}

@@ -1,0 +1,1602 @@
+[
+ {
+  "id": "python_int_literal-000",
+  "tag": "leading-zero",
+  "args": [
+   "0"
+  ],
+  "expected": true
+ },
+ {
+  "id": "python_int_literal-001",
+  "tag": "leading-zero",
+  "args": [
+   "00"
+  ],
+  "expected": true
+ },
+ {
+  "id": "python_int_literal-002",
+  "tag": "leading-zero",
+  "args": [
+   "000"
+  ],
+  "expected": true
+ },
+ {
+  "id": "python_int_literal-003",
+  "tag": "underscores",
+  "args": [
+   "0_0"
+  ],
+  "expected": true
+ },
+ {
+  "id": "python_int_literal-004",
+  "tag": "underscores",
+  "args": [
+   "00_0"
+  ],
+  "expected": true
+ },
+ {
+  "id": "python_int_literal-005",
+  "tag": "underscores",
+  "args": [
+   "0_00"
+  ],
+  "expected": true
+ },
+ {
+  "id": "python_int_literal-006",
+  "tag": "leading-zero",
+  "args": [
+   "01"
+  ],
+  "expected": false
+ },
+ {
+  "id": "python_int_literal-007",
+  "tag": "leading-zero",
+  "args": [
+   "007"
+  ],
+  "expected": false
+ },
+ {
+  "id": "python_int_literal-008",
+  "tag": "underscores",
+  "args": [
+   "0_7"
+  ],
+  "expected": false
+ },
+ {
+  "id": "python_int_literal-009",
+  "tag": "basic",
+  "args": [
+   "1"
+  ],
+  "expected": true
+ },
+ {
+  "id": "python_int_literal-010",
+  "tag": "basic",
+  "args": [
+   "10"
+  ],
+  "expected": true
+ },
+ {
+  "id": "python_int_literal-011",
+  "tag": "underscores",
+  "args": [
+   "1_000_000"
+  ],
+  "expected": true
+ },
+ {
+  "id": "python_int_literal-012",
+  "tag": "underscores",
+  "args": [
+   "1__0"
+  ],
+  "expected": false
+ },
+ {
+  "id": "python_int_literal-013",
+  "tag": "underscores",
+  "args": [
+   "_1"
+  ],
+  "expected": false
+ },
+ {
+  "id": "python_int_literal-014",
+  "tag": "underscores",
+  "args": [
+   "1_"
+  ],
+  "expected": false
+ },
+ {
+  "id": "python_int_literal-015",
+  "tag": "prefixed",
+  "args": [
+   "0x_f"
+  ],
+  "expected": true
+ },
+ {
+  "id": "python_int_literal-016",
+  "tag": "prefixed",
+  "args": [
+   "0x_"
+  ],
+  "expected": false
+ },
+ {
+  "id": "python_int_literal-017",
+  "tag": "prefixed",
+  "args": [
+   "0x"
+  ],
+  "expected": false
+ },
+ {
+  "id": "python_int_literal-018",
+  "tag": "prefixed",
+  "args": [
+   "0xDEAD_beef"
+  ],
+  "expected": true
+ },
+ {
+  "id": "python_int_literal-019",
+  "tag": "prefixed",
+  "args": [
+   "0XFF"
+  ],
+  "expected": true
+ },
+ {
+  "id": "python_int_literal-020",
+  "tag": "prefixed",
+  "args": [
+   "0b1010"
+  ],
+  "expected": true
+ },
+ {
+  "id": "python_int_literal-021",
+  "tag": "prefixed",
+  "args": [
+   "0B1"
+  ],
+  "expected": true
+ },
+ {
+  "id": "python_int_literal-022",
+  "tag": "prefixed",
+  "args": [
+   "0b2"
+  ],
+  "expected": false
+ },
+ {
+  "id": "python_int_literal-023",
+  "tag": "prefixed",
+  "args": [
+   "0b_1_0"
+  ],
+  "expected": true
+ },
+ {
+  "id": "python_int_literal-024",
+  "tag": "prefixed",
+  "args": [
+   "0b1_"
+  ],
+  "expected": false
+ },
+ {
+  "id": "python_int_literal-025",
+  "tag": "prefixed",
+  "args": [
+   "0o17"
+  ],
+  "expected": true
+ },
+ {
+  "id": "python_int_literal-026",
+  "tag": "prefixed",
+  "args": [
+   "0O7"
+  ],
+  "expected": true
+ },
+ {
+  "id": "python_int_literal-027",
+  "tag": "prefixed",
+  "args": [
+   "0o8"
+  ],
+  "expected": false
+ },
+ {
+  "id": "python_int_literal-028",
+  "tag": "prefixed",
+  "args": [
+   "0o_7"
+  ],
+  "expected": true
+ },
+ {
+  "id": "python_int_literal-029",
+  "tag": "prefixed",
+  "args": [
+   "0x__1"
+  ],
+  "expected": false
+ },
+ {
+  "id": "python_int_literal-030",
+  "tag": "underscores",
+  "args": [
+   "0_x1"
+  ],
+  "expected": false
+ },
+ {
+  "id": "python_int_literal-031",
+  "tag": "prefixed",
+  "args": [
+   "0xg"
+  ],
+  "expected": false
+ },
+ {
+  "id": "python_int_literal-032",
+  "tag": "basic",
+  "args": [
+   "1e5"
+  ],
+  "expected": false
+ },
+ {
+  "id": "python_int_literal-033",
+  "tag": "basic",
+  "args": [
+   "1j"
+  ],
+  "expected": false
+ },
+ {
+  "id": "python_int_literal-034",
+  "tag": "basic",
+  "args": [
+   "1.0"
+  ],
+  "expected": false
+ },
+ {
+  "id": "python_int_literal-035",
+  "tag": "basic",
+  "args": [
+   "1L"
+  ],
+  "expected": false
+ },
+ {
+  "id": "python_int_literal-036",
+  "tag": "leading-zero",
+  "args": [
+   "0l"
+  ],
+  "expected": false
+ },
+ {
+  "id": "python_int_literal-037",
+  "tag": "basic",
+  "args": [
+   ""
+  ],
+  "expected": false
+ },
+ {
+  "id": "python_int_literal-038",
+  "tag": "int()-accepts-but-grammar-rejects",
+  "args": [
+   " 1"
+  ],
+  "expected": false
+ },
+ {
+  "id": "python_int_literal-039",
+  "tag": "int()-accepts-but-grammar-rejects",
+  "args": [
+   "1 "
+  ],
+  "expected": false
+ },
+ {
+  "id": "python_int_literal-040",
+  "tag": "int()-accepts-but-grammar-rejects",
+  "args": [
+   "+1"
+  ],
+  "expected": false
+ },
+ {
+  "id": "python_int_literal-041",
+  "tag": "int()-accepts-but-grammar-rejects",
+  "args": [
+   "-1"
+  ],
+  "expected": false
+ },
+ {
+  "id": "python_int_literal-042",
+  "tag": "int()-accepts-but-grammar-rejects",
+  "args": [
+   "1\n"
+  ],
+  "expected": false
+ },
+ {
+  "id": "python_int_literal-043",
+  "tag": "int()-accepts-but-grammar-rejects",
+  "args": [
+   "١"
+  ],
+  "expected": false
+ },
+ {
+  "id": "python_int_literal-044",
+  "tag": "int()-accepts-but-grammar-rejects",
+  "args": [
+   "１"
+  ],
+  "expected": false
+ },
+ {
+  "id": "python_int_literal-045",
+  "tag": "int()-accepts-but-grammar-rejects",
+  "args": [
+   "1٢"
+  ],
+  "expected": false
+ },
+ {
+  "id": "python_int_literal-046",
+  "tag": "prefixed",
+  "args": [
+   "0o"
+  ],
+  "expected": false
+ },
+ {
+  "id": "python_int_literal-047",
+  "tag": "prefixed",
+  "args": [
+   "0b"
+  ],
+  "expected": false
+ },
+ {
+  "id": "python_int_literal-048",
+  "tag": "underscores",
+  "args": [
+   "0_"
+  ],
+  "expected": false
+ },
+ {
+  "id": "python_int_literal-049",
+  "tag": "underscores",
+  "args": [
+   "_"
+  ],
+  "expected": false
+ },
+ {
+  "id": "python_int_literal-050",
+  "tag": "basic",
+  "args": [
+   "9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999"
+  ],
+  "expected": true
+ },
+ {
+  "id": "python_int_literal-051",
+  "tag": "fuzz",
+  "args": [
+   "0o9Xxeb"
+  ],
+  "expected": false
+ },
+ {
+  "id": "python_int_literal-052",
+  "tag": "fuzz",
+  "args": [
+   "0be_O_1"
+  ],
+  "expected": false
+ },
+ {
+  "id": "python_int_literal-053",
+  "tag": "fuzz",
+  "args": [
+   "0xO7"
+  ],
+  "expected": false
+ },
+ {
+  "id": "python_int_literal-054",
+  "tag": "fuzz",
+  "args": [
+   "7Ox"
+  ],
+  "expected": false
+ },
+ {
+  "id": "python_int_literal-055",
+  "tag": "fuzz",
+  "args": [
+   "0xXb00x"
+  ],
+  "expected": false
+ },
+ {
+  "id": "python_int_literal-056",
+  "tag": "fuzz",
+  "args": [
+   "xb00a"
+  ],
+  "expected": false
+ },
+ {
+  "id": "python_int_literal-057",
+  "tag": "fuzz",
+  "args": [
+   "0o9_O0000"
+  ],
+  "expected": false
+ },
+ {
+  "id": "python_int_literal-058",
+  "tag": "fuzz",
+  "args": [
+   "f_"
+  ],
+  "expected": false
+ },
+ {
+  "id": "python_int_literal-059",
+  "tag": "fuzz",
+  "args": [
+   "f7"
+  ],
+  "expected": false
+ },
+ {
+  "id": "python_int_literal-060",
+  "tag": "fuzz",
+  "args": [
+   "1a"
+  ],
+  "expected": false
+ },
+ {
+  "id": "python_int_literal-061",
+  "tag": "fuzz",
+  "args": [
+   "0xoB000"
+  ],
+  "expected": false
+ },
+ {
+  "id": "python_int_literal-062",
+  "tag": "fuzz",
+  "args": [
+   "b"
+  ],
+  "expected": false
+ },
+ {
+  "id": "python_int_literal-063",
+  "tag": "fuzz",
+  "args": [
+   "0b1fO"
+  ],
+  "expected": false
+ },
+ {
+  "id": "python_int_literal-064",
+  "tag": "fuzz",
+  "args": [
+   "_9ax1"
+  ],
+  "expected": false
+ },
+ {
+  "id": "python_int_literal-065",
+  "tag": "fuzz",
+  "args": [
+   "0o_00eX_"
+  ],
+  "expected": false
+ },
+ {
+  "id": "python_int_literal-066",
+  "tag": "fuzz",
+  "args": [
+   "0o_"
+  ],
+  "expected": false
+ },
+ {
+  "id": "python_int_literal-067",
+  "tag": "fuzz",
+  "args": [
+   "0oOO"
+  ],
+  "expected": false
+ },
+ {
+  "id": "python_int_literal-068",
+  "tag": "fuzz",
+  "args": [
+   "0xexoo7"
+  ],
+  "expected": false
+ },
+ {
+  "id": "python_int_literal-069",
+  "tag": "fuzz",
+  "args": [
+   "fab"
+  ],
+  "expected": false
+ },
+ {
+  "id": "python_int_literal-070",
+  "tag": "fuzz",
+  "args": [
+   "ax7"
+  ],
+  "expected": false
+ },
+ {
+  "id": "python_int_literal-071",
+  "tag": "fuzz",
+  "args": [
+   "0bB7O1"
+  ],
+  "expected": false
+ },
+ {
+  "id": "python_int_literal-072",
+  "tag": "fuzz",
+  "args": [
+   "0bbBa"
+  ],
+  "expected": false
+ },
+ {
+  "id": "python_int_literal-073",
+  "tag": "fuzz",
+  "args": [
+   "e9o"
+  ],
+  "expected": false
+ },
+ {
+  "id": "python_int_literal-074",
+  "tag": "fuzz",
+  "args": [
+   "0b00Oa"
+  ],
+  "expected": false
+ },
+ {
+  "id": "python_int_literal-075",
+  "tag": "fuzz",
+  "args": [
+   "0x7"
+  ],
+  "expected": true
+ },
+ {
+  "id": "python_int_literal-076",
+  "tag": "fuzz",
+  "args": [
+   "xOf_7"
+  ],
+  "expected": false
+ },
+ {
+  "id": "python_int_literal-077",
+  "tag": "fuzz",
+  "args": [
+   "0b7_7"
+  ],
+  "expected": false
+ },
+ {
+  "id": "python_int_literal-078",
+  "tag": "fuzz",
+  "args": [
+   "919"
+  ],
+  "expected": true
+ },
+ {
+  "id": "python_int_literal-079",
+  "tag": "fuzz",
+  "args": [
+   "0x1"
+  ],
+  "expected": true
+ },
+ {
+  "id": "python_int_literal-080",
+  "tag": "fuzz",
+  "args": [
+   "oX"
+  ],
+  "expected": false
+ },
+ {
+  "id": "python_int_literal-081",
+  "tag": "fuzz",
+  "args": [
+   "of_00"
+  ],
+  "expected": false
+ },
+ {
+  "id": "python_int_literal-082",
+  "tag": "fuzz",
+  "args": [
+   "BB9fX"
+  ],
+  "expected": false
+ },
+ {
+  "id": "python_int_literal-083",
+  "tag": "fuzz",
+  "args": [
+   "0ea"
+  ],
+  "expected": false
+ },
+ {
+  "id": "python_int_literal-084",
+  "tag": "fuzz",
+  "args": [
+   "7"
+  ],
+  "expected": true
+ },
+ {
+  "id": "python_int_literal-085",
+  "tag": "fuzz",
+  "args": [
+   "00e1__"
+  ],
+  "expected": false
+ },
+ {
+  "id": "python_int_literal-086",
+  "tag": "fuzz",
+  "args": [
+   "0o_9"
+  ],
+  "expected": false
+ },
+ {
+  "id": "python_int_literal-087",
+  "tag": "fuzz",
+  "args": [
+   "0ooXxa"
+  ],
+  "expected": false
+ },
+ {
+  "id": "python_int_literal-088",
+  "tag": "fuzz",
+  "args": [
+   "7a"
+  ],
+  "expected": false
+ },
+ {
+  "id": "python_int_literal-089",
+  "tag": "fuzz",
+  "args": [
+   "Bxe7b"
+  ],
+  "expected": false
+ },
+ {
+  "id": "python_int_literal-090",
+  "tag": "fuzz",
+  "args": [
+   "ex01"
+  ],
+  "expected": false
+ },
+ {
+  "id": "python_int_literal-091",
+  "tag": "fuzz",
+  "args": [
+   "0be"
+  ],
+  "expected": false
+ },
+ {
+  "id": "python_int_literal-092",
+  "tag": "fuzz",
+  "args": [
+   "0b0"
+  ],
+  "expected": true
+ },
+ {
+  "id": "python_int_literal-093",
+  "tag": "fuzz",
+  "args": [
+   "X"
+  ],
+  "expected": false
+ },
+ {
+  "id": "python_int_literal-094",
+  "tag": "fuzz",
+  "args": [
+   "00bf"
+  ],
+  "expected": false
+ },
+ {
+  "id": "python_int_literal-095",
+  "tag": "fuzz",
+  "args": [
+   "0xefa"
+  ],
+  "expected": true
+ },
+ {
+  "id": "python_int_literal-096",
+  "tag": "fuzz",
+  "args": [
+   "xBe"
+  ],
+  "expected": false
+ },
+ {
+  "id": "python_int_literal-097",
+  "tag": "fuzz",
+  "args": [
+   "0oeoe7"
+  ],
+  "expected": false
+ },
+ {
+  "id": "python_int_literal-098",
+  "tag": "fuzz",
+  "args": [
+   "1O_"
+  ],
+  "expected": false
+ },
+ {
+  "id": "python_int_literal-099",
+  "tag": "fuzz",
+  "args": [
+   "fB"
+  ],
+  "expected": false
+ },
+ {
+  "id": "python_int_literal-100",
+  "tag": "fuzz",
+  "args": [
+   "ef"
+  ],
+  "expected": false
+ },
+ {
+  "id": "python_int_literal-101",
+  "tag": "fuzz",
+  "args": [
+   "e_"
+  ],
+  "expected": false
+ },
+ {
+  "id": "python_int_literal-102",
+  "tag": "fuzz",
+  "args": [
+   "o"
+  ],
+  "expected": false
+ },
+ {
+  "id": "python_int_literal-103",
+  "tag": "fuzz",
+  "args": [
+   "Xo"
+  ],
+  "expected": false
+ },
+ {
+  "id": "python_int_literal-104",
+  "tag": "fuzz",
+  "args": [
+   "0xxaBO"
+  ],
+  "expected": false
+ },
+ {
+  "id": "python_int_literal-105",
+  "tag": "fuzz",
+  "args": [
+   "0bbe97f"
+  ],
+  "expected": false
+ },
+ {
+  "id": "python_int_literal-106",
+  "tag": "fuzz",
+  "args": [
+   "0b000000"
+  ],
+  "expected": true
+ },
+ {
+  "id": "python_int_literal-107",
+  "tag": "fuzz",
+  "args": [
+   "0bo"
+  ],
+  "expected": false
+ },
+ {
+  "id": "python_int_literal-108",
+  "tag": "fuzz",
+  "args": [
+   "0b9099"
+  ],
+  "expected": false
+ },
+ {
+  "id": "python_int_literal-109",
+  "tag": "fuzz",
+  "args": [
+   "9B00"
+  ],
+  "expected": false
+ },
+ {
+  "id": "python_int_literal-110",
+  "tag": "fuzz",
+  "args": [
+   "7O9Xo"
+  ],
+  "expected": false
+ },
+ {
+  "id": "python_int_literal-111",
+  "tag": "fuzz",
+  "args": [
+   "eeo"
+  ],
+  "expected": false
+ },
+ {
+  "id": "python_int_literal-112",
+  "tag": "fuzz",
+  "args": [
+   "0x1a79"
+  ],
+  "expected": true
+ },
+ {
+  "id": "python_int_literal-113",
+  "tag": "fuzz",
+  "args": [
+   "0b17ex"
+  ],
+  "expected": false
+ },
+ {
+  "id": "python_int_literal-114",
+  "tag": "fuzz",
+  "args": [
+   "oO9"
+  ],
+  "expected": false
+ },
+ {
+  "id": "python_int_literal-115",
+  "tag": "fuzz",
+  "args": [
+   "o0f"
+  ],
+  "expected": false
+ },
+ {
+  "id": "python_int_literal-116",
+  "tag": "fuzz",
+  "args": [
+   "B0B9"
+  ],
+  "expected": false
+ },
+ {
+  "id": "python_int_literal-117",
+  "tag": "fuzz",
+  "args": [
+   "00X"
+  ],
+  "expected": false
+ },
+ {
+  "id": "python_int_literal-118",
+  "tag": "fuzz",
+  "args": [
+   "0b9e10000"
+  ],
+  "expected": false
+ },
+ {
+  "id": "python_int_literal-119",
+  "tag": "fuzz",
+  "args": [
+   "X7a"
+  ],
+  "expected": false
+ },
+ {
+  "id": "python_int_literal-120",
+  "tag": "fuzz",
+  "args": [
+   "00x00f"
+  ],
+  "expected": false
+ },
+ {
+  "id": "python_int_literal-121",
+  "tag": "fuzz",
+  "args": [
+   "0xX7"
+  ],
+  "expected": false
+ },
+ {
+  "id": "python_int_literal-122",
+  "tag": "fuzz",
+  "args": [
+   "1x7bf"
+  ],
+  "expected": false
+ },
+ {
+  "id": "python_int_literal-123",
+  "tag": "fuzz",
+  "args": [
+   "0xXOf7f"
+  ],
+  "expected": false
+ },
+ {
+  "id": "python_int_literal-124",
+  "tag": "fuzz",
+  "args": [
+   "e"
+  ],
+  "expected": false
+ },
+ {
+  "id": "python_int_literal-125",
+  "tag": "fuzz",
+  "args": [
+   "XX00ab"
+  ],
+  "expected": false
+ },
+ {
+  "id": "python_int_literal-126",
+  "tag": "fuzz",
+  "args": [
+   "7o7"
+  ],
+  "expected": false
+ },
+ {
+  "id": "python_int_literal-127",
+  "tag": "fuzz",
+  "args": [
+   "0bB7"
+  ],
+  "expected": false
+ },
+ {
+  "id": "python_int_literal-128",
+  "tag": "fuzz",
+  "args": [
+   "0x1O"
+  ],
+  "expected": false
+ },
+ {
+  "id": "python_int_literal-129",
+  "tag": "fuzz",
+  "args": [
+   "0bf01"
+  ],
+  "expected": false
+ },
+ {
+  "id": "python_int_literal-130",
+  "tag": "fuzz",
+  "args": [
+   "eb"
+  ],
+  "expected": false
+ },
+ {
+  "id": "python_int_literal-131",
+  "tag": "fuzz",
+  "args": [
+   "0bXB00o7"
+  ],
+  "expected": false
+ },
+ {
+  "id": "python_int_literal-132",
+  "tag": "fuzz",
+  "args": [
+   "f00x1b"
+  ],
+  "expected": false
+ },
+ {
+  "id": "python_int_literal-133",
+  "tag": "fuzz",
+  "args": [
+   "fo0"
+  ],
+  "expected": false
+ },
+ {
+  "id": "python_int_literal-134",
+  "tag": "fuzz",
+  "args": [
+   "0xx"
+  ],
+  "expected": false
+ },
+ {
+  "id": "python_int_literal-135",
+  "tag": "fuzz",
+  "args": [
+   "_9"
+  ],
+  "expected": false
+ },
+ {
+  "id": "python_int_literal-136",
+  "tag": "fuzz",
+  "args": [
+   "O00_o"
+  ],
+  "expected": false
+ },
+ {
+  "id": "python_int_literal-137",
+  "tag": "fuzz",
+  "args": [
+   "f"
+  ],
+  "expected": false
+ },
+ {
+  "id": "python_int_literal-138",
+  "tag": "fuzz",
+  "args": [
+   "Xb9f"
+  ],
+  "expected": false
+ },
+ {
+  "id": "python_int_literal-139",
+  "tag": "fuzz",
+  "args": [
+   "77o"
+  ],
+  "expected": false
+ },
+ {
+  "id": "python_int_literal-140",
+  "tag": "fuzz",
+  "args": [
+   "O"
+  ],
+  "expected": false
+ },
+ {
+  "id": "python_int_literal-141",
+  "tag": "fuzz",
+  "args": [
+   "0b7700"
+  ],
+  "expected": false
+ },
+ {
+  "id": "python_int_literal-142",
+  "tag": "fuzz",
+  "args": [
+   "0b7x07_"
+  ],
+  "expected": false
+ },
+ {
+  "id": "python_int_literal-143",
+  "tag": "fuzz",
+  "args": [
+   "0bf7B"
+  ],
+  "expected": false
+ },
+ {
+  "id": "python_int_literal-144",
+  "tag": "fuzz",
+  "args": [
+   "0o0Xbof"
+  ],
+  "expected": false
+ },
+ {
+  "id": "python_int_literal-145",
+  "tag": "fuzz",
+  "args": [
+   "0bx0X"
+  ],
+  "expected": false
+ },
+ {
+  "id": "python_int_literal-146",
+  "tag": "fuzz",
+  "args": [
+   "_o"
+  ],
+  "expected": false
+ },
+ {
+  "id": "python_int_literal-147",
+  "tag": "fuzz",
+  "args": [
+   "0xe7"
+  ],
+  "expected": true
+ },
+ {
+  "id": "python_int_literal-148",
+  "tag": "fuzz",
+  "args": [
+   "0bO71_f"
+  ],
+  "expected": false
+ },
+ {
+  "id": "python_int_literal-149",
+  "tag": "fuzz",
+  "args": [
+   "Bb"
+  ],
+  "expected": false
+ },
+ {
+  "id": "python_int_literal-150",
+  "tag": "fuzz",
+  "args": [
+   "0o7a"
+  ],
+  "expected": false
+ },
+ {
+  "id": "python_int_literal-151",
+  "tag": "fuzz",
+  "args": [
+   "0010"
+  ],
+  "expected": false
+ },
+ {
+  "id": "python_int_literal-152",
+  "tag": "fuzz",
+  "args": [
+   "fb"
+  ],
+  "expected": false
+ },
+ {
+  "id": "python_int_literal-153",
+  "tag": "fuzz",
+  "args": [
+   "OB"
+  ],
+  "expected": false
+ },
+ {
+  "id": "python_int_literal-154",
+  "tag": "fuzz",
+  "args": [
+   "0oX_X009"
+  ],
+  "expected": false
+ },
+ {
+  "id": "python_int_literal-155",
+  "tag": "fuzz",
+  "args": [
+   "BeB_"
+  ],
+  "expected": false
+ },
+ {
+  "id": "python_int_literal-156",
+  "tag": "fuzz",
+  "args": [
+   "1bf7X"
+  ],
+  "expected": false
+ },
+ {
+  "id": "python_int_literal-157",
+  "tag": "fuzz",
+  "args": [
+   "17ba"
+  ],
+  "expected": false
+ },
+ {
+  "id": "python_int_literal-158",
+  "tag": "fuzz",
+  "args": [
+   "Oa_00a"
+  ],
+  "expected": false
+ },
+ {
+  "id": "python_int_literal-159",
+  "tag": "fuzz",
+  "args": [
+   "0bx0fB"
+  ],
+  "expected": false
+ },
+ {
+  "id": "python_int_literal-160",
+  "tag": "fuzz",
+  "args": [
+   "0oxBO00X"
+  ],
+  "expected": false
+ },
+ {
+  "id": "python_int_literal-161",
+  "tag": "fuzz",
+  "args": [
+   "0x_Of"
+  ],
+  "expected": false
+ },
+ {
+  "id": "python_int_literal-162",
+  "tag": "fuzz",
+  "args": [
+   "0xo00Xa"
+  ],
+  "expected": false
+ },
+ {
+  "id": "python_int_literal-163",
+  "tag": "fuzz",
+  "args": [
+   "0bfx"
+  ],
+  "expected": false
+ },
+ {
+  "id": "python_int_literal-164",
+  "tag": "fuzz",
+  "args": [
+   "a1fB"
+  ],
+  "expected": false
+ },
+ {
+  "id": "python_int_literal-165",
+  "tag": "fuzz",
+  "args": [
+   "0o007"
+  ],
+  "expected": true
+ },
+ {
+  "id": "python_int_literal-166",
+  "tag": "fuzz",
+  "args": [
+   "07efb"
+  ],
+  "expected": false
+ },
+ {
+  "id": "python_int_literal-167",
+  "tag": "fuzz",
+  "args": [
+   "997_"
+  ],
+  "expected": false
+ },
+ {
+  "id": "python_int_literal-168",
+  "tag": "fuzz",
+  "args": [
+   "0x9"
+  ],
+  "expected": true
+ },
+ {
+  "id": "python_int_literal-169",
+  "tag": "fuzz",
+  "args": [
+   "B"
+  ],
+  "expected": false
+ },
+ {
+  "id": "python_int_literal-170",
+  "tag": "fuzz",
+  "args": [
+   "0bOe00bB"
+  ],
+  "expected": false
+ },
+ {
+  "id": "python_int_literal-171",
+  "tag": "fuzz",
+  "args": [
+   "x9Bb9"
+  ],
+  "expected": false
+ },
+ {
+  "id": "python_int_literal-172",
+  "tag": "fuzz",
+  "args": [
+   "0beeb"
+  ],
+  "expected": false
+ },
+ {
+  "id": "python_int_literal-173",
+  "tag": "fuzz",
+  "args": [
+   "0fo"
+  ],
+  "expected": false
+ },
+ {
+  "id": "python_int_literal-174",
+  "tag": "fuzz",
+  "args": [
+   "O7"
+  ],
+  "expected": false
+ },
+ {
+  "id": "python_int_literal-175",
+  "tag": "fuzz",
+  "args": [
+   "BB0Ob"
+  ],
+  "expected": false
+ },
+ {
+  "id": "python_int_literal-176",
+  "tag": "fuzz",
+  "args": [
+   "ebb"
+  ],
+  "expected": false
+ },
+ {
+  "id": "python_int_literal-177",
+  "tag": "fuzz",
+  "args": [
+   "00xo7"
+  ],
+  "expected": false
+ },
+ {
+  "id": "python_int_literal-178",
+  "tag": "fuzz",
+  "args": [
+   "700a"
+  ],
+  "expected": false
+ },
+ {
+  "id": "python_int_literal-179",
+  "tag": "fuzz",
+  "args": [
+   "0o90"
+  ],
+  "expected": false
+ },
+ {
+  "id": "python_int_literal-180",
+  "tag": "fuzz",
+  "args": [
+   "0o00o00o0"
+  ],
+  "expected": false
+ },
+ {
+  "id": "python_int_literal-181",
+  "tag": "fuzz",
+  "args": [
+   "Of700x"
+  ],
+  "expected": false
+ },
+ {
+  "id": "python_int_literal-182",
+  "tag": "fuzz",
+  "args": [
+   "7oe"
+  ],
+  "expected": false
+ },
+ {
+  "id": "python_int_literal-183",
+  "tag": "fuzz",
+  "args": [
+   "0bfb"
+  ],
+  "expected": false
+ },
+ {
+  "id": "python_int_literal-184",
+  "tag": "fuzz",
+  "args": [
+   "0b1X9f"
+  ],
+  "expected": false
+ },
+ {
+  "id": "python_int_literal-185",
+  "tag": "fuzz",
+  "args": [
+   "0oX"
+  ],
+  "expected": false
+ },
+ {
+  "id": "python_int_literal-186",
+  "tag": "fuzz",
+  "args": [
+   "0b7_"
+  ],
+  "expected": false
+ },
+ {
+  "id": "python_int_literal-187",
+  "tag": "fuzz",
+  "args": [
+   "0boa"
+  ],
+  "expected": false
+ },
+ {
+  "id": "python_int_literal-188",
+  "tag": "fuzz",
+  "args": [
+   "0ox"
+  ],
+  "expected": false
+ },
+ {
+  "id": "python_int_literal-189",
+  "tag": "fuzz",
+  "args": [
+   "o_XO"
+  ],
+  "expected": false
+ },
+ {
+  "id": "python_int_literal-190",
+  "tag": "fuzz",
+  "args": [
+   "o1b"
+  ],
+  "expected": false
+ },
+ {
+  "id": "python_int_literal-191",
+  "tag": "fuzz",
+  "args": [
+   "fX"
+  ],
+  "expected": false
+ },
+ {
+  "id": "python_int_literal-192",
+  "tag": "fuzz",
+  "args": [
+   "0xXe"
+  ],
+  "expected": false
+ },
+ {
+  "id": "python_int_literal-193",
+  "tag": "fuzz",
+  "args": [
+   "0xxXoB"
+  ],
+  "expected": false
+ },
+ {
+  "id": "python_int_literal-194",
+  "tag": "fuzz",
+  "args": [
+   "a7"
+  ],
+  "expected": false
+ },
+ {
+  "id": "python_int_literal-195",
+  "tag": "fuzz",
+  "args": [
+   "0o9e"
+  ],
+  "expected": false
+ },
+ {
+  "id": "python_int_literal-196",
+  "tag": "fuzz",
+  "args": [
+   "0x0BX00"
+  ],
+  "expected": false
+ },
+ {
+  "id": "python_int_literal-197",
+  "tag": "fuzz",
+  "args": [
+   "99bb_"
+  ],
+  "expected": false
+ },
+ {
+  "id": "python_int_literal-198",
+  "tag": "fuzz",
+  "args": [
+   "0boB"
+  ],
+  "expected": false
+ },
+ {
+  "id": "python_int_literal-199",
+  "tag": "fuzz",
+  "args": [
+   "a"
+  ],
+  "expected": false
+ }
+]

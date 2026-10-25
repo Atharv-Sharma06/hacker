@@ -1,0 +1,15 @@
+{
+  "id": "cron_next_fire",
+  "title": "Next fire time of a Vixie-cron expression",
+  "function": "next_fire",
+  "forbidden_imports": ["croniter", "crontab", "apscheduler", "cron_descriptor", "dateutil"],
+  "skill": "Scheduling semantics: the Vixie cron day-of-month / day-of-week OR rule",
+  "traps": [
+    "when both day fields are restricted, a day matches if EITHER matches",
+    "a field beginning with '*' (including '*/2') counts as unrestricted for that rule",
+    "'5/15' means 5-max/15",
+    "day-of-week 7 is Sunday, as is 0",
+    "the result must be strictly after now",
+    "impossible schedules (Feb 30) must return None, not loop forever"
+  ]
+}

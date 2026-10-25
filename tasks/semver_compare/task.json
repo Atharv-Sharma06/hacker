@@ -1,0 +1,15 @@
+{
+  "id": "semver_compare",
+  "title": "Semantic Versioning 2.0.0 precedence",
+  "function": "compare",
+  "forbidden_imports": ["semver", "packaging", "semantic_version", "distutils"],
+  "skill": "Spec conformance: SemVer 2.0.0 section 11",
+  "traps": [
+    "numeric pre-release identifiers compare numerically (alpha.10 > alpha.9)",
+    "numeric identifiers sort before alphanumeric ones",
+    "'0A' and '1-2' are alphanumeric, not numeric",
+    "a larger set of pre-release fields wins only when all preceding ones are equal",
+    "build metadata is ignored, and may itself contain '-'",
+    "ASCII order, so 'Alpha' < 'alpha'"
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "id": "csv_parse",
+  "title": "Strict RFC 4180 record parser",
+  "function": "parse_csv",
+  "forbidden_imports": ["csv", "pandas", "polars", "numpy"],
+  "skill": "Writing a correct state machine from a precise grammar",
+  "traps": [
+    "a trailing line break does not create an extra record, but a blank line in the middle (or a second trailing break) does",
+    "quoted fields keep embedded CR/LF verbatim",
+    "a quote inside an unquoted field is a literal character",
+    "text after a closing quote is an error, not concatenation",
+    "\"\" alone is one empty field; a trailing comma adds an empty field"
+  ]
+}

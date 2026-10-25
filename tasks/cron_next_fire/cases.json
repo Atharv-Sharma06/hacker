@@ -1,0 +1,845 @@
+[
+ {
+  "id": "cron_next_fire-000",
+  "tag": "basic",
+  "args": [
+   "* * * * *",
+   "2026-10-30T03:15"
+  ],
+  "expected": "2026-10-30T03:16"
+ },
+ {
+  "id": "cron_next_fire-001",
+  "tag": "strictly-after",
+  "args": [
+   "0 * * * *",
+   "2026-10-30T03:00"
+  ],
+  "expected": "2026-10-30T04:00"
+ },
+ {
+  "id": "cron_next_fire-002",
+  "tag": "strictly-after",
+  "args": [
+   "59 23 31 12 *",
+   "2026-12-31T23:59"
+  ],
+  "expected": "2027-12-31T23:59"
+ },
+ {
+  "id": "cron_next_fire-003",
+  "tag": "step",
+  "args": [
+   "*/15 * * * *",
+   "2026-01-01T00:44"
+  ],
+  "expected": "2026-01-01T00:45"
+ },
+ {
+  "id": "cron_next_fire-004",
+  "tag": "n-slash-step",
+  "args": [
+   "5/15 * * * *",
+   "2026-01-01T00:51"
+  ],
+  "expected": "2026-01-01T01:05",
+  "note": "5/15 = 5,20,35,50"
+ },
+ {
+  "id": "cron_next_fire-005",
+  "tag": "range-step",
+  "args": [
+   "10-40/10 9 * * *",
+   "2026-01-01T09:41"
+  ],
+  "expected": "2026-01-02T09:10"
+ },
+ {
+  "id": "cron_next_fire-006",
+  "tag": "dom-dow-or",
+  "args": [
+   "0 0 1 * 1",
+   "2026-06-02T00:00"
+  ],
+  "expected": "2026-06-08T00:00",
+  "note": "both restricted: Monday OR the 1st"
+ },
+ {
+  "id": "cron_next_fire-007",
+  "tag": "dom-dow-or",
+  "args": [
+   "0 0 13 * 5",
+   "2026-01-01T00:00"
+  ],
+  "expected": "2026-01-02T00:00",
+  "note": "every Friday plus every 13th"
+ },
+ {
+  "id": "cron_next_fire-008",
+  "tag": "dom-dow-or",
+  "args": [
+   "0 0 13 * 5",
+   "2026-02-07T00:00"
+  ],
+  "expected": "2026-02-13T00:00"
+ },
+ {
+  "id": "cron_next_fire-009",
+  "tag": "star-step-is-unrestricted",
+  "args": [
+   "0 0 */2 * 1",
+   "2026-06-01T00:00"
+  ],
+  "expected": "2026-06-15T00:00",
+  "note": "'*/2' starts with '*', so the day fields are ANDed: odd day AND Monday"
+ },
+ {
+  "id": "cron_next_fire-010",
+  "tag": "star-step-is-unrestricted",
+  "args": [
+   "0 0 1 * */1",
+   "2026-06-01T00:00"
+  ],
+  "expected": "2026-07-01T00:00"
+ },
+ {
+  "id": "cron_next_fire-011",
+  "tag": "sunday-7",
+  "args": [
+   "0 0 * * 7",
+   "2026-10-25T12:00"
+  ],
+  "expected": "2026-11-01T00:00"
+ },
+ {
+  "id": "cron_next_fire-012",
+  "tag": "sunday-0",
+  "args": [
+   "0 0 * * 0",
+   "2026-10-25T12:00"
+  ],
+  "expected": "2026-11-01T00:00"
+ },
+ {
+  "id": "cron_next_fire-013",
+  "tag": "dow-range-to-7",
+  "args": [
+   "0 12 * * 5-7",
+   "2026-10-26T00:00"
+  ],
+  "expected": "2026-10-30T12:00"
+ },
+ {
+  "id": "cron_next_fire-014",
+  "tag": "leap-day",
+  "args": [
+   "0 0 29 2 *",
+   "2026-01-01T00:00"
+  ],
+  "expected": "2028-02-29T00:00"
+ },
+ {
+  "id": "cron_next_fire-015",
+  "tag": "leap-day",
+  "args": [
+   "0 0 29 2 *",
+   "2096-03-01T00:00"
+  ],
+  "expected": "2104-02-29T00:00",
+  "note": "2100 is not a leap year"
+ },
+ {
+  "id": "cron_next_fire-016",
+  "tag": "never",
+  "args": [
+   "0 0 30 2 *",
+   "2026-01-01T00:00"
+  ],
+  "expected": null
+ },
+ {
+  "id": "cron_next_fire-017",
+  "tag": "never",
+  "args": [
+   "0 0 31 4,6,9,11 *",
+   "2026-01-01T00:00"
+  ],
+  "expected": null
+ },
+ {
+  "id": "cron_next_fire-018",
+  "tag": "dom-dow-or",
+  "args": [
+   "0 0 31 2 1",
+   "2026-02-01T00:00"
+  ],
+  "expected": "2026-02-02T00:00",
+  "note": "the 31st never exists in Feb, but Mondays do"
+ },
+ {
+  "id": "cron_next_fire-019",
+  "tag": "basic",
+  "args": [
+   "30 2 * * *",
+   "2026-10-30T02:29"
+  ],
+  "expected": "2026-10-30T02:30"
+ },
+ {
+  "id": "cron_next_fire-020",
+  "tag": "list",
+  "args": [
+   "1,2,3 0 * * *",
+   "2026-10-30T00:02"
+  ],
+  "expected": "2026-10-30T00:03"
+ },
+ {
+  "id": "cron_next_fire-021",
+  "tag": "range-step",
+  "args": [
+   "0 9-17/4 * * 1-5",
+   "2026-10-30T17:01"
+  ],
+  "expected": "2026-11-02T09:00"
+ },
+ {
+  "id": "cron_next_fire-022",
+  "tag": "year-rollover",
+  "args": [
+   "0 0 1 1 *",
+   "2026-12-31T23:59"
+  ],
+  "expected": "2027-01-01T00:00"
+ },
+ {
+  "id": "cron_next_fire-023",
+  "tag": "fuzz",
+  "args": [
+   "*/4 23,16 */2 3 *",
+   "2026-07-26T22:31"
+  ],
+  "expected": "2027-03-01T16:00"
+ },
+ {
+  "id": "cron_next_fire-024",
+  "tag": "fuzz",
+  "args": [
+   "22 * 11,13,29 * *",
+   "2026-01-04T13:53"
+  ],
+  "expected": "2026-01-11T00:22"
+ },
+ {
+  "id": "cron_next_fire-025",
+  "tag": "fuzz",
+  "args": [
+   "4-15 * * * *",
+   "2026-03-09T17:58"
+  ],
+  "expected": "2026-03-09T18:04"
+ },
+ {
+  "id": "cron_next_fire-026",
+  "tag": "fuzz",
+  "args": [
+   "47 * 20 * 3,0,4",
+   "2026-04-15T10:01"
+  ],
+  "expected": "2026-04-15T10:47"
+ },
+ {
+  "id": "cron_next_fire-027",
+  "tag": "fuzz",
+  "args": [
+   "*/2 23 * 5 *",
+   "2026-05-21T04:30"
+  ],
+  "expected": "2026-05-21T23:00"
+ },
+ {
+  "id": "cron_next_fire-028",
+  "tag": "fuzz",
+  "args": [
+   "11-52 2 14/4 4-11 *",
+   "2026-09-05T02:01"
+  ],
+  "expected": "2026-09-14T02:11"
+ },
+ {
+  "id": "cron_next_fire-029",
+  "tag": "fuzz",
+  "args": [
+   "42,45,18 4 * * *",
+   "2026-03-15T01:44"
+  ],
+  "expected": "2026-03-15T04:18"
+ },
+ {
+  "id": "cron_next_fire-030",
+  "tag": "fuzz",
+  "args": [
+   "8 * */3 * *",
+   "2026-07-16T18:48"
+  ],
+  "expected": "2026-07-16T19:08"
+ },
+ {
+  "id": "cron_next_fire-031",
+  "tag": "fuzz",
+  "args": [
+   "48 * * * 0",
+   "2026-12-04T12:21"
+  ],
+  "expected": "2026-12-06T00:48"
+ },
+ {
+  "id": "cron_next_fire-032",
+  "tag": "fuzz",
+  "args": [
+   "23-46 * 31,22,20 * *",
+   "2026-01-07T17:48"
+  ],
+  "expected": "2026-01-20T00:23"
+ },
+ {
+  "id": "cron_next_fire-033",
+  "tag": "fuzz",
+  "args": [
+   "17,2 * */4 * 7",
+   "2026-04-27T10:17"
+  ],
+  "expected": "2026-05-17T00:02"
+ },
+ {
+  "id": "cron_next_fire-034",
+  "tag": "fuzz",
+  "args": [
+   "41-50 * * 3,5 0",
+   "2026-04-27T01:27"
+  ],
+  "expected": "2026-05-03T00:41"
+ },
+ {
+  "id": "cron_next_fire-035",
+  "tag": "fuzz",
+  "args": [
+   "*/5 * * 5/7 0-0",
+   "2026-03-16T11:41"
+  ],
+  "expected": "2026-05-03T00:00"
+ },
+ {
+  "id": "cron_next_fire-036",
+  "tag": "fuzz",
+  "args": [
+   "49-53 * 18 4-6 7",
+   "2026-02-05T06:54"
+  ],
+  "expected": "2026-04-05T00:49"
+ },
+ {
+  "id": "cron_next_fire-037",
+  "tag": "fuzz",
+  "args": [
+   "55-58 * 3,31,6 * *",
+   "2026-03-11T19:46"
+  ],
+  "expected": "2026-03-31T00:55"
+ },
+ {
+  "id": "cron_next_fire-038",
+  "tag": "fuzz",
+  "args": [
+   "38,15 * 30,28 * 7,0",
+   "2026-06-02T00:42"
+  ],
+  "expected": "2026-06-07T00:15"
+ },
+ {
+  "id": "cron_next_fire-039",
+  "tag": "fuzz",
+  "args": [
+   "*/2 * * 8/2 *",
+   "2026-10-28T04:20"
+  ],
+  "expected": "2026-10-28T04:22"
+ },
+ {
+  "id": "cron_next_fire-040",
+  "tag": "fuzz",
+  "args": [
+   "*/4 4 6 * *",
+   "2026-03-14T16:34"
+  ],
+  "expected": "2026-04-06T04:00"
+ },
+ {
+  "id": "cron_next_fire-041",
+  "tag": "fuzz",
+  "args": [
+   "18-32 20,18 6 * *",
+   "2026-12-17T11:31"
+  ],
+  "expected": "2027-01-06T18:18"
+ },
+ {
+  "id": "cron_next_fire-042",
+  "tag": "fuzz",
+  "args": [
+   "16,9,6 9,7 29-30 * 2,7",
+   "2026-05-31T15:29"
+  ],
+  "expected": "2026-06-02T07:06"
+ },
+ {
+  "id": "cron_next_fire-043",
+  "tag": "fuzz",
+  "args": [
+   "46/6 * * * 2,2,5",
+   "2026-04-14T06:45"
+  ],
+  "expected": "2026-04-14T06:46"
+ },
+ {
+  "id": "cron_next_fire-044",
+  "tag": "fuzz",
+  "args": [
+   "11,19 * 23,31,5 * *",
+   "2026-05-07T19:39"
+  ],
+  "expected": "2026-05-23T00:11"
+ },
+ {
+  "id": "cron_next_fire-045",
+  "tag": "fuzz",
+  "args": [
+   "*/2 * * 3-12 *",
+   "2026-07-03T01:15"
+  ],
+  "expected": "2026-07-03T01:16"
+ },
+ {
+  "id": "cron_next_fire-046",
+  "tag": "fuzz",
+  "args": [
+   "4-11 */3 * * *",
+   "2026-03-16T15:13"
+  ],
+  "expected": "2026-03-16T18:04"
+ },
+ {
+  "id": "cron_next_fire-047",
+  "tag": "fuzz",
+  "args": [
+   "26 7-12 * 7 *",
+   "2026-10-19T04:16"
+  ],
+  "expected": "2027-07-01T07:26"
+ },
+ {
+  "id": "cron_next_fire-048",
+  "tag": "fuzz",
+  "args": [
+   "32/7 * */4 * *",
+   "2026-09-12T13:15"
+  ],
+  "expected": "2026-09-13T00:32"
+ },
+ {
+  "id": "cron_next_fire-049",
+  "tag": "fuzz",
+  "args": [
+   "45 1 * * 3/4",
+   "2026-10-21T05:10"
+  ],
+  "expected": "2026-10-25T01:45"
+ },
+ {
+  "id": "cron_next_fire-050",
+  "tag": "fuzz",
+  "args": [
+   "57,11 * 24 * *",
+   "2026-06-14T14:59"
+  ],
+  "expected": "2026-06-24T00:11"
+ },
+ {
+  "id": "cron_next_fire-051",
+  "tag": "fuzz",
+  "args": [
+   "13 * */5 * 3,7,5",
+   "2026-10-10T01:00"
+  ],
+  "expected": "2026-10-11T00:13"
+ },
+ {
+  "id": "cron_next_fire-052",
+  "tag": "fuzz",
+  "args": [
+   "17 * 27/2 * 6/7",
+   "2026-04-16T20:26"
+  ],
+  "expected": "2026-04-18T00:17"
+ },
+ {
+  "id": "cron_next_fire-053",
+  "tag": "fuzz",
+  "args": [
+   "2-18 0 26 * *",
+   "2026-10-12T06:14"
+  ],
+  "expected": "2026-10-26T00:02"
+ },
+ {
+  "id": "cron_next_fire-054",
+  "tag": "fuzz",
+  "args": [
+   "*/3 * 30-30 * *",
+   "2026-09-11T19:49"
+  ],
+  "expected": "2026-09-30T00:00"
+ },
+ {
+  "id": "cron_next_fire-055",
+  "tag": "fuzz",
+  "args": [
+   "17 * 9 1 *",
+   "2026-09-30T03:06"
+  ],
+  "expected": "2027-01-09T00:17"
+ },
+ {
+  "id": "cron_next_fire-056",
+  "tag": "fuzz",
+  "args": [
+   "29,17,35 * * * *",
+   "2026-10-23T22:55"
+  ],
+  "expected": "2026-10-23T23:17"
+ },
+ {
+  "id": "cron_next_fire-057",
+  "tag": "fuzz",
+  "args": [
+   "29-47 * * * *",
+   "2026-06-30T13:57"
+  ],
+  "expected": "2026-06-30T14:29"
+ },
+ {
+  "id": "cron_next_fire-058",
+  "tag": "fuzz",
+  "args": [
+   "24 * * 6,2 0,2",
+   "2026-03-04T00:00"
+  ],
+  "expected": "2026-06-02T00:24"
+ },
+ {
+  "id": "cron_next_fire-059",
+  "tag": "fuzz",
+  "args": [
+   "37,29 21 * 11,12 *",
+   "2026-05-11T19:43"
+  ],
+  "expected": "2026-11-01T21:29"
+ },
+ {
+  "id": "cron_next_fire-060",
+  "tag": "fuzz",
+  "args": [
+   "19 13-17 * */2 *",
+   "2026-04-03T05:09"
+  ],
+  "expected": "2026-05-01T13:19"
+ },
+ {
+  "id": "cron_next_fire-061",
+  "tag": "fuzz",
+  "args": [
+   "10/2 4 * 9/4 4,1,2",
+   "2026-11-03T07:00"
+  ],
+  "expected": "2027-09-02T04:10"
+ },
+ {
+  "id": "cron_next_fire-062",
+  "tag": "fuzz",
+  "args": [
+   "*/4 2-20 15 * 0",
+   "2026-03-03T22:12"
+  ],
+  "expected": "2026-03-08T02:00"
+ },
+ {
+  "id": "cron_next_fire-063",
+  "tag": "fuzz",
+  "args": [
+   "54,35 * * * *",
+   "2026-10-19T06:23"
+  ],
+  "expected": "2026-10-19T06:35"
+ },
+ {
+  "id": "cron_next_fire-064",
+  "tag": "fuzz",
+  "args": [
+   "26-27 10 16-29 * *",
+   "2026-03-20T14:13"
+  ],
+  "expected": "2026-03-21T10:26"
+ },
+ {
+  "id": "cron_next_fire-065",
+  "tag": "fuzz",
+  "args": [
+   "53,20,2 3,5 31/2 * 4",
+   "2026-07-09T22:31"
+  ],
+  "expected": "2026-07-16T03:02"
+ },
+ {
+  "id": "cron_next_fire-066",
+  "tag": "fuzz",
+  "args": [
+   "*/2 15,6,13 * 7,11 *",
+   "2026-01-16T13:47"
+  ],
+  "expected": "2026-07-01T06:00"
+ },
+ {
+  "id": "cron_next_fire-067",
+  "tag": "fuzz",
+  "args": [
+   "0 * * 9-10 1,2,7",
+   "2026-11-24T15:11"
+  ],
+  "expected": "2027-09-05T00:00"
+ },
+ {
+  "id": "cron_next_fire-068",
+  "tag": "fuzz",
+  "args": [
+   "35,44 21,0,16 21-26 * *",
+   "2026-10-06T19:22"
+  ],
+  "expected": "2026-10-21T00:35"
+ },
+ {
+  "id": "cron_next_fire-069",
+  "tag": "fuzz",
+  "args": [
+   "6-44 * 27,8 * *",
+   "2026-11-28T16:19"
+  ],
+  "expected": "2026-12-08T00:06"
+ },
+ {
+  "id": "cron_next_fire-070",
+  "tag": "fuzz",
+  "args": [
+   "23 9 5/5 * *",
+   "2026-12-07T09:05"
+  ],
+  "expected": "2026-12-10T09:23"
+ },
+ {
+  "id": "cron_next_fire-071",
+  "tag": "fuzz",
+  "args": [
+   "11 10/9 */2 2,2 7",
+   "2026-01-21T16:10"
+  ],
+  "expected": "2026-02-01T10:11"
+ },
+ {
+  "id": "cron_next_fire-072",
+  "tag": "fuzz",
+  "args": [
+   "14-53 22-22 * * 4,2,1",
+   "2026-11-25T07:29"
+  ],
+  "expected": "2026-11-26T22:14"
+ },
+ {
+  "id": "cron_next_fire-073",
+  "tag": "fuzz",
+  "args": [
+   "*/2 * * * *",
+   "2026-11-30T15:42"
+  ],
+  "expected": "2026-11-30T15:44"
+ },
+ {
+  "id": "cron_next_fire-074",
+  "tag": "fuzz",
+  "args": [
+   "24,57 * * 1 3",
+   "2026-06-12T21:39"
+  ],
+  "expected": "2027-01-06T00:24"
+ },
+ {
+  "id": "cron_next_fire-075",
+  "tag": "fuzz",
+  "args": [
+   "21 * * 10-10 *",
+   "2026-02-19T04:08"
+  ],
+  "expected": "2026-10-01T00:21"
+ },
+ {
+  "id": "cron_next_fire-076",
+  "tag": "fuzz",
+  "args": [
+   "22,27,39 9-19 * * *",
+   "2026-10-09T09:11"
+  ],
+  "expected": "2026-10-09T09:22"
+ },
+ {
+  "id": "cron_next_fire-077",
+  "tag": "fuzz",
+  "args": [
+   "*/5 11 * * *",
+   "2026-04-13T06:36"
+  ],
+  "expected": "2026-04-13T11:00"
+ },
+ {
+  "id": "cron_next_fire-078",
+  "tag": "fuzz",
+  "args": [
+   "59 * 10-23 * *",
+   "2026-03-02T17:47"
+  ],
+  "expected": "2026-03-10T00:59"
+ },
+ {
+  "id": "cron_next_fire-079",
+  "tag": "fuzz",
+  "args": [
+   "44/9 * * 2,9,9 */2",
+   "2026-03-15T17:45"
+  ],
+  "expected": "2026-09-01T00:44"
+ },
+ {
+  "id": "cron_next_fire-080",
+  "tag": "fuzz",
+  "args": [
+   "19,2,44 4 * * */4",
+   "2026-01-12T19:47"
+  ],
+  "expected": "2026-01-15T04:02"
+ },
+ {
+  "id": "cron_next_fire-081",
+  "tag": "fuzz",
+  "args": [
+   "19,1 11 * * *",
+   "2026-01-17T20:26"
+  ],
+  "expected": "2026-01-18T11:01"
+ },
+ {
+  "id": "cron_next_fire-082",
+  "tag": "fuzz",
+  "args": [
+   "38,2 * 12,20,29 9-10 4",
+   "2026-08-27T22:06"
+  ],
+  "expected": "2026-09-03T00:02"
+ },
+ {
+  "id": "cron_next_fire-083",
+  "tag": "fuzz",
+  "args": [
+   "45 * * * 3,6",
+   "2026-08-13T20:36"
+  ],
+  "expected": "2026-08-15T00:45"
+ },
+ {
+  "id": "cron_next_fire-084",
+  "tag": "fuzz",
+  "args": [
+   "2,33 15,2 * * *",
+   "2026-05-22T21:04"
+  ],
+  "expected": "2026-05-23T02:02"
+ },
+ {
+  "id": "cron_next_fire-085",
+  "tag": "fuzz",
+  "args": [
+   "16 * 4 * *",
+   "2026-09-04T07:42"
+  ],
+  "expected": "2026-09-04T08:16"
+ },
+ {
+  "id": "cron_next_fire-086",
+  "tag": "fuzz",
+  "args": [
+   "22 2 29/9 * *",
+   "2026-12-05T11:16"
+  ],
+  "expected": "2026-12-29T02:22"
+ },
+ {
+  "id": "cron_next_fire-087",
+  "tag": "fuzz",
+  "args": [
+   "55 5-8 8-12 10 *",
+   "2026-01-28T06:45"
+  ],
+  "expected": "2026-10-08T05:55"
+ },
+ {
+  "id": "cron_next_fire-088",
+  "tag": "fuzz",
+  "args": [
+   "10,32,18 * 19 * 1",
+   "2026-03-20T07:33"
+  ],
+  "expected": "2026-03-23T00:10"
+ },
+ {
+  "id": "cron_next_fire-089",
+  "tag": "fuzz",
+  "args": [
+   "*/2 * */3 * 1,7,3",
+   "2026-07-28T21:32"
+  ],
+  "expected": "2026-08-10T00:00"
+ },
+ {
+  "id": "cron_next_fire-090",
+  "tag": "fuzz",
+  "args": [
+   "17,2,34 14-15 * * 6,5",
+   "2026-08-19T06:50"
+  ],
+  "expected": "2026-08-21T14:02"
+ },
+ {
+  "id": "cron_next_fire-091",
+  "tag": "fuzz",
+  "args": [
+   "19-28 */2 19-28 6 *",
+   "2026-06-17T12:46"
+  ],
+  "expected": "2026-06-19T00:19"
+ },
+ {
+  "id": "cron_next_fire-092",
+  "tag": "fuzz",
+  "args": [
+   "17 * 25 * */5",
+   "2026-10-11T15:15"
+  ],
+  "expected": "2026-10-25T00:17"
+ }
+]
