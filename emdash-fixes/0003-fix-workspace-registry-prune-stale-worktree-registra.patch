@@ -1,0 +1,88 @@
+From 7dc48cef86318587b0a64c3345383d7c4d4e3c24 Mon Sep 17 00:00:00 2001
+From: Claude <noreply@anthropic.com>
+Date: Mon, 26 Oct 2026 02:29:47 +0000
+Subject: [PATCH 3/6] fix(workspace-registry): prune stale worktree
+ registrations before add
+
+A worktree directory removed outside git (manual rm, temp cleanup, crashed process)
+leaves .git/worktrees/<name> behind. The path check saw nothing on disk, and
+git worktree add then failed with 'already registered' / 'already checked out'
+until the user ran git worktree prune by hand.
+
+Run git worktree prune (best-effort) in the inspect stage. It only drops entries
+whose path is gone; in-flight adds hold a lock and survive.
+
+Fixes generalaction/emdash#3247
+
+Co-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01Lf1ZxTXikvVa7e1BpWKy1d
+---
+ .../node/create-worktree.test.ts              | 37 +++++++++++++++++++
+ .../node/create-worktree.ts                   |  6 +++
+ 2 files changed, 43 insertions(+)
+
+diff --git a/packages/core/src/runtimes/workspace-registry/node/create-worktree.test.ts b/packages/core/src/runtimes/workspace-registry/node/create-worktree.test.ts
+index 4c1bd34..c47cf0f 100644
+--- a/packages/core/src/runtimes/workspace-registry/node/create-worktree.test.ts
++++ b/packages/core/src/runtimes/workspace-registry/node/create-worktree.test.ts
+@@ -291,3 +291,40 @@ describe('executeCreateWorktree gitSetup', () => {
+     await expect(fs.access(path.join(root, 'locked-wt'))).rejects.toThrow();
+   });
+ });
++
++describe('executeCreateWorktree stale worktree registrations', () => {
++  let root: string;
++
++  beforeEach(async () => {
++    root = await fs.realpath(await fs.mkdtemp(path.join(os.tmpdir(), 'ws-stale-')));
++  });
++
++  afterEach(async () => {
++    await fs.rm(root, { recursive: true, force: true });
++  });
++
++  it('recreates a worktree whose directory was deleted outside git', async () => {
++    const repoPath = await makeRepo(root, 'repo');
++    const worktreePath = path.join(root, 'orphaned-wt');
++    const create = () =>
++      executeCreateWorktree({
++        git: gitContext,
++        repositoryPath: repoPath,
++        worktreePath,
++        branch: 'feature/orphaned',
++        baseRef: 'main',
++        onStage: () => undefined,
++      });
++
++    expect(await create()).toMatchObject({ status: 'succeeded', createdWorktree: true });
++    // Simulate manual removal / temp cleanup: the directory goes, .git/worktrees/<name>
++    // stays, and plain `git worktree add` now fails with "already registered".
++    await fs.rm(worktreePath, { recursive: true, force: true });
++    expect(git(repoPath, 'worktree', 'list', '--porcelain')).toContain('prunable');
++
++    const result = await create();
++
++    expect(result).toMatchObject({ status: 'succeeded', createdWorktree: true });
++    expect(git(worktreePath, 'branch', '--show-current')).toBe('feature/orphaned');
++  });
++});
+diff --git a/packages/core/src/runtimes/workspace-registry/node/create-worktree.ts b/packages/core/src/runtimes/workspace-registry/node/create-worktree.ts
+index c688b79..5f87dc2 100644
+--- a/packages/core/src/runtimes/workspace-registry/node/create-worktree.ts
++++ b/packages/core/src/runtimes/workspace-registry/node/create-worktree.ts
+@@ -71,6 +71,12 @@ export async function executeCreateWorktree(
+     if (!safe.success) {
+       return { status: 'failed', stage: 'inspect', message: safe.error.message };
+     }
++    // A worktree directory removed outside git leaves its admin entry behind, and
++    // `worktree add` then refuses with "already registered" / "already checked out"
++    // until someone prunes by hand. Pruning first only drops entries whose path is
++    // gone (in-flight adds hold a lock, so they survive); best-effort, because a
++    // failure here just means add-worktree reports git's own error as before.
++    await exec.exec(['worktree', 'prune']).catch(() => undefined);
+     existing = (await listWorktreePaths(exec)).has(
+       nativePathIdentityKey(await canonicalOrResolved(execution.worktreePath))
+     );
+-- 
+2.43.0
+
