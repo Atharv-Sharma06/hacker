@@ -1,0 +1,86 @@
+From 9f0c7118867458230790b94f946eb319ff082bf6 Mon Sep 17 00:00:00 2001
+From: Claude <noreply@anthropic.com>
+Date: Mon, 26 Oct 2026 02:29:48 +0000
+Subject: [PATCH 4/6] fix(agent-env): forward Windows system folder variables
+ to agents
+
+The agent env allowlist dropped SystemDrive, ProgramData and friends. Windows stores
+the ProgramData known folder as %SystemDrive%\ProgramData, so agents expanded the
+literal string as a relative path and created a stray
+%SystemDrive%\ProgramData\Microsoft\Windows\Caches tree in every workspace.
+
+Add SystemDrive, ProgramData, ALLUSERSPROFILE, PUBLIC, HOMEDRIVE, HOMEPATH and the
+ProgramFiles / CommonProgramFiles family, matching what terminal sessions already
+receive since #1181.
+
+Fixes generalaction/emdash#3315
+
+Co-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01Lf1ZxTXikvVa7e1BpWKy1d
+---
+ .../src/primitives/agent-env/api/index.test.ts    |  6 ++++++
+ .../core/src/primitives/agent-env/api/index.ts    | 15 +++++++++++++++
+ 2 files changed, 21 insertions(+)
+
+diff --git a/packages/core/src/primitives/agent-env/api/index.test.ts b/packages/core/src/primitives/agent-env/api/index.test.ts
+index 10d14a6..1c9f1cf 100644
+--- a/packages/core/src/primitives/agent-env/api/index.test.ts
++++ b/packages/core/src/primitives/agent-env/api/index.test.ts
+@@ -14,6 +14,9 @@ describe('buildAllowlistedAgentEnv', () => {
+         pathext: '.COM;.EXE;.CMD',
+         localappdata: 'C:\\Users\\ada\\AppData\\Local',
+         userprofile: 'C:\\Users\\ada',
++        systemdrive: 'C:',
++        programdata: 'C:\\ProgramData',
++        'programfiles(x86)': 'C:\\Program Files (x86)',
+         username: 'ada',
+         anthropic_api_key: 'secret',
+         https_proxy: 'https://proxy.test',
+@@ -34,6 +37,9 @@ describe('buildAllowlistedAgentEnv', () => {
+       PATHEXT: '.COM;.EXE;.CMD',
+       LOCALAPPDATA: 'C:\\Users\\ada\\AppData\\Local',
+       USERPROFILE: 'C:\\Users\\ada',
++      SystemDrive: 'C:',
++      ProgramData: 'C:\\ProgramData',
++      'ProgramFiles(x86)': 'C:\\Program Files (x86)',
+       ANTHROPIC_API_KEY: 'secret',
+       HTTPS_PROXY: 'https://proxy.test',
+     });
+diff --git a/packages/core/src/primitives/agent-env/api/index.ts b/packages/core/src/primitives/agent-env/api/index.ts
+index c149c99..12dbecc 100644
+--- a/packages/core/src/primitives/agent-env/api/index.ts
++++ b/packages/core/src/primitives/agent-env/api/index.ts
+@@ -125,15 +125,30 @@ export const AGENT_ENV_VARS = [
+   'ZAI_API_KEY',
+ ] as const;
+ 
++// Windows resolves known folders through these (ProgramData is stored as
++// `%SystemDrive%\ProgramData`); without them an agent expands the literal
++// `%SystemDrive%` into a stray directory under its cwd.
+ const WINDOWS_AGENT_ENV_VARS = [
+   'TEMP',
+   'TMP',
+   'SystemRoot',
++  'SystemDrive',
+   'windir',
+   'ComSpec',
+   'PATHEXT',
+   'LOCALAPPDATA',
+   'USERPROFILE',
++  'HOMEDRIVE',
++  'HOMEPATH',
++  'ProgramData',
++  'ALLUSERSPROFILE',
++  'PUBLIC',
++  'ProgramFiles',
++  'ProgramFiles(x86)',
++  'ProgramW6432',
++  'CommonProgramFiles',
++  'CommonProgramFiles(x86)',
++  'CommonProgramW6432',
+ ] as const;
+ 
+ const DISPLAY_ENV_VARS = [
+-- 
+2.43.0
+

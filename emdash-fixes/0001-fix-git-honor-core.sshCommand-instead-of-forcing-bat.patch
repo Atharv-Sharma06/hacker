@@ -1,0 +1,336 @@
+From 236d36abf467b47ac8574d01479ea95e414b1d70 Mon Sep 17 00:00:00 2001
+From: Claude <noreply@anthropic.com>
+Date: Mon, 26 Oct 2026 02:29:47 +0000
+Subject: [PATCH 1/6] fix(git): honor core.sshCommand instead of forcing
+ batch-mode ssh
+
+App-managed git exported GIT_SSH_COMMAND='ssh -o BatchMode=yes' whenever the
+variable was unset. Git gives that variable precedence over core.sshCommand, so a
+user's configured ssh wrapper (key routing, proxies, 1Password-style agents) was
+silently bypassed and private clones failed that work in a terminal.
+
+Probe the effective core.sshCommand for the invocation's cwd (through git itself, so
+includes and per-repo config apply; cached briefly) and only add the batch-mode
+default when neither it nor GIT_SSH_COMMAND picks an ssh command. Prompting stays
+disabled either way via GIT_TERMINAL_PROMPT=0 and the empty askpass variables.
+
+Fixes generalaction/emdash#3345
+
+Co-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01Lf1ZxTXikvVa7e1BpWKy1d
+---
+ .../runtimes/git/node/exec/git-exec.test.ts   | 76 ++++++++++++++++++-
+ .../src/runtimes/git/node/exec/git-exec.ts    | 49 ++++++++----
+ .../src/runtimes/git/node/git-runtime.test.ts |  7 +-
+ .../core/src/services/exec/node/git-exec.ts   | 27 ++++---
+ .../src/services/exec/node/git-ssh-command.ts | 63 +++++++++++++++
+ 5 files changed, 196 insertions(+), 26 deletions(-)
+ create mode 100644 packages/core/src/services/exec/node/git-ssh-command.ts
+
+diff --git a/packages/core/src/runtimes/git/node/exec/git-exec.test.ts b/packages/core/src/runtimes/git/node/exec/git-exec.test.ts
+index dba218b..ef91b46 100644
+--- a/packages/core/src/runtimes/git/node/exec/git-exec.test.ts
++++ b/packages/core/src/runtimes/git/node/exec/git-exec.test.ts
+@@ -1,5 +1,10 @@
+-import { describe, expect, it } from 'vitest';
++import { execFileSync } from 'node:child_process';
++import { promises as fs } from 'node:fs';
++import os from 'node:os';
++import path from 'node:path';
++import { afterEach, beforeEach, describe, expect, it } from 'vitest';
+ import type { BoundExec } from '#services/exec/api';
++import { resetSshCommandProbes } from '#services/exec/node/git-ssh-command';
+ import { bindGitDir, createGitExec, gitEnv } from './git-exec';
+ 
+ describe('gitEnv', () => {
+@@ -19,6 +24,75 @@ describe('gitEnv', () => {
+     );
+   });
+ 
++  it('withholds the batch-mode default when git config already picks the ssh command', () => {
++    // GIT_SSH_COMMAND outranks core.sshCommand, so exporting it would bypass the
++    // user's wrapper; prompting stays disabled through the other variables.
++    const env = gitEnv({}, { sshCommandConfigured: true });
++    expect(env).not.toHaveProperty('GIT_SSH_COMMAND');
++    expect(env).toMatchObject({ GIT_TERMINAL_PROMPT: '0', SSH_ASKPASS: '', GIT_ASKPASS: '' });
++  });
++});
++
++describe('createGitExec ssh command', () => {
++  let root: string;
++  let isolatedEnv: NodeJS.ProcessEnv;
++
++  beforeEach(async () => {
++    root = await fs.realpath(await fs.mkdtemp(path.join(os.tmpdir(), 'git-ssh-')));
++    isolatedEnv = {
++      PATH: process.env.PATH,
++      SystemRoot: process.env.SystemRoot,
++      HOME: root,
++      GIT_CONFIG_NOSYSTEM: '1',
++      GIT_CONFIG_GLOBAL: path.join(root, 'gitconfig'),
++    };
++    execFileSync('git', ['init', '-q', path.join(root, 'repo')], { env: isolatedEnv });
++    resetSshCommandProbes();
++  });
++
++  afterEach(async () => {
++    resetSshCommandProbes();
++    await fs.rm(root, { recursive: true, force: true });
++  });
++
++  async function sshCommandSeenByGit(cwd: string): Promise<string> {
++    const exec = createGitExec({ cwd, env: isolatedEnv });
++    // `git var` prints a shell-expanded view of the env; printing through a
++    // one-shot alias keeps this a real git subprocess with the composed env.
++    const { stdout } = await exec.exec([
++      '-c',
++      'alias.show-ssh=!printf %s "${GIT_SSH_COMMAND-<unset>}"',
++      'show-ssh',
++    ]);
++    return stdout;
++  }
++
++  it.skipIf(process.platform === 'win32')(
++    'honors a configured core.sshCommand instead of forcing plain batch-mode ssh',
++    async () => {
++      const repo = path.join(root, 'repo');
++      execFileSync('git', ['config', '--global', 'core.sshCommand', 'git-router ssh-wrap'], {
++        env: isolatedEnv,
++      });
++
++      expect(await sshCommandSeenByGit(repo)).toBe('<unset>');
++      // A clone target's parent is not a repository: global config still applies.
++      expect(await sshCommandSeenByGit(root)).toBe('<unset>');
++    }
++  );
++
++  it.skipIf(process.platform === 'win32')(
++    'falls back to batch-mode ssh when nothing configures an ssh command',
++    async () => {
++      expect(await sshCommandSeenByGit(path.join(root, 'repo'))).toBe('ssh -o BatchMode=yes');
++    }
++  );
++
++  it.skipIf(process.platform === 'win32')('keeps an explicit GIT_SSH_COMMAND', async () => {
++    isolatedEnv.GIT_SSH_COMMAND = 'ssh -F custom-config';
++    expect(await sshCommandSeenByGit(path.join(root, 'repo'))).toBe('ssh -F custom-config');
++  });
++
+   it('loads the current environment for every git subprocess', async () => {
+     let env = { EMDASH_ENV_REVISION: 'before-refresh' };
+     const exec = createGitExec({
+diff --git a/packages/core/src/runtimes/git/node/exec/git-exec.ts b/packages/core/src/runtimes/git/node/exec/git-exec.ts
+index 6535761..ffc871d 100644
+--- a/packages/core/src/runtimes/git/node/exec/git-exec.ts
++++ b/packages/core/src/runtimes/git/node/exec/git-exec.ts
+@@ -7,6 +7,10 @@ import {
+   type ExecResult,
+   type ExecSpawnOptions,
+ } from '#services/exec/api';
++import {
++  hasConfiguredSshCommand,
++  withDefaultSshCommand,
++} from '#services/exec/node/git-ssh-command';
+ import { gitRuntimeEnv } from '../non-interactive-env';
+ 
+ export type CreateGitExecOptions = {
+@@ -15,29 +19,48 @@ export type CreateGitExecOptions = {
+   env: NodeJS.ProcessEnv | EnvSource;
+ };
+ 
++export type GitEnvOptions = {
++  /**
++   * True when git already has an ssh command for this cwd (`core.sshCommand`), so the
++   * batch-mode `GIT_SSH_COMMAND` default — which would outrank and bypass it — is
++   * withheld. `createGitExec` probes this per invocation.
++   */
++  sshCommandConfigured?: boolean;
++};
++
+ /**
+  * Full child environment for git invocations. Git needs the process env (PATH, HOME,
+  * SSH_AUTH_SOCK, credential helpers), so it is composed in deliberately — exec itself
+  * never merges `process.env`.
+  */
+-export function gitEnv(base: NodeJS.ProcessEnv): NodeJS.ProcessEnv {
++export function gitEnv(base: NodeJS.ProcessEnv, options: GitEnvOptions = {}): NodeJS.ProcessEnv {
+   const env = gitRuntimeEnv(base);
+-  return {
+-    ...env,
+-    LC_ALL: 'C',
+-    LANG: 'C',
+-    LANGUAGE: 'C',
+-    GIT_TERMINAL_PROMPT: '0',
+-    GCM_INTERACTIVE: 'never',
+-    GIT_ASKPASS: '',
+-    SSH_ASKPASS: '',
+-    ...(env.GIT_SSH_COMMAND ? {} : { GIT_SSH_COMMAND: 'ssh -o BatchMode=yes' }),
+-  };
++  return withDefaultSshCommand(
++    {
++      ...env,
++      LC_ALL: 'C',
++      LANG: 'C',
++      LANGUAGE: 'C',
++      GIT_TERMINAL_PROMPT: '0',
++      GCM_INTERACTIVE: 'never',
++      GIT_ASKPASS: '',
++      SSH_ASKPASS: '',
++    },
++    options.sshCommandConfigured ?? false
++  );
+ }
+ 
+ export function createGitExec(options: CreateGitExecOptions): BoundExec {
+   const source = options.env;
+-  const env = typeof source === 'function' ? async () => gitEnv(await source()) : gitEnv(source);
++  const env: EnvSource = async () => {
++    const base = typeof source === 'function' ? await source() : source;
++    const sshCommandConfigured = await hasConfiguredSshCommand(
++      options.cwd,
++      gitRuntimeEnv(base),
++      options.executable
++    );
++    return gitEnv(base, { sshCommandConfigured });
++  };
+   return createBoundExec({
+     file: options.executable ?? 'git',
+     cwd: options.cwd,
+diff --git a/packages/core/src/runtimes/git/node/git-runtime.test.ts b/packages/core/src/runtimes/git/node/git-runtime.test.ts
+index ee3906a..6b1e494 100644
+--- a/packages/core/src/runtimes/git/node/git-runtime.test.ts
++++ b/packages/core/src/runtimes/git/node/git-runtime.test.ts
+@@ -137,7 +137,12 @@ describe('GitRuntime', () => {
+       await runtime.dispose();
+     }
+ 
+-    const calls = (await readFile(logPath, 'utf8')).trim().split('\n').filter(Boolean);
++    const calls = (await readFile(logPath, 'utf8'))
++      .trim()
++      .split('\n')
++      .filter(Boolean)
++      // The env probe for core.sshCommand precedes every command and carries no -C.
++      .filter((call) => call !== 'config --get core.sshCommand');
+     expect(calls[0]).toBe(`-C ${repo} rev-parse --is-inside-work-tree`);
+   });
+ 
+diff --git a/packages/core/src/services/exec/node/git-exec.ts b/packages/core/src/services/exec/node/git-exec.ts
+index 511c3bd..6938834 100644
+--- a/packages/core/src/services/exec/node/git-exec.ts
++++ b/packages/core/src/services/exec/node/git-exec.ts
+@@ -1,4 +1,5 @@
+ import { createBoundExec, type BoundExec } from '#services/exec/api';
++import { hasConfiguredSshCommand, withDefaultSshCommand } from './git-ssh-command';
+ 
+ export type GitExecFactory = (cwd: string) => BoundExec;
+ 
+@@ -6,22 +7,26 @@ export type GitExecFactory = (cwd: string) => BoundExec;
+  * Non-interactive git exec bound to `cwd`. Git needs the full process env (PATH, HOME,
+  * SSH_AUTH_SOCK, credential helpers), so it is composed in here — exec itself never
+  * merges `process.env`. Every prompt channel is disabled so background git work fails
+- * fast instead of blocking on credential or host-key input.
++ * fast instead of blocking on credential or host-key input. The batch-mode ssh default
++ * is added only when neither `GIT_SSH_COMMAND` nor `core.sshCommand` picks one, since
++ * the env variable would otherwise override the user's configured wrapper.
+  */
+ export function createNonInteractiveGitExec(cwd: string): BoundExec {
+   return createBoundExec({
+     file: 'git',
+     cwd,
+-    env: {
+-      ...process.env,
+-      LC_ALL: 'C',
+-      LANG: 'C',
+-      LANGUAGE: 'C',
+-      GIT_TERMINAL_PROMPT: '0',
+-      GCM_INTERACTIVE: 'never',
+-      GIT_ASKPASS: '',
+-      SSH_ASKPASS: '',
+-      ...(process.env.GIT_SSH_COMMAND ? {} : { GIT_SSH_COMMAND: 'ssh -o BatchMode=yes' }),
++    env: async () => {
++      const env: NodeJS.ProcessEnv = {
++        ...process.env,
++        LC_ALL: 'C',
++        LANG: 'C',
++        LANGUAGE: 'C',
++        GIT_TERMINAL_PROMPT: '0',
++        GCM_INTERACTIVE: 'never',
++        GIT_ASKPASS: '',
++        SSH_ASKPASS: '',
++      };
++      return withDefaultSshCommand(env, await hasConfiguredSshCommand(cwd, env));
+     },
+   });
+ }
+diff --git a/packages/core/src/services/exec/node/git-ssh-command.ts b/packages/core/src/services/exec/node/git-ssh-command.ts
+new file mode 100644
+index 0000000..4495270
+--- /dev/null
++++ b/packages/core/src/services/exec/node/git-ssh-command.ts
+@@ -0,0 +1,63 @@
++import { createBoundExec } from '#services/exec/api';
++
++/** What emdash's git runs over when neither the user nor git config picks an ssh command. */
++export const DEFAULT_GIT_SSH_COMMAND = 'ssh -o BatchMode=yes';
++
++const PROBE_TTL_MS = 60_000;
++
++const probes = new Map<string, { expiresAt: number; configured: boolean }>();
++
++/**
++ * Whether git would already pick its own ssh command for work in `cwd`: an explicit
++ * `GIT_SSH_COMMAND` in the environment, or an effective `core.sshCommand` (repository
++ * config inside a checkout, global/system config elsewhere — including a clone
++ * target's parent directory). Probed through git itself so includes, conditional
++ * includes, and worktree config all apply; cached briefly per cwd because every
++ * git invocation asks.
++ *
++ * `GIT_SSH_COMMAND` outranks `core.sshCommand`, so emdash must not export its
++ * batch-mode default whenever the user configured a wrapper (key routing, proxies,
++ * 1Password-style agents): that silently bypasses it and clones fail that work in a
++ * terminal. Prompts stay disabled either way — GIT_TERMINAL_PROMPT=0 and empty
++ * askpass variables apply regardless of which ssh command runs.
++ */
++export async function hasConfiguredSshCommand(
++  cwd: string,
++  env: NodeJS.ProcessEnv,
++  executable = 'git'
++): Promise<boolean> {
++  if (env.GIT_SSH_COMMAND) return true;
++  const key = `${executable}\0${cwd}`;
++  const now = Date.now();
++  const cached = probes.get(key);
++  if (cached && cached.expiresAt > now) return cached.configured;
++
++  let configured = false;
++  try {
++    const { stdout } = await createBoundExec({ file: executable, cwd, env }).exec([
++      'config',
++      '--get',
++      'core.sshCommand',
++    ]);
++    configured = stdout.trim().length > 0;
++  } catch {
++    // Exit 1 means unset; anything else (no git on PATH, unreadable cwd) means there
++    // is no wrapper we could be bypassing, so the batch-mode default is right.
++  }
++  probes.set(key, { expiresAt: now + PROBE_TTL_MS, configured });
++  return configured;
++}
++
++/** Adds the batch-mode default only when nothing else chooses the ssh command. */
++export function withDefaultSshCommand(
++  env: NodeJS.ProcessEnv,
++  configured: boolean
++): NodeJS.ProcessEnv {
++  if (configured || env.GIT_SSH_COMMAND) return env;
++  return { ...env, GIT_SSH_COMMAND: DEFAULT_GIT_SSH_COMMAND };
++}
++
++/** Test seam: forgets probe results so a config change is observed immediately. */
++export function resetSshCommandProbes(): void {
++  probes.clear();
++}
+-- 
+2.43.0
+

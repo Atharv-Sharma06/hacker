@@ -1,0 +1,224 @@
+From e27e66b5f9af53fa2fc9469a81a167d7a0d36fe4 Mon Sep 17 00:00:00 2001
+From: Claude <noreply@anthropic.com>
+Date: Mon, 26 Oct 2026 02:29:48 +0000
+Subject: [PATCH 6/6] fix(fs-usage): skip nested linked worktrees and honor
+ abort while measuring
+
+Workspace usage walked every entry under the repository, including linked worktrees
+nested inside it (e.g. <repo>/.claude/worktrees/*). Each of those is a workspace of
+its own and measured separately, so the bytes were double-counted and the walk ran
+twice over the biggest subtrees, pinning a core for the whole Workspaces tab visit.
+
+Detect a nested linked worktree by its .git file (gitdir: .../worktrees/<name>) and
+skip its contents; submodules and nested repositories remain part of the checkout.
+Thread the AbortSignal through the walk so a cancelled measurement stops instead of
+finishing in the background.
+
+Refs generalaction/emdash#3262
+
+Co-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01Lf1ZxTXikvVa7e1BpWKy1d
+---
+ .../workspace-registry/node/measure-usage.ts  |  6 +-
+ .../src/services/fs-usage/node/index.test.ts  | 73 +++++++++++++++++++
+ .../core/src/services/fs-usage/node/index.ts  | 43 ++++++++++-
+ 3 files changed, 117 insertions(+), 5 deletions(-)
+ create mode 100644 packages/core/src/services/fs-usage/node/index.test.ts
+
+diff --git a/packages/core/src/runtimes/workspace-registry/node/measure-usage.ts b/packages/core/src/runtimes/workspace-registry/node/measure-usage.ts
+index 52a2bb7..15f486b 100644
+--- a/packages/core/src/runtimes/workspace-registry/node/measure-usage.ts
++++ b/packages/core/src/runtimes/workspace-registry/node/measure-usage.ts
+@@ -21,7 +21,10 @@ export type MeasureWorkspaceUsageOptions = {
+ /**
+  * Measures a workspace's disk footprint. Total bytes are exclusive disk usage;
+  * artifact bytes cover git-ignored build output (`git clean -ndX` roots), so
+- * callers can show "reclaimable" space separately.
++ * callers can show "reclaimable" space separately. Linked worktrees nested inside
++ * the workspace (e.g. `<repo>/.claude/worktrees/*`) are left out — they are
++ * workspaces of their own and get measured as such — and the walk honors
++ * `signal`, so a caller leaving the view stops the scan instead of paying for it.
+  */
+ export async function measureWorkspaceUsage(
+   options: MeasureWorkspaceUsageOptions
+@@ -31,6 +34,7 @@ export async function measureWorkspaceUsage(
+   try {
+     const measured = await measureAbsolutePathUsage(options.workspacePath, '', {
+       artifactRoots: artifactRoots.data,
++      ...(options.signal ? { signal: options.signal } : {}),
+     });
+     return ok({
+       totalBytes: measured.exclusiveDiskBytes,
+diff --git a/packages/core/src/services/fs-usage/node/index.test.ts b/packages/core/src/services/fs-usage/node/index.test.ts
+new file mode 100644
+index 0000000..9e3f16f
+--- /dev/null
++++ b/packages/core/src/services/fs-usage/node/index.test.ts
+@@ -0,0 +1,73 @@
++import { promises as fs } from 'node:fs';
++import os from 'node:os';
++import path from 'node:path';
++import { afterEach, beforeEach, describe, expect, it } from 'vitest';
++import { measureAbsolutePathUsage } from './index';
++
++describe('measureAbsolutePathUsage', () => {
++  let root: string;
++
++  beforeEach(async () => {
++    root = await fs.realpath(await fs.mkdtemp(path.join(os.tmpdir(), 'fs-usage-')));
++  });
++
++  afterEach(async () => {
++    await fs.rm(root, { recursive: true, force: true });
++  });
++
++  async function write(relative: string, bytes: number): Promise<void> {
++    const target = path.join(root, relative);
++    await fs.mkdir(path.dirname(target), { recursive: true });
++    await fs.writeFile(target, Buffer.alloc(bytes, 1));
++  }
++
++  it('skips nested linked worktrees but keeps submodules and nested repositories', async () => {
++    await write('src/app.ts', 4096);
++    // A linked worktree of this (or any) repository: measured as its own workspace.
++    await write('.claude/worktrees/task-1/.git', 0);
++    await fs.writeFile(
++      path.join(root, '.claude/worktrees/task-1/.git'),
++      `gitdir: ${path.join(root, '.git/worktrees/task-1')}\n`
++    );
++    await write('.claude/worktrees/task-1/big.bin', 1 << 20);
++    // A submodule checkout belongs to this workspace.
++    await write('vendor/lib/lib.c', 4096);
++    await fs.writeFile(
++      path.join(root, 'vendor/lib/.git'),
++      `gitdir: ${path.join(root, '.git/modules/vendor/lib')}\n`
++    );
++    // A nested repository with its own .git directory also stays included.
++    await write('third-party/tool/.git/HEAD', 64);
++    await write('third-party/tool/tool.sh', 4096);
++
++    const everything = await measureAbsolutePathUsage(root, '');
++    const withoutWorktree = await measureAbsolutePathUsage(
++      path.join(root, '.claude/worktrees/task-1'),
++      ''
++    );
++
++    expect(everything.errors).toEqual([]);
++    expect(everything.exclusiveDiskBytes).toBeGreaterThanOrEqual(3 * 4096);
++    expect(everything.exclusiveDiskBytes).toBeLessThan(withoutWorktree.exclusiveDiskBytes);
++    expect(withoutWorktree.exclusiveDiskBytes).toBeGreaterThanOrEqual(1 << 20);
++  });
++
++  it('measures a linked worktree itself when it is the root', async () => {
++    await fs.writeFile(path.join(root, '.git'), `gitdir: /elsewhere/.git/worktrees/x\n`);
++    await write('data.bin', 8192);
++
++    const usage = await measureAbsolutePathUsage(root, '');
++
++    expect(usage.exclusiveDiskBytes).toBeGreaterThanOrEqual(8192);
++  });
++
++  it('stops when the signal aborts', async () => {
++    await write('a/b/c.bin', 1024);
++    const controller = new AbortController();
++    controller.abort(new Error('left the view'));
++
++    await expect(measureAbsolutePathUsage(root, '', { signal: controller.signal })).rejects.toThrow(
++      'left the view'
++    );
++  });
++});
+diff --git a/packages/core/src/services/fs-usage/node/index.ts b/packages/core/src/services/fs-usage/node/index.ts
+index 1596ece..23f140d 100644
+--- a/packages/core/src/services/fs-usage/node/index.ts
++++ b/packages/core/src/services/fs-usage/node/index.ts
+@@ -1,5 +1,5 @@
+-import type { Stats } from 'node:fs';
+-import { lstat, readdir } from 'node:fs/promises';
++import type { Dirent, Stats } from 'node:fs';
++import { lstat, readdir, readFile } from 'node:fs/promises';
+ import path from 'node:path';
+ 
+ export type PathUsageError = {
+@@ -30,14 +30,28 @@ type ScanState = {
+   root: string;
+   displayPath: string;
+   artifactRoots: string[];
++  signal: AbortSignal | undefined;
+   entries: EntryUsage[];
+   errors: PathUsageError[];
+ };
+ 
++export type MeasurePathUsageOptions = {
++  artifactRoots?: string[];
++  /** Stops the walk between directories; rejects with the signal's reason. */
++  signal?: AbortSignal;
++};
++
++/**
++ * Exclusive disk usage of `absolutePath`. Nested linked worktrees (a child directory
++ * whose `.git` file points at some repository's `worktrees/` entry) are skipped: each
++ * is a workspace of its own and measured as one, so counting it here would both
++ * double the bytes and double the walk. Submodules and plain nested repositories are
++ * part of this checkout and stay included.
++ */
+ export async function measureAbsolutePathUsage(
+   absolutePath: string,
+   displayPath: string,
+-  options: { artifactRoots?: string[] } = {}
++  options: MeasurePathUsageOptions = {}
+ ): Promise<PathUsage> {
+   const root = path.resolve(absolutePath);
+   const rootStats = await lstat(root);
+@@ -59,6 +73,7 @@ export async function measureAbsolutePathUsage(
+     root,
+     displayPath,
+     artifactRoots: normalizeArtifactRoots(options.artifactRoots ?? []),
++    signal: options.signal,
+     entries: [],
+     errors: [],
+   };
+@@ -91,19 +106,39 @@ async function scanPath(state: ScanState, currentPath: string): Promise<void> {
+     isArtifact: isArtifactPath(state, relative),
+   });
+   if (!isDirectory) return;
++  state.signal?.throwIfAborted();
+ 
+-  let children;
++  let children: Dirent[];
+   try {
+     children = await readdir(currentPath, { withFileTypes: true });
+   } catch (error) {
+     state.errors.push({ path: relative, message: errorMessage(error) });
+     return;
+   }
++  if (currentPath !== state.root && (await isLinkedWorktree(currentPath, children))) return;
+   for (const child of children) {
+     await scanPath(state, path.join(currentPath, child.name));
+   }
+ }
+ 
++/**
++ * A linked worktree carries a `.git` *file* of the form `gitdir: <repo>/.git/worktrees/<name>`.
++ * A `.git` directory (nested repository) or a `gitdir:` into `modules/` (submodule) is not one.
++ */
++async function isLinkedWorktree(directory: string, children: Dirent[]): Promise<boolean> {
++  const marker = children.find((child) => child.name === '.git');
++  if (!marker?.isFile()) return false;
++  try {
++    const content = await readFile(path.join(directory, '.git'), 'utf8');
++    const match = /^gitdir:\s*(.+?)\s*$/mu.exec(content);
++    if (!match?.[1]) return false;
++    const segments = match[1].replace(/\\/gu, '/').split('/');
++    return segments.includes('worktrees');
++  } catch {
++    return false;
++  }
++}
++
+ function aggregateEntries(entries: EntryUsage[]) {
+   let apparentBytes = 0;
+   let diskBytesTotal = 0;
+-- 
+2.43.0
+

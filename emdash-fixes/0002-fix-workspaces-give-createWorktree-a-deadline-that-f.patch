@@ -1,0 +1,71 @@
+From 534ba64bf9dbd7efd33f5e81badd0993ed79935d Mon Sep 17 00:00:00 2001
+From: Claude <noreply@anthropic.com>
+Date: Mon, 26 Oct 2026 02:29:47 +0000
+Subject: [PATCH 2/6] fix(workspaces): give createWorktree a deadline that fits
+ large repos
+
+The createWorktree Wire call used the 30s connection default. git worktree add on a
+large repository can outlast that; the host keeps going and finishes the worktree
+anyway, so the UI showed 'Workspace activation failed' for a workspace that then
+existed, and Retry succeeded instantly. Use a 10-minute per-call timeout.
+
+Fixes generalaction/emdash#3339
+
+Co-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01Lf1ZxTXikvVa7e1BpWKy1d
+---
+ .../workspaces/api/node/registry-verbs.ts     | 31 +++++++++++++------
+ 1 file changed, 21 insertions(+), 10 deletions(-)
+
+diff --git a/apps/emdash-desktop/src/core/features/workspaces/api/node/registry-verbs.ts b/apps/emdash-desktop/src/core/features/workspaces/api/node/registry-verbs.ts
+index d8073f4..6be1b62 100644
+--- a/apps/emdash-desktop/src/core/features/workspaces/api/node/registry-verbs.ts
++++ b/apps/emdash-desktop/src/core/features/workspaces/api/node/registry-verbs.ts
+@@ -8,6 +8,14 @@ import type { WorktreeGitPlan } from '@core/primitives/workspaces/api';
+ export type WorkspaceCreationFailure = { stage: string; message: string };
+ export type WorkspaceCreationOutcome = Result<void, WorkspaceCreationFailure>;
+ 
++/**
++ * Wire deadline for the createWorktree verb. `git worktree add` on a large repository
++ * routinely outlasts the 30s connection default; the host finishes the worktree
++ * regardless, so a short deadline only makes the UI report a failure for a workspace
++ * that then exists (and succeeds instantly on Retry).
++ */
++const CREATE_WORKTREE_TIMEOUT_MS = 10 * 60_000;
++
+ /**
+  * In-memory index of in-flight createWorktree verb calls, keyed by workspace id.
+  * Provisioning awaits the pending promise instead of polling the mirror; the durable
+@@ -89,16 +97,19 @@ export async function createWorktreeThroughRegistry(
+   }
+   const repositoryId = repository.data.id;
+ 
+-  const created = await registry.createWorktree({
+-    workspaceId: spec.workspaceId,
+-    repositoryId,
+-    branch: spec.branch,
+-    ...(spec.baseRef !== undefined && { baseRef: spec.baseRef }),
+-    path: spec.path,
+-    preservePatterns: spec.preservePatterns,
+-    ...(spec.publish !== undefined && { publish: spec.publish }),
+-    ...(spec.gitSetup !== undefined && { gitSetup: spec.gitSetup }),
+-  });
++  const created = await registry.createWorktree(
++    {
++      workspaceId: spec.workspaceId,
++      repositoryId,
++      branch: spec.branch,
++      ...(spec.baseRef !== undefined && { baseRef: spec.baseRef }),
++      path: spec.path,
++      preservePatterns: spec.preservePatterns,
++      ...(spec.publish !== undefined && { publish: spec.publish }),
++      ...(spec.gitSetup !== undefined && { gitSetup: spec.gitSetup }),
++    },
++    { timeoutMs: CREATE_WORKTREE_TIMEOUT_MS }
++  );
+   if (!created.success) {
+     const error = created.error;
+     switch (error.type) {
+-- 
+2.43.0
+
